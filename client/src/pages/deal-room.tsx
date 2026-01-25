@@ -14,7 +14,8 @@ import {
   Globe,
   Shield,
   Package,
-  Layers
+  Layers,
+  Mail
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -29,6 +30,7 @@ import {
 } from "@/components/ui/select";
 import { LoadingState } from "@/components/loading-state";
 import { EmptyState } from "@/components/empty-state";
+import { EmailDialog } from "@/components/email-dialog";
 import { useToast } from "@/hooks/use-toast";
 import type { Transaction, Document } from "@shared/schema";
 import { DOCUMENT_TYPE_LABELS } from "@shared/schema";
@@ -391,25 +393,37 @@ export default function DealRoomPage() {
                     <span className="font-medium">${transaction?.valueUsd.toLocaleString()}</span>
                   </div>
                 </div>
-                <Button 
-                  className="w-full mt-4"
-                  onClick={() => {
-                    const link = window.document.createElement('a');
-                    link.href = `/api/transactions/${selectedTransaction}/download-all`;
-                    link.download = `${transaction?.dealId}_complete_package.txt`;
-                    window.document.body.appendChild(link);
-                    link.click();
-                    window.document.body.removeChild(link);
-                    toast({
-                      title: "Download Started",
-                      description: "Downloading complete document package for officials...",
-                    });
-                  }}
-                  data-testid="button-download-package"
-                >
-                  <Download className="h-4 w-4 mr-2" />
-                  Download All for Officials
-                </Button>
+                <div className="space-y-2 mt-4">
+                  <Button 
+                    className="w-full"
+                    onClick={() => {
+                      const link = window.document.createElement('a');
+                      link.href = `/api/transactions/${selectedTransaction}/download-all`;
+                      link.download = `${transaction?.dealId}_complete_package.txt`;
+                      window.document.body.appendChild(link);
+                      link.click();
+                      window.document.body.removeChild(link);
+                      toast({
+                        title: "Download Started",
+                        description: "Downloading complete document package for officials...",
+                      });
+                    }}
+                    data-testid="button-download-package"
+                  >
+                    <Download className="h-4 w-4 mr-2" />
+                    Download All for Officials
+                  </Button>
+                  <EmailDialog 
+                    transactionId={selectedTransaction} 
+                    dealId={transaction?.dealId || ""} 
+                    trigger={
+                      <Button variant="outline" className="w-full" data-testid="button-email-officials">
+                        <Mail className="h-4 w-4 mr-2" />
+                        Email to Officials
+                      </Button>
+                    }
+                  />
+                </div>
               </CardContent>
             </Card>
 
