@@ -26,6 +26,7 @@ import { DocumentStatusBadge } from "@/components/document-status-badge";
 import { ComplianceStatusBadge } from "@/components/compliance-status-badge";
 import { UploadDocumentDialog } from "@/components/upload-document-dialog";
 import { ComplianceChecklist } from "@/components/compliance-checklist";
+import { WorkflowWizard } from "@/components/workflow-wizard";
 import { LoadingState } from "@/components/loading-state";
 import { EmptyState } from "@/components/empty-state";
 import { useToast } from "@/hooks/use-toast";
@@ -160,6 +161,7 @@ export default function TransactionDetailPage() {
               </TabsTrigger>
               <TabsTrigger value="compliance" data-testid="tab-compliance">Legacy Items</TabsTrigger>
               <TabsTrigger value="checklist" data-testid="tab-checklist">Checklist</TabsTrigger>
+              <TabsTrigger value="workflow" data-testid="tab-workflow">90-Day Workflow</TabsTrigger>
             </TabsList>
 
             <TabsContent value="overview" className="mt-4 space-y-4">
@@ -416,6 +418,10 @@ export default function TransactionDetailPage() {
 
             <TabsContent value="checklist" className="mt-4">
               {transactionId && <ComplianceChecklist transactionId={transactionId} />}
+            </TabsContent>
+
+            <TabsContent value="workflow" className="mt-4">
+              {transactionId && <WorkflowWizard transactionId={transactionId} />}
             </TabsContent>
           </Tabs>
         </div>

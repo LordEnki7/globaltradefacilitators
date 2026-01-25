@@ -9,7 +9,8 @@ import {
   Settings,
   Package,
   Building2,
-  User
+  User,
+  FolderOpen
 } from "lucide-react";
 import {
   Sidebar,
@@ -31,6 +32,7 @@ const mainMenuItems = [
   { title: "Dashboard", url: "/", icon: LayoutDashboard },
   { title: "Transactions", url: "/transactions", icon: Package },
   { title: "Documents", url: "/documents", icon: FileText },
+  { title: "Deal Room", url: "/deal-room", icon: FolderOpen },
   { title: "Compliance", url: "/compliance", icon: FolderCheck },
 ];
 

@@ -1,7 +1,8 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertTransactionSchema, insertDocumentSchema, insertComplianceItemSchema, insertNotificationSchema } from "@shared/schema";
+import { insertTransactionSchema, insertDocumentSchema, insertComplianceItemSchema, insertNotificationSchema, TRANSACTION_TEMPLATES, WORKFLOW_PHASES, DOCUMENT_TO_CHECKLIST_MAPPING, insertTransactionWorkflowSchema } from "@shared/schema";
+import type { DocumentType } from "@shared/schema";
 import { z } from "zod";
 
 export async function registerRoutes(
@@ -225,6 +226,114 @@ export async function registerRoutes(
       res.json(checklist);
     } catch (error) {
       res.status(500).json({ error: "Failed to update checklist item" });
+    }
+  });
+
+  // Templates API
+  app.get("/api/templates", async (req, res) => {
+    try {
+      res.json(TRANSACTION_TEMPLATES);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch templates" });
+    }
+  });
+
+  app.get("/api/templates/:id", async (req, res) => {
+    try {
+      const template = TRANSACTION_TEMPLATES.find(t => t.id === req.params.id);
+      if (!template) {
+        return res.status(404).json({ error: "Template not found" });
+      }
+      res.json(template);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch template" });
+    }
+  });
+
+  // Workflow Phases API
+  app.get("/api/workflow-phases", async (req, res) => {
+    try {
+      res.json(WORKFLOW_PHASES);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch workflow phases" });
+    }
+  });
+
+  // Transaction Workflow API
+  app.get("/api/workflows/:transactionId", async (req, res) => {
+    try {
+      const workflow = await storage.getTransactionWorkflow(req.params.transactionId);
+      if (!workflow) {
+        return res.json({
+          transactionId: req.params.transactionId,
+          templateId: null,
+          currentPhase: "foundation",
+          phaseStartDate: new Date().toISOString(),
+          completedTasks: {},
+          autoAdvanceEnabled: true,
+          updatedAt: new Date().toISOString()
+        });
+      }
+      res.json(workflow);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch workflow" });
+    }
+  });
+
+  app.post("/api/workflows", async (req, res) => {
+    try {
+      const validatedData = insertTransactionWorkflowSchema.parse(req.body);
+      const workflow = await storage.createTransactionWorkflow(validatedData);
+      res.status(201).json(workflow);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: "Validation error", details: error.errors });
+      }
+      res.status(500).json({ error: "Failed to create workflow" });
+    }
+  });
+
+  app.patch("/api/workflows/:transactionId/phase", async (req, res) => {
+    try {
+      const { phase } = req.body;
+      const workflow = await storage.updateWorkflowPhase(req.params.transactionId, phase);
+      if (!workflow) {
+        return res.status(404).json({ error: "Workflow not found" });
+      }
+      res.json(workflow);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to update workflow phase" });
+    }
+  });
+
+  app.patch("/api/workflows/:transactionId/task", async (req, res) => {
+    try {
+      const { taskId, completed } = req.body;
+      const workflow = await storage.updateWorkflowTask(req.params.transactionId, taskId, completed);
+      if (!workflow) {
+        return res.status(404).json({ error: "Workflow not found" });
+      }
+      res.json(workflow);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to update workflow task" });
+    }
+  });
+
+  // Auto-complete checklist items when documents are uploaded/verified
+  app.post("/api/documents/auto-complete", async (req, res) => {
+    try {
+      const { transactionId, documentType } = req.body;
+      const checklistItemIds = DOCUMENT_TO_CHECKLIST_MAPPING[documentType as DocumentType] || [];
+      
+      for (const itemId of checklistItemIds) {
+        const type = itemId.startsWith("exp_") ? "exporter" : "importer";
+        await storage.updateChecklistItem(transactionId, itemId, true, type as "exporter" | "importer");
+      }
+      
+      const checklist = await storage.getTransactionChecklist(transactionId);
+      res.json({ success: true, checklist, autoCompletedItems: checklistItemIds });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to auto-complete checklist items" });
     }
   });
 

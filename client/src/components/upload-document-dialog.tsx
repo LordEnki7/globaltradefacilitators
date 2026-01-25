@@ -52,16 +52,24 @@ export function UploadDocumentDialog({
 
   const uploadMutation = useMutation({
     mutationFn: async (data: { transactionId: string; type: DocumentType; fileName: string; notes: string }) => {
-      return apiRequest("POST", "/api/documents", {
+      const response = await apiRequest("POST", "/api/documents", {
         ...data,
         uploadedBy: "current-user"
       });
+      
+      await apiRequest("POST", "/api/documents/auto-complete", {
+        transactionId: data.transactionId,
+        documentType: data.type
+      });
+      
+      return response;
     },
-    onSuccess: () => {
+    onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ["/api/documents"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/checklists", variables.transactionId] });
       toast({
         title: "Document Uploaded",
-        description: "Your document has been uploaded and encrypted successfully.",
+        description: "Your document has been uploaded and related checklist items have been auto-completed.",
       });
       resetForm();
       onOpenChange(false);

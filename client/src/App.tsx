@@ -18,6 +18,7 @@ import CompliancePage from "@/pages/compliance";
 import CountriesPage from "@/pages/countries";
 import NotificationsPage from "@/pages/notifications";
 import SettingsPage from "@/pages/settings";
+import DealRoomPage from "@/pages/deal-room";
 
 function Router() {
   return (
@@ -28,6 +29,7 @@ function Router() {
       <Route path="/transactions/:id" component={TransactionDetailPage} />
       <Route path="/documents" component={DocumentsPage} />
       <Route path="/compliance" component={CompliancePage} />
+      <Route path="/deal-room" component={DealRoomPage} />
       <Route path="/countries" component={CountriesPage} />
       <Route path="/notifications" component={NotificationsPage} />
       <Route path="/settings" component={SettingsPage} />

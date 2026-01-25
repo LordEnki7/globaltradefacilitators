@@ -327,6 +327,253 @@ export const EXPORTER_CHECKLIST_PHASES: ChecklistPhase[] = [
   }
 ];
 
+// Transaction Templates based on deal room documents
+export interface TransactionTemplate {
+  id: string;
+  name: string;
+  description: string;
+  country: string;
+  countryCode: string;
+  productType: "dry_goods" | "frozen_meats" | "edible_oils" | "packaged_foods";
+  product: string;
+  suggestedQuantity: string;
+  suggestedValueUsd: number;
+  lcTenor: string;
+  incoterms: string;
+  approvedBanks: string[];
+  lcSpecialConditions: string;
+  requiredDocuments: string[];
+  countrySpecificRequirements: string[];
+}
+
+export const TRANSACTION_TEMPLATES: TransactionTemplate[] = [
+  {
+    id: "ng-rice",
+    name: "Nigeria - Rice Export",
+    description: "Standard rice export to Nigeria via USDA GSM-102",
+    country: "Nigeria",
+    countryCode: "NG",
+    productType: "dry_goods",
+    product: "Rice (Long Grain)",
+    suggestedQuantity: "500 MT",
+    suggestedValueUsd: 425000,
+    lcTenor: "180 days",
+    incoterms: "FOB",
+    approvedBanks: ["Access Bank", "Zenith Bank", "GTBank", "UBA", "FirstBank"],
+    lcSpecialConditions: "This Letter of Credit is issued in connection with a transaction supported by the USDA GSM-102 Export Credit Guarantee Program and may be assigned to a U.S. financial institution. Discrepancies, if any, shall be waived within three (3) banking days.",
+    requiredDocuments: ["Signed commercial invoice", "Packing list", "Clean on-board ocean bill of lading consigned to issuing bank", "Certificate of origin (United States)", "Insurance certificate (if CIF)"],
+    countrySpecificRequirements: ["NAFDAC product approval letters", "NAFDAC import permit", "Port Health clearance", "FX capability confirmation (bank letter)"]
+  },
+  {
+    id: "ng-chicken",
+    name: "Nigeria - Frozen Chicken Export",
+    description: "Frozen poultry export to Nigeria with cold chain requirements",
+    country: "Nigeria",
+    countryCode: "NG",
+    productType: "frozen_meats",
+    product: "Frozen Chicken",
+    suggestedQuantity: "200 MT",
+    suggestedValueUsd: 380000,
+    lcTenor: "180 days",
+    incoterms: "CIF",
+    approvedBanks: ["Access Bank", "Zenith Bank", "GTBank", "UBA", "FirstBank"],
+    lcSpecialConditions: "This Letter of Credit is issued in connection with a transaction supported by the USDA GSM-102 Export Credit Guarantee Program and may be assigned to a U.S. financial institution. Discrepancies, if any, shall be waived within three (3) banking days.",
+    requiredDocuments: ["Signed commercial invoice", "Packing list", "Clean on-board ocean bill of lading consigned to issuing bank", "Certificate of origin (United States)", "USDA veterinary/health certificate", "Insurance certificate"],
+    countrySpecificRequirements: ["NAFDAC product approval letters", "NAFDAC import permit", "Cold-chain declaration (meats)", "Port Health clearance", "FX capability confirmation (bank letter)"]
+  },
+  {
+    id: "gh-chicken",
+    name: "Ghana - Frozen Chicken Export",
+    description: "Ghana is fastest and cleanest for frozen products",
+    country: "Ghana",
+    countryCode: "GH",
+    productType: "frozen_meats",
+    product: "Frozen Chicken",
+    suggestedQuantity: "200 MT",
+    suggestedValueUsd: 350000,
+    lcTenor: "180 days",
+    incoterms: "CIF",
+    approvedBanks: ["Ecobank", "Stanbic", "GCB", "Standard Chartered"],
+    lcSpecialConditions: "This Letter of Credit is issued in connection with a transaction supported by the USDA GSM-102 Export Credit Guarantee Program and may be assigned to a U.S. financial institution. Partial shipments allowed. Transshipment allowed.",
+    requiredDocuments: ["Signed commercial invoice", "Packing list", "Clean on-board ocean bill of lading", "Certificate of origin (United States)", "USDA veterinary/health certificate", "Insurance certificate"],
+    countrySpecificRequirements: ["FDA Ghana import permit", "Ghana Standards Authority compliance", "Product registration (if retail)", "Customs classification confirmation"]
+  },
+  {
+    id: "gh-rice",
+    name: "Ghana - Rice Export",
+    description: "Ghana is fastest and cleanest market - recommended for first deals",
+    country: "Ghana",
+    countryCode: "GH",
+    productType: "dry_goods",
+    product: "Rice (Parboiled)",
+    suggestedQuantity: "500 MT",
+    suggestedValueUsd: 400000,
+    lcTenor: "180 days",
+    incoterms: "FOB",
+    approvedBanks: ["Ecobank", "Stanbic", "GCB", "Standard Chartered"],
+    lcSpecialConditions: "This Letter of Credit is issued in connection with a transaction supported by the USDA GSM-102 Export Credit Guarantee Program and may be assigned to a U.S. financial institution. Partial shipments allowed. Transshipment allowed.",
+    requiredDocuments: ["Signed commercial invoice", "Packing list", "Clean on-board ocean bill of lading", "Certificate of origin (United States)", "Insurance certificate (if CIF)"],
+    countrySpecificRequirements: ["FDA Ghana import permit", "Ghana Standards Authority compliance", "Customs classification confirmation"]
+  },
+  {
+    id: "sn-tomato",
+    name: "Senegal - Tomato Paste Export",
+    description: "Francophone market - French labeling required",
+    country: "Senegal",
+    countryCode: "SN",
+    productType: "packaged_foods",
+    product: "Tomato Paste",
+    suggestedQuantity: "150 MT",
+    suggestedValueUsd: 185000,
+    lcTenor: "360 days",
+    incoterms: "CIF",
+    approvedBanks: ["CBAO", "Société Générale Sénégal", "Ecobank"],
+    lcSpecialConditions: "This Letter of Credit is issued in connection with a transaction supported by the USDA GSM-102 Export Credit Guarantee Program and may be assigned to a U.S. financial institution. All documents may be presented in English. Labels and regulatory documents may be bilingual (French/English).",
+    requiredDocuments: ["Signed commercial invoice", "Packing list", "Clean on-board ocean bill of lading", "Certificate of origin (United States)", "Insurance certificate"],
+    countrySpecificRequirements: ["Import license (Ministry of Commerce)", "Ministry of Health food authorization", "French labeling proof", "Customs valuation approval"]
+  },
+  {
+    id: "sn-oils",
+    name: "Senegal - Edible Oils Export",
+    description: "Edible oils to Senegal with French labeling",
+    country: "Senegal",
+    countryCode: "SN",
+    productType: "edible_oils",
+    product: "Edible Oils",
+    suggestedQuantity: "300 MT",
+    suggestedValueUsd: 290000,
+    lcTenor: "360 days",
+    incoterms: "CIF",
+    approvedBanks: ["CBAO", "Société Générale Sénégal", "Ecobank"],
+    lcSpecialConditions: "This Letter of Credit is issued in connection with a transaction supported by the USDA GSM-102 Export Credit Guarantee Program and may be assigned to a U.S. financial institution. All documents may be presented in English. Labels and regulatory documents may be bilingual (French/English).",
+    requiredDocuments: ["Signed commercial invoice", "Packing list", "Clean on-board ocean bill of lading", "Certificate of origin (United States)", "Insurance certificate"],
+    countrySpecificRequirements: ["Import license (Ministry of Commerce)", "Ministry of Health food authorization", "French labeling proof", "Customs valuation approval"]
+  }
+];
+
+// 90-Day Workflow Phases based on deal execution timeline
+export interface WorkflowPhase {
+  id: string;
+  name: string;
+  dayRange: string;
+  description: string;
+  tasks: string[];
+  requiredToAdvance: string[];
+}
+
+export const WORKFLOW_PHASES: WorkflowPhase[] = [
+  {
+    id: "foundation",
+    name: "Foundation",
+    dayRange: "Days 1-15",
+    description: "Set up master contract, select target country, shortlist importers, confirm bank LC capability",
+    tasks: [
+      "Finalize master contract & LC template",
+      "Select target country (start with Ghana)",
+      "Shortlist 2 importers",
+      "Confirm bank LC capability"
+    ],
+    requiredToAdvance: ["Sales contract ready", "Target country selected", "Importer identified"]
+  },
+  {
+    id: "compliance",
+    name: "Compliance",
+    dayRange: "Days 16-30",
+    description: "Complete importer onboarding, product approvals, labeling, logistics setup",
+    tasks: [
+      "Importer onboarding complete",
+      "Product approvals submitted",
+      "Labeling finalized",
+      "Logistics partners confirmed"
+    ],
+    requiredToAdvance: ["Importer documentation verified", "Product registration in progress"]
+  },
+  {
+    id: "financing",
+    name: "Financing",
+    dayRange: "Days 31-45",
+    description: "Sign sales contract, issue LC, submit GSM-102 application, line up U.S. bank",
+    tasks: [
+      "Sales contract signed",
+      "LC issued",
+      "GSM-102 application submitted",
+      "U.S. bank lined up"
+    ],
+    requiredToAdvance: ["LC issued and verified", "GSM-102 application filed"]
+  },
+  {
+    id: "execution",
+    name: "Execution",
+    dayRange: "Days 46-60",
+    description: "Guarantee issued, goods produced & staged, shipment booked, documents pre-checked",
+    tasks: [
+      "Guarantee issued",
+      "Goods produced & staged",
+      "Shipment booked",
+      "Docs pre-checked"
+    ],
+    requiredToAdvance: ["CCC guarantee issued", "Shipment confirmed"]
+  },
+  {
+    id: "shipping",
+    name: "Shipping",
+    dayRange: "Days 61-75",
+    description: "Ship goods, present documents, receive payment",
+    tasks: [
+      "Goods shipped",
+      "Docs presented",
+      "Exporter paid"
+    ],
+    requiredToAdvance: ["Bill of lading issued", "Payment received"]
+  },
+  {
+    id: "scale",
+    name: "Scale",
+    dayRange: "Days 76-90",
+    description: "Import clearance, market sale, repayment tracking, queue next shipment",
+    tasks: [
+      "Import clearance",
+      "Market sale",
+      "Repayment tracking",
+      "Next shipment queued"
+    ],
+    requiredToAdvance: ["Customs cleared", "Deal archived"]
+  }
+];
+
+// Transaction workflow tracking
+export interface TransactionWorkflow {
+  transactionId: string;
+  templateId: string | null;
+  currentPhase: string;
+  phaseStartDate: string;
+  completedTasks: Record<string, boolean>;
+  autoAdvanceEnabled: boolean;
+  updatedAt: string;
+}
+
+export const insertTransactionWorkflowSchema = z.object({
+  transactionId: z.string(),
+  templateId: z.string().nullable().optional(),
+  currentPhase: z.string().optional().default("foundation"),
+  autoAdvanceEnabled: z.boolean().optional().default(true)
+});
+
+export type InsertTransactionWorkflow = z.infer<typeof insertTransactionWorkflowSchema>;
+
+// Document to checklist item mapping for auto-complete
+export const DOCUMENT_TO_CHECKLIST_MAPPING: Record<DocumentType, string[]> = {
+  letter_of_credit: ["exp_3_5", "imp_3_3"],
+  commercial_invoice: ["exp_6_1"],
+  packing_list: ["exp_6_2"],
+  bill_of_lading: ["exp_6_3"],
+  certificate_of_origin: ["exp_6_4"],
+  health_certificate: ["exp_5_3"],
+  insurance_certificate: ["exp_6_5"],
+  usda_form: ["exp_4_1"],
+  commodity_certificate: ["exp_4_3"]
+};
+
 export const IMPORTER_CHECKLIST_PHASES: ChecklistPhase[] = [
   {
     id: "phase1",

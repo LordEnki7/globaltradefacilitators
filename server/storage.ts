@@ -14,7 +14,9 @@ import type {
   DocumentStatus,
   ComplianceStatus,
   TransactionChecklist,
-  InsertTransactionChecklist
+  InsertTransactionChecklist,
+  TransactionWorkflow,
+  InsertTransactionWorkflow
 } from "@shared/schema";
 
 export interface IStorage {
@@ -45,6 +47,11 @@ export interface IStorage {
   getTransactionChecklist(transactionId: string): Promise<TransactionChecklist | undefined>;
   createOrUpdateChecklist(data: InsertTransactionChecklist): Promise<TransactionChecklist>;
   updateChecklistItem(transactionId: string, itemId: string, checked: boolean, type: "exporter" | "importer"): Promise<TransactionChecklist | undefined>;
+  
+  getTransactionWorkflow(transactionId: string): Promise<TransactionWorkflow | undefined>;
+  createTransactionWorkflow(data: InsertTransactionWorkflow): Promise<TransactionWorkflow>;
+  updateWorkflowPhase(transactionId: string, phase: string): Promise<TransactionWorkflow | undefined>;
+  updateWorkflowTask(transactionId: string, taskId: string, completed: boolean): Promise<TransactionWorkflow | undefined>;
 }
 
 export class MemStorage implements IStorage {
@@ -54,6 +61,7 @@ export class MemStorage implements IStorage {
   private complianceItems: Map<string, ComplianceItem>;
   private notifications: Map<string, Notification>;
   private checklists: Map<string, TransactionChecklist>;
+  private workflows: Map<string, TransactionWorkflow>;
 
   constructor() {
     this.users = new Map();
@@ -62,6 +70,7 @@ export class MemStorage implements IStorage {
     this.complianceItems = new Map();
     this.notifications = new Map();
     this.checklists = new Map();
+    this.workflows = new Map();
     
     this.seedData();
   }
@@ -558,7 +567,8 @@ export class MemStorage implements IStorage {
   }
 
   async markAllNotificationsRead(userId: string): Promise<void> {
-    for (const [id, notification] of this.notifications) {
+    const entries = Array.from(this.notifications.entries());
+    for (const [id, notification] of entries) {
       if (notification.userId === userId) {
         this.notifications.set(id, { ...notification, isRead: true });
       }
@@ -606,6 +616,54 @@ export class MemStorage implements IStorage {
     
     this.checklists.set(transactionId, checklist);
     return checklist;
+  }
+
+  async getTransactionWorkflow(transactionId: string): Promise<TransactionWorkflow | undefined> {
+    return this.workflows.get(transactionId);
+  }
+
+  async createTransactionWorkflow(data: InsertTransactionWorkflow): Promise<TransactionWorkflow> {
+    const workflow: TransactionWorkflow = {
+      transactionId: data.transactionId,
+      templateId: data.templateId || null,
+      currentPhase: data.currentPhase || "foundation",
+      phaseStartDate: new Date().toISOString(),
+      completedTasks: {},
+      autoAdvanceEnabled: data.autoAdvanceEnabled ?? true,
+      updatedAt: new Date().toISOString()
+    };
+    this.workflows.set(data.transactionId, workflow);
+    return workflow;
+  }
+
+  async updateWorkflowPhase(transactionId: string, phase: string): Promise<TransactionWorkflow | undefined> {
+    const workflow = this.workflows.get(transactionId);
+    if (!workflow) return undefined;
+    
+    const updated = {
+      ...workflow,
+      currentPhase: phase,
+      phaseStartDate: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+    this.workflows.set(transactionId, updated);
+    return updated;
+  }
+
+  async updateWorkflowTask(transactionId: string, taskId: string, completed: boolean): Promise<TransactionWorkflow | undefined> {
+    const workflow = this.workflows.get(transactionId);
+    if (!workflow) return undefined;
+    
+    const updated = {
+      ...workflow,
+      completedTasks: {
+        ...workflow.completedTasks,
+        [taskId]: completed
+      },
+      updatedAt: new Date().toISOString()
+    };
+    this.workflows.set(transactionId, updated);
+    return updated;
   }
 }
 
