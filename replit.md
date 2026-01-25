@@ -6,7 +6,7 @@ A comprehensive tracking system for USDA GSM-102 Export Credit Guarantee transac
 ## Key Features
 - **Transaction Tracking**: Create and track export transactions through 5 stages (Application → Approval → Shipment → Payment → Completed)
 - **Document Management**: Upload and verify trade documents (Letter of Credit, Commodity Certificates, Shipping Documents, USDA Forms)
-- **Compliance Checklist**: Track required certifications and regulatory paperwork
+- **Master Compliance Checklist**: Comprehensive phase-based checklists for both exporters (8 phases) and importers (6 phases) with stop gates and blocking items
 - **Country Verification**: List of USDA-approved importing countries with authorized banks
 - **Status Dashboard**: Visual pipeline overview with transaction statistics
 - **Notifications**: Alerts for missing documents, approaching deadlines, and status changes
@@ -54,6 +54,8 @@ A comprehensive tracking system for USDA GSM-102 Export Credit Guarantee transac
 - `PATCH /api/documents/:id/verify` - Verify document
 - `GET/POST /api/compliance` - List/add compliance items
 - `PATCH /api/compliance/:id/status` - Update compliance status
+- `GET /api/checklists/:transactionId` - Get transaction compliance checklist
+- `PATCH /api/checklists/:transactionId/item` - Update checklist item status
 - `GET /api/notifications` - List notifications
 - `PATCH /api/notifications/:id/read` - Mark as read
 - `PATCH /api/notifications/read-all` - Mark all as read
@@ -79,6 +81,26 @@ Each country includes approved banks that can issue Letters of Credit.
 - **Approval**: Commercial Invoice, Packing List
 - **Shipment**: Bill of Lading, Certificate of Origin, Health Certificate, Insurance Certificate
 - **Payment**: USDA Form, Commodity Certificate
+
+## Master Compliance Checklists
+
+### Exporter Checklist (U.S. Side) - 8 Phases
+1. **Pre-Deal Eligibility** - Exporter registration, GSM-102 qualification, product eligibility
+2. **Commercial Setup** - Sales contract, incoterms, pricing, delivery schedule
+3. **Financing & LC** - Bank confirmation, LC review, GSM-102 clauses (*STOP GATE: LC must be issued*)
+4. **GSM-102 Guarantee** - Application submitted, fee paid, CCC guarantee issued
+5. **Production & Shipping** - Goods inspected, permits verified, shipment booked
+6. **Document Control** - Invoice, packing list, B/L, certificates prepared
+7. **Presentation & Payment** - Docs pre-checked, presented, exporter paid
+8. **Post-Shipment** - Arrival confirmed, customs cleared, deal archived
+
+### Importer Checklist (Destination Side) - 6 Phases
+1. **Corporate & Banking** - Company registration, tax ID, import license, bank relationship
+2. **Regulatory** - Food authority approval, meat authorization, labeling (*STOP GATE: Permits required*)
+3. **Financing** - LC application, terms approved, LC issued
+4. **Shipping & Clearance** - Pre-arrival notice, customs broker, duties ready
+5. **Receipt & Sale** - Goods cleared, warehoused, distribution commenced
+6. **Repayment** - Bank repayment scheduled, executed, deal closed
 
 ## Security
 - Documents are simulated with AES-256 encryption indication
