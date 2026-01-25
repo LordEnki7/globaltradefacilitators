@@ -518,6 +518,78 @@ export const TRANSACTION_TEMPLATES: TransactionTemplate[] = [
       { name: "Tomato Paste", quantity: "120 MT", valueUsd: 145000 },
       { name: "Soybean Oil", quantity: "230 MT", valueUsd: 275000 }
     ]
+  },
+  {
+    id: "do-rice",
+    name: "Dominican Republic - Rice Export",
+    description: "Caribbean gateway - streamlined import process and strong banking",
+    country: "Dominican Republic",
+    countryCode: "DO",
+    productType: "dry_goods",
+    product: "Rice (Long Grain)",
+    suggestedQuantity: "400 MT",
+    suggestedValueUsd: 340000,
+    lcTenor: "180 days",
+    incoterms: "CIF",
+    approvedBanks: ["Banco Multiple BHD León", "Banreservas"],
+    lcSpecialConditions: "This Letter of Credit is issued in connection with a transaction supported by the USDA GSM-102 Export Credit Guarantee Program and may be assigned to a U.S. financial institution. Partial shipments allowed. Transshipment allowed.",
+    requiredDocuments: ["Signed commercial invoice", "Packing list", "Clean on-board ocean bill of lading", "Certificate of origin (United States)", "Insurance certificate"],
+    countrySpecificRequirements: ["Phytosanitary certificate", "DGII tax registration verification", "Pro-Consumidor product registration", "Customs broker pre-clearance"]
+  },
+  {
+    id: "do-chicken",
+    name: "Dominican Republic - Frozen Chicken Export",
+    description: "Growing poultry market in the Caribbean with established cold chain",
+    country: "Dominican Republic",
+    countryCode: "DO",
+    productType: "frozen_meats",
+    product: "Frozen Chicken",
+    suggestedQuantity: "180 MT",
+    suggestedValueUsd: 320000,
+    lcTenor: "180 days",
+    incoterms: "CIF",
+    approvedBanks: ["Banco Multiple BHD León", "Banreservas"],
+    lcSpecialConditions: "This Letter of Credit is issued in connection with a transaction supported by the USDA GSM-102 Export Credit Guarantee Program and may be assigned to a U.S. financial institution. Partial shipments allowed. Transshipment allowed.",
+    requiredDocuments: ["Signed commercial invoice", "Packing list", "Clean on-board ocean bill of lading", "Certificate of origin (United States)", "USDA veterinary/health certificate", "Insurance certificate"],
+    countrySpecificRequirements: ["USDA/FSIS meat export certificate", "Ministry of Agriculture import permit", "Cold-chain verification", "Pro-Consumidor product registration", "DGII tax registration verification"]
+  },
+  {
+    id: "do-oils",
+    name: "Dominican Republic - Edible Oils Export",
+    description: "Edible oils to the Dominican Republic - efficient Caribbean logistics",
+    country: "Dominican Republic",
+    countryCode: "DO",
+    productType: "edible_oils",
+    product: "Soybean Oil",
+    suggestedQuantity: "250 MT",
+    suggestedValueUsd: 285000,
+    lcTenor: "180 days",
+    incoterms: "CIF",
+    approvedBanks: ["Banco Multiple BHD León", "Banreservas"],
+    lcSpecialConditions: "This Letter of Credit is issued in connection with a transaction supported by the USDA GSM-102 Export Credit Guarantee Program and may be assigned to a U.S. financial institution. Partial shipments allowed. Transshipment allowed.",
+    requiredDocuments: ["Signed commercial invoice", "Packing list", "Clean on-board ocean bill of lading", "Certificate of origin (United States)", "Insurance certificate"],
+    countrySpecificRequirements: ["Phytosanitary certificate", "Pro-Consumidor product registration", "DGII tax registration verification", "Customs broker pre-clearance"]
+  },
+  {
+    id: "do-multi-caribbean",
+    name: "Dominican Republic - Multi-Product (Caribbean Bundle)",
+    description: "Consolidated rice + frozen chicken shipment - ideal for Caribbean distribution hub",
+    country: "Dominican Republic",
+    countryCode: "DO",
+    productType: "multi_product",
+    product: "Rice + Frozen Chicken",
+    suggestedQuantity: "Mixed Container",
+    suggestedValueUsd: 520000,
+    lcTenor: "180 days",
+    incoterms: "CIF",
+    approvedBanks: ["Banco Multiple BHD León", "Banreservas"],
+    lcSpecialConditions: "This Letter of Credit is issued in connection with a transaction supported by the USDA GSM-102 Export Credit Guarantee Program and may be assigned to a U.S. financial institution. Partial shipments allowed. Transshipment allowed. Multiple commodities covered under single LC.",
+    requiredDocuments: ["Signed commercial invoice (itemized by product)", "Packing list (itemized by product)", "Clean on-board ocean bill of lading", "Certificate of origin (United States)", "USDA veterinary/health certificate (for meats)", "Insurance certificate"],
+    countrySpecificRequirements: ["Ministry of Agriculture import permit (per product category)", "Pro-Consumidor product registration (per product)", "Cold-chain verification (for frozen items)", "DGII tax registration verification", "Customs broker pre-clearance"],
+    products: [
+      { name: "Rice (Long Grain)", quantity: "300 MT", valueUsd: 255000 },
+      { name: "Frozen Chicken (leg quarters)", quantity: "140 MT", valueUsd: 265000 }
+    ]
   }
 ];
 

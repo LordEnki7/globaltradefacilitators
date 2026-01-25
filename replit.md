@@ -5,7 +5,7 @@ A comprehensive tracking system for USDA GSM-102 Export Credit Guarantee transac
 
 ## Key Features
 - **Transaction Tracking**: Create and track export transactions through 5 stages (Application → Approval → Shipment → Payment → Completed)
-- **Transaction Templates**: 9 country-specific quick-start templates (Ghana, Nigeria, Senegal) including:
+- **Transaction Templates**: 13 country-specific quick-start templates (Ghana, Nigeria, Senegal, Dominican Republic) including:
   - Single-product templates for rice, frozen chicken, edible oils, and tomato paste
   - Multi-product bundle templates for consolidated shipments (Protein Bundle, Staples Bundle, Food Bundle)
   - Pre-filled LC language and compliance requirements per template
