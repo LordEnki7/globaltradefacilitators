@@ -56,6 +56,8 @@ A comprehensive tracking system for USDA GSM-102 Export Credit Guarantee transac
 - `GET/POST /api/documents` - List/upload documents
 - `PATCH /api/documents/:id/verify` - Verify document
 - `POST /api/documents/auto-complete` - Auto-complete checklist items based on document upload
+- `GET /api/documents/:id/download` - Download individual document as formatted text
+- `GET /api/transactions/:id/download-all` - Download complete document package for officials
 - `GET/POST /api/compliance` - List/add compliance items
 - `PATCH /api/compliance/:id/status` - Update compliance status
 - `GET /api/checklists/:transactionId` - Get transaction compliance checklist

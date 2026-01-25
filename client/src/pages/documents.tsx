@@ -9,7 +9,8 @@ import {
   Clock,
   XCircle,
   MoreHorizontal,
-  Eye
+  Eye,
+  Download
 } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -264,6 +265,21 @@ export default function DocumentsPage() {
                             <DropdownMenuItem>
                               <Eye className="h-4 w-4 mr-2" />
                               View
+                            </DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => {
+                              const link = document.createElement('a');
+                              link.href = `/api/documents/${doc.id}/download`;
+                              link.download = doc.fileName;
+                              document.body.appendChild(link);
+                              link.click();
+                              document.body.removeChild(link);
+                              toast({
+                                title: "Download Started",
+                                description: `Downloading ${doc.fileName}...`,
+                              });
+                            }}>
+                              <Download className="h-4 w-4 mr-2" />
+                              Download
                             </DropdownMenuItem>
                             {doc.status === "uploaded" && (
                               <DropdownMenuItem onClick={() => verifyMutation.mutate(doc.id)}>

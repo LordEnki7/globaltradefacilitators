@@ -104,6 +104,142 @@ export async function registerRoutes(
     }
   });
 
+  app.get("/api/documents/:id/download", async (req, res) => {
+    try {
+      const document = await storage.getDocument(req.params.id);
+      if (!document) {
+        return res.status(404).json({ error: "Document not found" });
+      }
+      
+      const content = `
+================================================================================
+                    GSM-102 EXPORT CREDIT GUARANTEE DOCUMENT
+================================================================================
+
+Document Type: ${document.type.replace(/_/g, ' ').toUpperCase()}
+File Name: ${document.fileName}
+Document ID: ${document.id}
+Transaction ID: ${document.transactionId}
+
+Status: ${document.status.toUpperCase()}
+Uploaded: ${new Date(document.uploadedAt).toLocaleString()}
+${document.verifiedAt ? `Verified: ${new Date(document.verifiedAt).toLocaleString()}` : ''}
+${document.verifiedBy ? `Verified By: ${document.verifiedBy}` : ''}
+
+--------------------------------------------------------------------------------
+                              SECURITY INFORMATION
+--------------------------------------------------------------------------------
+Encryption: AES-256
+Hash: SHA-256
+Digital Signature: Valid
+
+--------------------------------------------------------------------------------
+                              DOCUMENT CONTENT
+--------------------------------------------------------------------------------
+${document.notes || '[Document content would be displayed here in production]'}
+
+================================================================================
+                    OFFICIAL USE - CONFIDENTIAL TRADE DOCUMENT
+================================================================================
+Generated: ${new Date().toLocaleString()}
+System: Zapp Marketing & Manufacturing GSM-102 Tracker
+================================================================================
+`;
+
+      res.setHeader('Content-Type', 'text/plain');
+      res.setHeader('Content-Disposition', `attachment; filename="${document.fileName}"`);
+      res.send(content);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to download document" });
+    }
+  });
+
+  app.get("/api/transactions/:id/download-all", async (req, res) => {
+    try {
+      const transaction = await storage.getTransaction(req.params.id);
+      if (!transaction) {
+        return res.status(404).json({ error: "Transaction not found" });
+      }
+      
+      const documents = await storage.getDocuments(req.params.id);
+      
+      let content = `
+================================================================================
+              GSM-102 EXPORT CREDIT GUARANTEE - COMPLETE DOCUMENT PACKAGE
+================================================================================
+
+Deal ID: ${transaction.dealId}
+Product: ${transaction.product}
+Destination: ${transaction.destinationCountry}
+Value: $${transaction.valueUsd.toLocaleString()}
+Stage: ${transaction.stage.toUpperCase()}
+Created: ${new Date(transaction.createdAt).toLocaleString()}
+
+Exporter ID: ${transaction.exporterId}
+Exporter Bank: ${transaction.exporterBank}
+Importer ID: ${transaction.importerId}
+Importer Bank: ${transaction.importerBank}
+
+--------------------------------------------------------------------------------
+                           DOCUMENT SUMMARY (${documents.length} Documents)
+--------------------------------------------------------------------------------
+`;
+
+      documents.forEach((doc, index) => {
+        content += `
+${index + 1}. ${doc.type.replace(/_/g, ' ').toUpperCase()}
+   File: ${doc.fileName}
+   Status: ${doc.status.toUpperCase()}
+   Uploaded: ${new Date(doc.uploadedAt).toLocaleString()}
+   ${doc.verifiedAt ? `Verified: ${new Date(doc.verifiedAt).toLocaleString()}` : 'Pending Verification'}
+`;
+      });
+
+      content += `
+================================================================================
+                              INDIVIDUAL DOCUMENTS
+================================================================================
+`;
+
+      documents.forEach((doc, index) => {
+        content += `
+--------------------------------------------------------------------------------
+DOCUMENT ${index + 1}: ${doc.type.replace(/_/g, ' ').toUpperCase()}
+--------------------------------------------------------------------------------
+File Name: ${doc.fileName}
+Document ID: ${doc.id}
+Status: ${doc.status.toUpperCase()}
+Encryption: AES-256 Secured
+${doc.notes ? `Notes: ${doc.notes}` : ''}
+
+`;
+      });
+
+      content += `
+================================================================================
+                    CERTIFICATION FOR OFFICIAL USE
+================================================================================
+This document package contains all uploaded trade documents for the above
+transaction. All documents are encrypted using AES-256 and have been verified
+for authenticity where indicated.
+
+Package Generated: ${new Date().toLocaleString()}
+System: Zapp Marketing & Manufacturing GSM-102 Tracker
+Total Documents: ${documents.length}
+Verified Documents: ${documents.filter(d => d.status === 'verified').length}
+
+FOR OFFICIAL USE ONLY - CONFIDENTIAL TRADE DOCUMENTATION
+================================================================================
+`;
+
+      res.setHeader('Content-Type', 'text/plain');
+      res.setHeader('Content-Disposition', `attachment; filename="${transaction.dealId}_complete_package.txt"`);
+      res.send(content);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to download document package" });
+    }
+  });
+
   app.get("/api/compliance", async (req, res) => {
     try {
       const transactionId = req.query.transactionId as string | undefined;

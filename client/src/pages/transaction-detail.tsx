@@ -13,7 +13,8 @@ import {
   Upload,
   CheckCircle2,
   AlertCircle,
-  ChevronRight
+  ChevronRight,
+  Download
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -128,16 +129,37 @@ export default function TransactionDetailPage() {
             </p>
           </div>
         </div>
-        {nextStage && (
+        <div className="flex items-center gap-2">
           <Button 
-            onClick={() => advanceStageMutation.mutate(nextStage)}
-            disabled={advanceStageMutation.isPending}
-            data-testid="button-advance-stage"
+            variant="outline"
+            onClick={() => {
+              const link = document.createElement('a');
+              link.href = `/api/transactions/${transactionId}/download-all`;
+              link.download = `${transaction.dealId}_complete_package.txt`;
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+              toast({
+                title: "Download Started",
+                description: "Downloading complete document package for officials...",
+              });
+            }}
+            data-testid="button-download-all"
           >
-            Advance to {STAGE_LABELS[nextStage]}
-            <ChevronRight className="h-4 w-4 ml-2" />
+            <Download className="h-4 w-4 mr-2" />
+            Download All Documents
           </Button>
-        )}
+          {nextStage && (
+            <Button 
+              onClick={() => advanceStageMutation.mutate(nextStage)}
+              disabled={advanceStageMutation.isPending}
+              data-testid="button-advance-stage"
+            >
+              Advance to {STAGE_LABELS[nextStage]}
+              <ChevronRight className="h-4 w-4 ml-2" />
+            </Button>
+          )}
+        </div>
       </div>
 
       <Card>

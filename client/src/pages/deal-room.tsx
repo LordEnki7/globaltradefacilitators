@@ -11,7 +11,6 @@ import {
   ChevronRight,
   ChevronDown,
   Download,
-  Eye,
   Globe,
   Shield,
   Package,
@@ -30,6 +29,7 @@ import {
 } from "@/components/ui/select";
 import { LoadingState } from "@/components/loading-state";
 import { EmptyState } from "@/components/empty-state";
+import { useToast } from "@/hooks/use-toast";
 import type { Transaction, Document } from "@shared/schema";
 import { DOCUMENT_TYPE_LABELS } from "@shared/schema";
 
@@ -136,6 +136,7 @@ const DEAL_ROOM_STRUCTURE: DealRoomFolder[] = [
 ];
 
 export default function DealRoomPage() {
+  const { toast } = useToast();
   const [selectedTransaction, setSelectedTransaction] = useState<string>("");
   const [expandedFolders, setExpandedFolders] = useState<Record<string, boolean>>({
     templates: true,
@@ -335,8 +336,26 @@ export default function DealRoomPage() {
                             >
                               {doc.status}
                             </Badge>
-                            <Button variant="ghost" size="icon" className="h-8 w-8">
-                              <Eye className="h-4 w-4" />
+                            <Button 
+                              variant="ghost" 
+                              size="icon" 
+                              className="h-8 w-8"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                const link = window.document.createElement('a');
+                                link.href = `/api/documents/${doc.id}/download`;
+                                link.download = doc.fileName;
+                                window.document.body.appendChild(link);
+                                link.click();
+                                window.document.body.removeChild(link);
+                                toast({
+                                  title: "Download Started",
+                                  description: `Downloading ${doc.fileName}...`,
+                                });
+                              }}
+                              data-testid={`button-download-${doc.id}`}
+                            >
+                              <Download className="h-4 w-4" />
                             </Button>
                           </div>
                         </div>
@@ -372,6 +391,25 @@ export default function DealRoomPage() {
                     <span className="font-medium">${transaction?.valueUsd.toLocaleString()}</span>
                   </div>
                 </div>
+                <Button 
+                  className="w-full mt-4"
+                  onClick={() => {
+                    const link = window.document.createElement('a');
+                    link.href = `/api/transactions/${selectedTransaction}/download-all`;
+                    link.download = `${transaction?.dealId}_complete_package.txt`;
+                    window.document.body.appendChild(link);
+                    link.click();
+                    window.document.body.removeChild(link);
+                    toast({
+                      title: "Download Started",
+                      description: "Downloading complete document package for officials...",
+                    });
+                  }}
+                  data-testid="button-download-package"
+                >
+                  <Download className="h-4 w-4 mr-2" />
+                  Download All for Officials
+                </Button>
               </CardContent>
             </Card>
 
