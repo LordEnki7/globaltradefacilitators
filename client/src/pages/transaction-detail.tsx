@@ -25,6 +25,7 @@ import { StageProgress } from "@/components/stage-progress";
 import { DocumentStatusBadge } from "@/components/document-status-badge";
 import { ComplianceStatusBadge } from "@/components/compliance-status-badge";
 import { UploadDocumentDialog } from "@/components/upload-document-dialog";
+import { ComplianceChecklist } from "@/components/compliance-checklist";
 import { LoadingState } from "@/components/loading-state";
 import { EmptyState } from "@/components/empty-state";
 import { useToast } from "@/hooks/use-toast";
@@ -157,7 +158,8 @@ export default function TransactionDetailPage() {
                   </Badge>
                 )}
               </TabsTrigger>
-              <TabsTrigger value="compliance" data-testid="tab-compliance">Compliance</TabsTrigger>
+              <TabsTrigger value="compliance" data-testid="tab-compliance">Legacy Items</TabsTrigger>
+              <TabsTrigger value="checklist" data-testid="tab-checklist">Checklist</TabsTrigger>
             </TabsList>
 
             <TabsContent value="overview" className="mt-4 space-y-4">
@@ -370,17 +372,17 @@ export default function TransactionDetailPage() {
             <TabsContent value="compliance" className="mt-4">
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-base">Compliance Checklist</CardTitle>
+                  <CardTitle className="text-base">Legacy Compliance Items</CardTitle>
                   <CardDescription>
-                    Track required certifications and regulatory items
+                    Manually tracked certifications and regulatory items
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   {transactionCompliance.length === 0 ? (
                     <EmptyState
                       icon={CheckCircle2}
-                      title="No compliance items"
-                      description="Compliance items will be added as the transaction progresses."
+                      title="No legacy compliance items"
+                      description="Use the Checklist tab for comprehensive compliance tracking."
                     />
                   ) : (
                     <div className="space-y-3">
@@ -410,6 +412,10 @@ export default function TransactionDetailPage() {
                   )}
                 </CardContent>
               </Card>
+            </TabsContent>
+
+            <TabsContent value="checklist" className="mt-4">
+              {transactionId && <ComplianceChecklist transactionId={transactionId} />}
             </TabsContent>
           </Tabs>
         </div>

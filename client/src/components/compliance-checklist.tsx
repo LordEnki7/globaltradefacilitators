@@ -21,7 +21,7 @@ interface ComplianceChecklistProps {
 }
 
 export function ComplianceChecklist({ transactionId }: ComplianceChecklistProps) {
-  const { role } = useUser();
+  const { user } = useUser();
   const [expandedPhases, setExpandedPhases] = useState<Record<string, boolean>>({});
 
   const { data: checklist, isLoading } = useQuery<TransactionChecklist>({
@@ -213,7 +213,7 @@ export function ComplianceChecklist({ transactionId }: ComplianceChecklistProps)
   const exporterData = checklist?.exporterChecklist || {};
   const importerData = checklist?.importerChecklist || {};
 
-  const defaultTab = role === "importer" ? "importer" : "exporter";
+  const defaultTab = user.role === "importer" ? "importer" : "exporter";
 
   return (
     <Card>
