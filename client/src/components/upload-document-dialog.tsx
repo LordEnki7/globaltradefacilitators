@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { Upload, FileText, X, Shield, Paperclip } from "lucide-react";
+import { Upload, FileText, X, Shield, Paperclip, Camera, Image } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -43,8 +43,11 @@ export function UploadDocumentDialog({
   const [fileName, setFileName] = useState("");
   const [notes, setNotes] = useState("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const cameraInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
+
 
   const { data: transactions = [] } = useQuery<Transaction[]>({
     queryKey: ["/api/transactions"],
@@ -89,16 +92,38 @@ export function UploadDocumentDialog({
     setFileName("");
     setNotes("");
     setSelectedFile(null);
+    setCapturedImage(null);
     if (fileInputRef.current) fileInputRef.current.value = "";
+    if (cameraInputRef.current) cameraInputRef.current.value = "";
+  };
+
+  const handleCameraCapture = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedFile(file);
+      const timestamp = new Date().toISOString().slice(0, 10);
+      const docType = (preselectedDocType || selectedDocType || "document").replace(/_/g, "-");
+      setFileName(`scanned_${docType}_${timestamp}.jpg`);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setCapturedImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+      if (fileInputRef.current) fileInputRef.current.value = "";
+      toast({
+        title: "Document Scanned",
+        description: "Photo captured successfully. You can preview it below.",
+      });
+    }
   };
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       setSelectedFile(file);
-      if (!fileName) {
-        setFileName(file.name);
-      }
+      setFileName(file.name);
+      setCapturedImage(null);
+      if (cameraInputRef.current) cameraInputRef.current.value = "";
     }
   };
 
@@ -107,9 +132,10 @@ export function UploadDocumentDialog({
     const file = e.dataTransfer.files[0];
     if (file) {
       setSelectedFile(file);
-      if (!fileName) {
-        setFileName(file.name);
-      }
+      setFileName(file.name);
+      setCapturedImage(null);
+      if (cameraInputRef.current) cameraInputRef.current.value = "";
+      if (fileInputRef.current) fileInputRef.current.value = "";
     }
   };
 
@@ -191,14 +217,77 @@ export function UploadDocumentDialog({
               accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png"
               data-testid="input-file"
             />
+            <input
+              ref={cameraInputRef}
+              type="file"
+              className="hidden"
+              onChange={handleCameraCapture}
+              accept="image/*"
+              capture="environment"
+              data-testid="input-camera"
+            />
+            
+            <div className="grid grid-cols-2 gap-2 mb-2">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => fileInputRef.current?.click()}
+                className="w-full"
+                data-testid="button-select-file"
+              >
+                <Paperclip className="h-4 w-4 mr-2" />
+                Select File
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => cameraInputRef.current?.click()}
+                className="w-full"
+                data-testid="button-scan-document"
+              >
+                <Camera className="h-4 w-4 mr-2" />
+                Scan / Photo
+              </Button>
+            </div>
+            
             <div
-              className="border-2 border-dashed border-border rounded-lg p-6 text-center cursor-pointer hover:border-primary/50 transition-colors"
+              className="border-2 border-dashed border-border rounded-lg p-4 text-center cursor-pointer hover:border-primary/50 transition-colors min-h-[120px] flex items-center justify-center"
               onClick={() => fileInputRef.current?.click()}
               onDrop={handleDrop}
               onDragOver={(e) => e.preventDefault()}
               data-testid="dropzone-file"
             >
-              {selectedFile ? (
+              {capturedImage ? (
+                <div className="relative w-full">
+                  <img 
+                    src={capturedImage} 
+                    alt="Scanned document preview" 
+                    className="max-h-40 mx-auto rounded-md object-contain"
+                  />
+                  <div className="flex items-center justify-center gap-2 mt-2">
+                    <Image className="h-4 w-4 text-primary" />
+                    <span className="text-sm font-medium">{selectedFile?.name}</span>
+                    <span className="text-xs text-muted-foreground">
+                      ({(selectedFile?.size ? selectedFile.size / 1024 : 0).toFixed(1)} KB)
+                    </span>
+                  </div>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    className="absolute top-0 right-0"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedFile(null);
+                      setCapturedImage(null);
+                      if (cameraInputRef.current) cameraInputRef.current.value = "";
+                    }}
+                    data-testid="button-remove-scan"
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                </div>
+              ) : selectedFile ? (
                 <div className="flex items-center justify-center gap-3">
                   <FileText className="h-8 w-8 text-primary" />
                   <div className="text-left">
@@ -217,6 +306,7 @@ export function UploadDocumentDialog({
                       setSelectedFile(null);
                       if (fileInputRef.current) fileInputRef.current.value = "";
                     }}
+                    data-testid="button-remove-file"
                   >
                     <X className="h-4 w-4" />
                   </Button>
@@ -225,9 +315,9 @@ export function UploadDocumentDialog({
                 <div className="space-y-2">
                   <Paperclip className="h-8 w-8 mx-auto text-muted-foreground" />
                   <div>
-                    <p className="text-sm font-medium">Click to select or drag & drop</p>
+                    <p className="text-sm font-medium">Drag & drop here</p>
                     <p className="text-xs text-muted-foreground">
-                      PDF, Word, Excel, or images up to 10MB
+                      Or use the buttons above to select or scan
                     </p>
                   </div>
                 </div>

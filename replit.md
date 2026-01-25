@@ -5,9 +5,12 @@ A comprehensive tracking system for USDA GSM-102 Export Credit Guarantee transac
 
 ## Key Features
 - **Transaction Tracking**: Create and track export transactions through 5 stages (Application → Approval → Shipment → Payment → Completed)
-- **Transaction Templates**: 6 country-specific quick-start templates (Ghana, Nigeria, Senegal) for rice, frozen chicken, edible oils, and tomato paste with pre-filled LC language and compliance requirements
+- **Transaction Templates**: 9 country-specific quick-start templates (Ghana, Nigeria, Senegal) including:
+  - Single-product templates for rice, frozen chicken, edible oils, and tomato paste
+  - Multi-product bundle templates for consolidated shipments (Protein Bundle, Staples Bundle, Food Bundle)
+  - Pre-filled LC language and compliance requirements per template
 - **90-Day Guided Workflow**: 6-phase wizard (Foundation → Compliance → Financing → Execution → Shipping → Scale) with task tracking and phase advancement
-- **Document Management**: Upload and verify trade documents with AES-256 encryption indication and auto-complete functionality that checks related checklist items
+- **Document Management**: Upload and verify trade documents with AES-256 encryption indication, auto-complete functionality, and mobile document scanning via camera capture
 - **Deal Room**: Organized folder structure (7 main folders) for professional deal organization matching trade industry standards
 - **Master Compliance Checklist**: Comprehensive phase-based checklists for both exporters (8 phases) and importers (6 phases) with stop gates and blocking items
 - **Country Verification**: List of USDA-approved importing countries with authorized banks

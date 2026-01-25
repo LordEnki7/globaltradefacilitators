@@ -139,7 +139,19 @@ export default function TransactionNewPage() {
       case "frozen_meats": return "bg-sky-500/20 text-sky-400 border-sky-500/30";
       case "edible_oils": return "bg-yellow-500/20 text-yellow-400 border-yellow-500/30";
       case "packaged_foods": return "bg-green-500/20 text-green-400 border-green-500/30";
+      case "multi_product": return "bg-purple-500/20 text-purple-400 border-purple-500/30";
       default: return "bg-muted";
+    }
+  };
+
+  const getProductTypeLabel = (type: string) => {
+    switch (type) {
+      case "dry_goods": return "Dry Goods";
+      case "frozen_meats": return "Frozen Meats";
+      case "edible_oils": return "Edible Oils";
+      case "packaged_foods": return "Packaged Foods";
+      case "multi_product": return "Multi-Product";
+      default: return type;
     }
   };
 
@@ -213,6 +225,26 @@ export default function TransactionNewPage() {
                   </div>
                 </div>
 
+                {selectedTemplate.products && selectedTemplate.products.length > 0 && (
+                  <div className="pt-2 border-t border-border">
+                    <h4 className="text-sm font-medium mb-2 flex items-center gap-2">
+                      <Package className="h-4 w-4 text-purple-400" />
+                      Products in Bundle
+                    </h4>
+                    <div className="grid gap-2 sm:grid-cols-2">
+                      {selectedTemplate.products.map((product, i) => (
+                        <div key={i} className="flex items-center justify-between p-2 rounded-md bg-muted/50">
+                          <div>
+                            <span className="text-sm font-medium">{product.name}</span>
+                            <span className="text-xs text-muted-foreground ml-2">{product.quantity}</span>
+                          </div>
+                          <span className="text-sm text-muted-foreground">${product.valueUsd.toLocaleString()}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 <div className="pt-2 border-t border-border">
                   <h4 className="text-sm font-medium mb-2 flex items-center gap-2">
                     <Timer className="h-4 w-4 text-primary" />
@@ -270,18 +302,31 @@ export default function TransactionNewPage() {
                           <div className="flex items-center justify-between">
                             <CardTitle className="text-base">{template.product}</CardTitle>
                             <Badge className={getProductTypeColor(template.productType)}>
-                              {template.productType.replace("_", " ")}
+                              {getProductTypeLabel(template.productType)}
                             </Badge>
                           </div>
                           <CardDescription className="text-xs">{template.description}</CardDescription>
                         </CardHeader>
-                        <CardContent className="pt-0">
+                        <CardContent className="pt-0 space-y-2">
                           <div className="flex items-center justify-between text-sm">
                             <span className="text-muted-foreground">
                               ${template.suggestedValueUsd.toLocaleString()} | {template.suggestedQuantity}
                             </span>
                             <ChevronRight className="h-4 w-4 text-muted-foreground" />
                           </div>
+                          {template.products && template.products.length > 0 && (
+                            <div className="pt-2 border-t border-border">
+                              <p className="text-xs text-muted-foreground mb-1">Includes:</p>
+                              <div className="space-y-1">
+                                {template.products.map((product, i) => (
+                                  <div key={i} className="flex justify-between text-xs">
+                                    <span>{product.name}</span>
+                                    <span className="text-muted-foreground">{product.quantity}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
                         </CardContent>
                       </Card>
                     ))}

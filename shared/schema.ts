@@ -328,13 +328,19 @@ export const EXPORTER_CHECKLIST_PHASES: ChecklistPhase[] = [
 ];
 
 // Transaction Templates based on deal room documents
+export interface ProductItem {
+  name: string;
+  quantity: string;
+  valueUsd: number;
+}
+
 export interface TransactionTemplate {
   id: string;
   name: string;
   description: string;
   country: string;
   countryCode: string;
-  productType: "dry_goods" | "frozen_meats" | "edible_oils" | "packaged_foods";
+  productType: "dry_goods" | "frozen_meats" | "edible_oils" | "packaged_foods" | "multi_product";
   product: string;
   suggestedQuantity: string;
   suggestedValueUsd: number;
@@ -344,6 +350,7 @@ export interface TransactionTemplate {
   lcSpecialConditions: string;
   requiredDocuments: string[];
   countrySpecificRequirements: string[];
+  products?: ProductItem[];
 }
 
 export const TRANSACTION_TEMPLATES: TransactionTemplate[] = [
@@ -448,6 +455,69 @@ export const TRANSACTION_TEMPLATES: TransactionTemplate[] = [
     lcSpecialConditions: "This Letter of Credit is issued in connection with a transaction supported by the USDA GSM-102 Export Credit Guarantee Program and may be assigned to a U.S. financial institution. All documents may be presented in English. Labels and regulatory documents may be bilingual (French/English).",
     requiredDocuments: ["Signed commercial invoice", "Packing list", "Clean on-board ocean bill of lading", "Certificate of origin (United States)", "Insurance certificate"],
     countrySpecificRequirements: ["Import license (Ministry of Commerce)", "Ministry of Health food authorization", "French labeling proof", "Customs valuation approval"]
+  },
+  {
+    id: "gh-multi-protein",
+    name: "Ghana - Multi-Product (Protein Bundle)",
+    description: "Consolidated shipment of frozen chicken + rice to Ghana - ideal for mixed containers",
+    country: "Ghana",
+    countryCode: "GH",
+    productType: "multi_product",
+    product: "Frozen Chicken + Rice",
+    suggestedQuantity: "Mixed Container",
+    suggestedValueUsd: 650000,
+    lcTenor: "180 days",
+    incoterms: "CIF",
+    approvedBanks: ["Ecobank", "Stanbic", "GCB", "Standard Chartered"],
+    lcSpecialConditions: "This Letter of Credit is issued in connection with a transaction supported by the USDA GSM-102 Export Credit Guarantee Program and may be assigned to a U.S. financial institution. Partial shipments allowed. Transshipment allowed. Multiple commodities covered under single LC.",
+    requiredDocuments: ["Signed commercial invoice (itemized by product)", "Packing list (itemized by product)", "Clean on-board ocean bill of lading", "Certificate of origin (United States)", "USDA veterinary/health certificate (for meats)", "Insurance certificate"],
+    countrySpecificRequirements: ["FDA Ghana import permit (per product category)", "Ghana Standards Authority compliance", "Cold-chain declaration (for frozen items)", "Product registration (if retail)"],
+    products: [
+      { name: "Frozen Chicken (leg quarters)", quantity: "150 MT", valueUsd: 285000 },
+      { name: "Rice (Parboiled)", quantity: "400 MT", valueUsd: 365000 }
+    ]
+  },
+  {
+    id: "ng-multi-staples",
+    name: "Nigeria - Multi-Product (Staples Bundle)",
+    description: "Consolidated rice + edible oils shipment to Nigeria - common commodity pairing",
+    country: "Nigeria",
+    countryCode: "NG",
+    productType: "multi_product",
+    product: "Rice + Edible Oils",
+    suggestedQuantity: "Mixed Container",
+    suggestedValueUsd: 580000,
+    lcTenor: "180 days",
+    incoterms: "FOB",
+    approvedBanks: ["Access Bank", "Zenith Bank", "GTBank", "UBA", "FirstBank"],
+    lcSpecialConditions: "This Letter of Credit is issued in connection with a transaction supported by the USDA GSM-102 Export Credit Guarantee Program and may be assigned to a U.S. financial institution. Discrepancies, if any, shall be waived within three (3) banking days. Multiple commodities covered under single LC. Partial shipments permitted.",
+    requiredDocuments: ["Signed commercial invoice (itemized by product)", "Packing list (itemized by product)", "Clean on-board ocean bill of lading", "Certificate of origin (United States)", "Insurance certificate (if CIF)"],
+    countrySpecificRequirements: ["NAFDAC product approval letters (per product)", "NAFDAC import permit (per product category)", "Port Health clearance", "FX capability confirmation (bank letter)"],
+    products: [
+      { name: "Rice (Long Grain)", quantity: "400 MT", valueUsd: 340000 },
+      { name: "Soybean Oil", quantity: "200 MT", valueUsd: 240000 }
+    ]
+  },
+  {
+    id: "sn-multi-food",
+    name: "Senegal - Multi-Product (Food Bundle)",
+    description: "Consolidated tomato paste + edible oils to Senegal - French labeling required",
+    country: "Senegal",
+    countryCode: "SN",
+    productType: "multi_product",
+    product: "Tomato Paste + Edible Oils",
+    suggestedQuantity: "Mixed Container",
+    suggestedValueUsd: 420000,
+    lcTenor: "360 days",
+    incoterms: "CIF",
+    approvedBanks: ["CBAO", "Société Générale Sénégal", "Ecobank"],
+    lcSpecialConditions: "This Letter of Credit is issued in connection with a transaction supported by the USDA GSM-102 Export Credit Guarantee Program and may be assigned to a U.S. financial institution. All documents may be presented in English. Labels and regulatory documents may be bilingual (French/English). Multiple commodities covered under single LC.",
+    requiredDocuments: ["Signed commercial invoice (itemized by product)", "Packing list (itemized by product)", "Clean on-board ocean bill of lading", "Certificate of origin (United States)", "Insurance certificate"],
+    countrySpecificRequirements: ["Import license (Ministry of Commerce) - per product", "Ministry of Health food authorization - per product", "French labeling proof - per product", "Customs valuation approval"],
+    products: [
+      { name: "Tomato Paste", quantity: "120 MT", valueUsd: 145000 },
+      { name: "Soybean Oil", quantity: "230 MT", valueUsd: 275000 }
+    ]
   }
 ];
 
