@@ -1,0 +1,204 @@
+✅ MASTER END-TO-END COMPLIANCE CHECKLIST
+
+(Bottom-to-Top = cannot skip steps)
+
+Think of this as green lights. If a box isn’t checked, the deal does not move.
+
+🟦 EXPORTER COMPLIANCE CHECKLIST (U.S. SIDE)
+🔹 PHASE 1 — PRE-DEAL ELIGIBILITY
+
+☐ Exporter is registered & active
+☐ Exporter is GSM-102 qualified
+☐ Product is GSM-102 eligible
+☐ Production facility approved (USDA/FSIS if meat)
+☐ No sanctions / restricted party issues
+
+🔹 PHASE 2 — COMMERCIAL SETUP
+
+☐ Sales contract executed
+☐ Incoterms confirmed
+☐ Pricing finalized (GSM fee embedded)
+☐ Broker/facilitator fee acknowledged
+☐ Delivery schedule agreed
+
+🔹 PHASE 3 — FINANCING & LC
+
+☐ Importer bank confirmed USDA-approved
+☐ LC draft reviewed internally
+☐ GSM-102 clause included in LC
+☐ Assignment language included
+☐ LC issued (irrevocable, USD)
+
+🚫 STOP HERE IF LC NOT ISSUED
+
+🔹 PHASE 4 — GSM-102 GUARANTEE
+
+☐ GSM-102 application submitted
+☐ Guarantee fee paid
+☐ CCC guarantee issued
+☐ Guarantee assigned to U.S. bank
+☐ U.S. bank confirmation received
+
+🔹 PHASE 5 — PRODUCTION & SHIPPING
+
+☐ Goods produced & inspected
+☐ Import permits verified (copy on file)
+☐ Health / veterinary certificates issued
+☐ Labels verified (language + content)
+☐ Shipment booked
+
+🔹 PHASE 6 — DOCUMENT CONTROL
+
+☐ Commercial invoice prepared
+☐ Packing list prepared
+☐ Clean on-board B/L issued
+☐ Certificate of origin issued
+☐ Insurance certificate (if CIF)
+
+🔹 PHASE 7 — PRESENTATION & PAYMENT
+
+☐ Docs pre-checked internally
+☐ Docs presented within LC timeline
+☐ No discrepancies OR waived
+☐ Exporter paid at sight
+
+🔹 PHASE 8 — POST-SHIPMENT
+
+☐ Shipment arrival confirmed
+☐ Customs clearance confirmed
+☐ Repayment schedule logged
+☐ Deal archived
+
+🟩 IMPORTER COMPLIANCE CHECKLIST (DESTINATION SIDE)
+🔹 PHASE 1 — CORPORATE & BANKING
+
+☐ Company legally registered
+☐ Tax ID active
+☐ Import license valid
+☐ Authorized signatories verified
+☐ Bank relationship confirmed
+
+🔹 PHASE 2 — REGULATORY
+
+☐ Product approved by food authority
+☐ Meat authorization obtained (if applicable)
+☐ Cold storage confirmed (meats)
+☐ Labeling compliant
+☐ Import permit issued
+
+🚫 STOP HERE IF PERMITS NOT ISSUED
+
+🔹 PHASE 3 — FINANCING
+
+☐ LC application submitted
+☐ LC terms approved
+☐ LC issued (USD, irrevocable)
+☐ GSM-102 structure acknowledged
+
+🔹 PHASE 4 — SHIPPING & CLEARANCE
+
+☐ Pre-arrival notice filed
+☐ Customs broker engaged
+☐ Duties / VAT funds ready
+☐ Port inspection coordinated
+
+🔹 PHASE 5 — RECEIPT & SALE
+
+☐ Goods cleared
+☐ Warehousing completed
+☐ Distribution commenced
+☐ Sales proceeds tracked
+
+🔹 PHASE 6 — REPAYMENT
+
+☐ Bank repayment scheduled
+☐ Repayment executed on time
+☐ Deal closed successfully
+
+📊 CREATE A BANK + IMPORTER PITCH DECK
+
+(10 slides — clean, serious)
+
+Slide 1 — Cover
+USDA GSM-102 Trade Program | U.S. Food Supply
+
+Slide 2 — Who We Are
+Exporter | Importer | Facilitator roles (clearly separated)
+
+Slide 3 — Products
+Top 10 SKUs (dry + frozen)
+
+Slide 4 — The Problem
+Import demand + financing gaps
+
+Slide 5 — The Solution
+USD LC + USDA GSM-102 guarantee
+
+Slide 6 — Transaction Flow (Visual)
+Importer → Bank → LC → Exporter → Shipment → Repayment
+
+Slide 7 — Risk Mitigation
+Government guarantee | Documentary control | Approved banks
+
+Slide 8 — Compliance Discipline
+Permits | Health certs | Customs | SOP
+
+Slide 9 — What We Need From You
+Import license | Bank | Volume | Compliance
+
+Slide 10 — Next Steps
+Onboarding checklist + contact info
+
+👉 If you want, I can write slide copy word-for-word or turn it into a Google Slides file.
+
+📈 LIVE GOOGLE SHEETS DEAL DASHBOARD
+
+(Exact tabs to create)
+
+TAB 1 — DEAL OVERVIEW
+
+Deal ID | Country | Importer | Bank | Value | Status
+
+TAB 2 — EXPORTER COMPLIANCE
+
+All exporter checklist items (checkboxes)
+
+TAB 3 — IMPORTER COMPLIANCE
+
+All importer checklist items (checkboxes)
+
+TAB 4 — FINANCING
+
+LC Issued | GSM Filed | Guarantee Issued | Exporter Paid
+
+TAB 5 — SHIPPING
+
+ETD | ETA | Docs Presented | Customs Cleared
+
+TAB 6 — COMMISSIONS
+
+Fee Type | Amount | Invoice Sent | Paid
+
+TAB 7 — ISSUES LOG
+
+Date | Issue | Owner | Resolution
+
+🔔 Automation Tip
+
+Conditional formatting:
+
+Red = blocks deal
+
+Yellow = pending
+
+Green = clear
+
+🏦 BANK CONFIRMATION WAIVER LANGUAGE
+
+(Use ONLY when needed)
+
+The Issuing Bank hereby agrees that any discrepancies identified in document presentation which do not materially affect the value, quantity, or description of the goods shall be deemed waived if not rejected in writing within three (3) banking days of presentation.
+
+The Issuing Bank further acknowledges that this Letter of Credit is issued in connection with a transaction supported by the USDA GSM-102 Export Credit Guarantee Program and agrees to cooperate in good faith to facilitate timely settlement.
+
+⚠️ Use sparingly. This is leverage, not default.

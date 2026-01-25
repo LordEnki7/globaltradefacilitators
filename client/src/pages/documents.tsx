@@ -9,10 +9,9 @@ import {
   Clock,
   XCircle,
   MoreHorizontal,
-  Eye,
-  Shield
+  Eye
 } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -36,32 +35,20 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
 import { DocumentStatusBadge } from "@/components/document-status-badge";
+import { UploadDocumentDialog } from "@/components/upload-document-dialog";
 import { LoadingState } from "@/components/loading-state";
 import { EmptyState } from "@/components/empty-state";
 import { useToast } from "@/hooks/use-toast";
 import { queryClient, apiRequest } from "@/lib/queryClient";
-import type { Document, Transaction, DocumentType, DocumentStatus } from "@shared/schema";
-import { DOCUMENT_TYPE_LABELS, documentTypeEnum } from "@shared/schema";
+import type { Document, Transaction, DocumentStatus } from "@shared/schema";
+import { DOCUMENT_TYPE_LABELS } from "@shared/schema";
 import { format } from "date-fns";
 
 export default function DocumentsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<DocumentStatus | "all">("all");
   const [uploadDialogOpen, setUploadDialogOpen] = useState(false);
-  const [selectedTransaction, setSelectedTransaction] = useState("");
-  const [selectedDocType, setSelectedDocType] = useState<DocumentType | "">("");
-  const [fileName, setFileName] = useState("");
   const { toast } = useToast();
 
   const { data: documents = [], isLoading } = useQuery<Document[]>({
@@ -70,34 +57,6 @@ export default function DocumentsPage() {
 
   const { data: transactions = [] } = useQuery<Transaction[]>({
     queryKey: ["/api/transactions"],
-  });
-
-  const uploadMutation = useMutation({
-    mutationFn: async (data: { transactionId: string; type: DocumentType; fileName: string }) => {
-      return apiRequest("POST", "/api/documents", {
-        ...data,
-        uploadedBy: "current-user",
-        notes: ""
-      });
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/documents"] });
-      toast({
-        title: "Document Uploaded",
-        description: "Your document has been uploaded successfully.",
-      });
-      setUploadDialogOpen(false);
-      setSelectedTransaction("");
-      setSelectedDocType("");
-      setFileName("");
-    },
-    onError: (error) => {
-      toast({
-        title: "Error",
-        description: error.message || "Failed to upload document.",
-        variant: "destructive",
-      });
-    }
   });
 
   const verifyMutation = useMutation({
@@ -141,15 +100,6 @@ export default function DocumentsPage() {
     rejected: documents.filter(d => d.status === "rejected").length,
   };
 
-  const handleUpload = () => {
-    if (!selectedTransaction || !selectedDocType || !fileName) return;
-    uploadMutation.mutate({
-      transactionId: selectedTransaction,
-      type: selectedDocType as DocumentType,
-      fileName
-    });
-  };
-
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -159,82 +109,14 @@ export default function DocumentsPage() {
             Manage trade documents and certifications
           </p>
         </div>
-        <Dialog open={uploadDialogOpen} onOpenChange={setUploadDialogOpen}>
-          <DialogTrigger asChild>
-            <Button data-testid="button-upload-document">
-              <Upload className="h-4 w-4 mr-2" />
-              Upload Document
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Upload Document</DialogTitle>
-              <DialogDescription>
-                Add a new document to a transaction. All documents are securely encrypted.
-              </DialogDescription>
-            </DialogHeader>
-            <div className="space-y-4 py-4">
-              <div className="space-y-2">
-                <Label htmlFor="transaction">Transaction</Label>
-                <Select value={selectedTransaction} onValueChange={setSelectedTransaction}>
-                  <SelectTrigger data-testid="select-upload-transaction">
-                    <SelectValue placeholder="Select transaction" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {transactions.map((t) => (
-                      <SelectItem key={t.id} value={t.id}>
-                        {t.dealId} - {t.product}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="docType">Document Type</Label>
-                <Select value={selectedDocType} onValueChange={(v) => setSelectedDocType(v as DocumentType)}>
-                  <SelectTrigger data-testid="select-upload-type">
-                    <SelectValue placeholder="Select document type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {documentTypeEnum.options.map((type) => (
-                      <SelectItem key={type} value={type}>
-                        {DOCUMENT_TYPE_LABELS[type]}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="fileName">File Name</Label>
-                <Input
-                  id="fileName"
-                  placeholder="e.g., LC_Nigeria_2025.pdf"
-                  value={fileName}
-                  onChange={(e) => setFileName(e.target.value)}
-                  data-testid="input-file-name"
-                />
-              </div>
-              <div className="flex items-center gap-2 p-3 rounded-lg bg-muted/50 border border-border">
-                <Shield className="h-5 w-5 text-primary" />
-                <p className="text-xs text-muted-foreground">
-                  Documents are encrypted using AES-256 encryption and stored securely.
-                </p>
-              </div>
-            </div>
-            <DialogFooter>
-              <Button variant="outline" onClick={() => setUploadDialogOpen(false)}>
-                Cancel
-              </Button>
-              <Button 
-                onClick={handleUpload} 
-                disabled={!selectedTransaction || !selectedDocType || !fileName || uploadMutation.isPending}
-                data-testid="button-confirm-upload"
-              >
-                {uploadMutation.isPending ? "Uploading..." : "Upload"}
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+        <Button onClick={() => setUploadDialogOpen(true)} data-testid="button-upload-document">
+          <Upload className="h-4 w-4 mr-2" />
+          Upload Document
+        </Button>
+        <UploadDocumentDialog 
+          open={uploadDialogOpen} 
+          onOpenChange={setUploadDialogOpen}
+        />
       </div>
 
       <div className="grid gap-4 md:grid-cols-4">

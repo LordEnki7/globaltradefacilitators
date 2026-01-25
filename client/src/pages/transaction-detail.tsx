@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { useRoute, useLocation, Link } from "wouter";
+import { useRoute, useLocation } from "wouter";
 import { 
   ArrowLeft, 
   Package, 
@@ -23,11 +24,12 @@ import { StageBadge } from "@/components/stage-badge";
 import { StageProgress } from "@/components/stage-progress";
 import { DocumentStatusBadge } from "@/components/document-status-badge";
 import { ComplianceStatusBadge } from "@/components/compliance-status-badge";
+import { UploadDocumentDialog } from "@/components/upload-document-dialog";
 import { LoadingState } from "@/components/loading-state";
 import { EmptyState } from "@/components/empty-state";
 import { useToast } from "@/hooks/use-toast";
 import { queryClient, apiRequest } from "@/lib/queryClient";
-import type { Transaction, Document, ComplianceItem, TransactionStage } from "@shared/schema";
+import type { Transaction, Document, ComplianceItem, TransactionStage, DocumentType } from "@shared/schema";
 import { DOCUMENT_TYPE_LABELS, REQUIRED_DOCUMENTS_BY_STAGE, STAGE_LABELS } from "@shared/schema";
 import { format } from "date-fns";
 
@@ -36,6 +38,8 @@ export default function TransactionDetailPage() {
   const [, navigate] = useLocation();
   const { toast } = useToast();
   const transactionId = params?.id;
+  const [uploadDialogOpen, setUploadDialogOpen] = useState(false);
+  const [uploadDocType, setUploadDocType] = useState<DocumentType | undefined>(undefined);
 
   const { data: transaction, isLoading: loadingTransaction } = useQuery<Transaction>({
     queryKey: ["/api/transactions", transactionId],
@@ -43,12 +47,12 @@ export default function TransactionDetailPage() {
   });
 
   const { data: documents = [] } = useQuery<Document[]>({
-    queryKey: ["/api/documents", { transactionId }],
+    queryKey: ["/api/documents"],
     enabled: !!transactionId,
   });
 
   const { data: complianceItems = [] } = useQuery<ComplianceItem[]>({
-    queryKey: ["/api/compliance", { transactionId }],
+    queryKey: ["/api/compliance"],
     enabled: !!transactionId,
   });
 
@@ -295,7 +299,14 @@ export default function TransactionDetailPage() {
                       Documents needed for the {STAGE_LABELS[transaction.stage]} stage
                     </CardDescription>
                   </div>
-                  <Button size="sm" data-testid="button-upload-document">
+                  <Button 
+                    size="sm" 
+                    data-testid="button-upload-document"
+                    onClick={() => {
+                      setUploadDocType(undefined);
+                      setUploadDialogOpen(true);
+                    }}
+                  >
                     <Upload className="h-4 w-4 mr-2" />
                     Upload
                   </Button>
@@ -327,9 +338,19 @@ export default function TransactionDetailPage() {
                             {doc ? (
                               <DocumentStatusBadge status={doc.status} />
                             ) : (
-                              <Badge variant="outline" className="text-destructive border-destructive/30">
-                                Missing
-                              </Badge>
+                              <Button 
+                                variant="outline" 
+                                size="sm"
+                                className="text-destructive border-destructive/30 hover:bg-destructive/10"
+                                onClick={() => {
+                                  setUploadDocType(docType);
+                                  setUploadDialogOpen(true);
+                                }}
+                                data-testid={`button-upload-${docType}`}
+                              >
+                                <Upload className="h-3 w-3 mr-1" />
+                                Upload
+                              </Button>
                             )}
                           </div>
                         );
@@ -338,6 +359,12 @@ export default function TransactionDetailPage() {
                   )}
                 </CardContent>
               </Card>
+              <UploadDocumentDialog 
+                open={uploadDialogOpen} 
+                onOpenChange={setUploadDialogOpen}
+                transactionId={transactionId}
+                preselectedDocType={uploadDocType}
+              />
             </TabsContent>
 
             <TabsContent value="compliance" className="mt-4">

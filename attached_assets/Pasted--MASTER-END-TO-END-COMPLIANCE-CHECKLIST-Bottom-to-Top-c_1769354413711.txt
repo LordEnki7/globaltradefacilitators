@@ -1,0 +1,116 @@
+✅ MASTER END-TO-END COMPLIANCE CHECKLIST
+
+(Bottom-to-Top = cannot skip steps)
+
+Think of this as green lights. If a box isn’t checked, the deal does not move.
+
+🟦 EXPORTER COMPLIANCE CHECKLIST (U.S. SIDE)
+🔹 PHASE 1 — PRE-DEAL ELIGIBILITY
+
+☐ Exporter is registered & active
+☐ Exporter is GSM-102 qualified
+☐ Product is GSM-102 eligible
+☐ Production facility approved (USDA/FSIS if meat)
+☐ No sanctions / restricted party issues
+
+🔹 PHASE 2 — COMMERCIAL SETUP
+
+☐ Sales contract executed
+☐ Incoterms confirmed
+☐ Pricing finalized (GSM fee embedded)
+☐ Broker/facilitator fee acknowledged
+☐ Delivery schedule agreed
+
+🔹 PHASE 3 — FINANCING & LC
+
+☐ Importer bank confirmed USDA-approved
+☐ LC draft reviewed internally
+☐ GSM-102 clause included in LC
+☐ Assignment language included
+☐ LC issued (irrevocable, USD)
+
+🚫 STOP HERE IF LC NOT ISSUED
+
+🔹 PHASE 4 — GSM-102 GUARANTEE
+
+☐ GSM-102 application submitted
+☐ Guarantee fee paid
+☐ CCC guarantee issued
+☐ Guarantee assigned to U.S. bank
+☐ U.S. bank confirmation received
+
+🔹 PHASE 5 — PRODUCTION & SHIPPING
+
+☐ Goods produced & inspected
+☐ Import permits verified (copy on file)
+☐ Health / veterinary certificates issued
+☐ Labels verified (language + content)
+☐ Shipment booked
+
+🔹 PHASE 6 — DOCUMENT CONTROL
+
+☐ Commercial invoice prepared
+☐ Packing list prepared
+☐ Clean on-board B/L issued
+☐ Certificate of origin issued
+☐ Insurance certificate (if CIF)
+
+🔹 PHASE 7 — PRESENTATION & PAYMENT
+
+☐ Docs pre-checked internally
+☐ Docs presented within LC timeline
+☐ No discrepancies OR waived
+☐ Exporter paid at sight
+
+🔹 PHASE 8 — POST-SHIPMENT
+
+☐ Shipment arrival confirmed
+☐ Customs clearance confirmed
+☐ Repayment schedule logged
+☐ Deal archived
+
+🟩 IMPORTER COMPLIANCE CHECKLIST (DESTINATION SIDE)
+🔹 PHASE 1 — CORPORATE & BANKING
+
+☐ Company legally registered
+☐ Tax ID active
+☐ Import license valid
+☐ Authorized signatories verified
+☐ Bank relationship confirmed
+
+🔹 PHASE 2 — REGULATORY
+
+☐ Product approved by food authority
+☐ Meat authorization obtained (if applicable)
+☐ Cold storage confirmed (meats)
+☐ Labeling compliant
+☐ Import permit issued
+
+🚫 STOP HERE IF PERMITS NOT ISSUED
+
+🔹 PHASE 3 — FINANCING
+
+☐ LC application submitted
+☐ LC terms approved
+☐ LC issued (USD, irrevocable)
+☐ GSM-102 structure acknowledged
+
+🔹 PHASE 4 — SHIPPING & CLEARANCE
+
+☐ Pre-arrival notice filed
+☐ Customs broker engaged
+☐ Duties / VAT funds ready
+☐ Port inspection coordinated
+
+🔹 PHASE 5 — RECEIPT & SALE
+
+☐ Goods cleared
+☐ Warehousing completed
+☐ Distribution commenced
+☐ Sales proceeds tracked
+
+🔹 PHASE 6 — REPAYMENT
+
+☐ Bank repayment scheduled
+☐ Repayment executed on time
+☐ Deal closed successfully
