@@ -1,10 +1,13 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertTransactionSchema, insertDocumentSchema, insertComplianceItemSchema, insertNotificationSchema, TRANSACTION_TEMPLATES, WORKFLOW_PHASES, DOCUMENT_TO_CHECKLIST_MAPPING, insertTransactionWorkflowSchema } from "@shared/schema";
+import { insertTransactionSchema, insertDocumentSchema, insertComplianceItemSchema, insertNotificationSchema, TRANSACTION_TEMPLATES, WORKFLOW_PHASES, DOCUMENT_TO_CHECKLIST_MAPPING, insertTransactionWorkflowSchema, users } from "@shared/schema";
 import type { DocumentType } from "@shared/schema";
 import { z } from "zod";
 import { getUncachableResendClient } from "./resend";
+import { isAuthenticated } from "./replit_integrations/auth";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
 
 export async function registerRoutes(
   httpServer: Server,
@@ -652,6 +655,108 @@ FOR OFFICIAL USE ONLY - CONFIDENTIAL TRADE DOCUMENTATION
     } catch (error) {
       console.error("Email error:", error);
       res.status(500).json({ error: "Failed to send email. Please check email configuration." });
+    }
+  });
+
+  // Admin API - Get all users
+  app.get("/api/admin/users", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user?.claims?.sub;
+      const [currentUser] = await db.select().from(users).where(eq(users.id, userId));
+      
+      if (!currentUser || currentUser.role !== "admin") {
+        return res.status(403).json({ error: "Admin access required" });
+      }
+      
+      const allUsers = await db.select().from(users);
+      res.json(allUsers);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      res.status(500).json({ error: "Failed to fetch users" });
+    }
+  });
+
+  // Admin API - Update user role
+  app.patch("/api/admin/users/:id/role", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user?.claims?.sub;
+      const [currentUser] = await db.select().from(users).where(eq(users.id, userId));
+      
+      if (!currentUser || currentUser.role !== "admin") {
+        return res.status(403).json({ error: "Admin access required" });
+      }
+      
+      const { role } = req.body;
+      if (!["admin", "exporter", "importer", "pending"].includes(role)) {
+        return res.status(400).json({ error: "Invalid role" });
+      }
+      
+      const [updatedUser] = await db
+        .update(users)
+        .set({ role, updatedAt: new Date() })
+        .where(eq(users.id, req.params.id))
+        .returning();
+        
+      if (!updatedUser) {
+        return res.status(404).json({ error: "User not found" });
+      }
+      
+      res.json(updatedUser);
+    } catch (error) {
+      console.error("Error updating user role:", error);
+      res.status(500).json({ error: "Failed to update user role" });
+    }
+  });
+
+  // Admin API - Update user company
+  app.patch("/api/admin/users/:id/company", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user?.claims?.sub;
+      const [currentUser] = await db.select().from(users).where(eq(users.id, userId));
+      
+      if (!currentUser || currentUser.role !== "admin") {
+        return res.status(403).json({ error: "Admin access required" });
+      }
+      
+      const { company } = req.body;
+      
+      const [updatedUser] = await db
+        .update(users)
+        .set({ company, updatedAt: new Date() })
+        .where(eq(users.id, req.params.id))
+        .returning();
+        
+      if (!updatedUser) {
+        return res.status(404).json({ error: "User not found" });
+      }
+      
+      res.json(updatedUser);
+    } catch (error) {
+      console.error("Error updating user company:", error);
+      res.status(500).json({ error: "Failed to update user company" });
+    }
+  });
+
+  // Get current user's role
+  app.get("/api/user/role", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user?.claims?.sub;
+      const [user] = await db.select().from(users).where(eq(users.id, userId));
+      
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+      
+      res.json({ 
+        role: user.role || "pending",
+        company: user.company,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email
+      });
+    } catch (error) {
+      console.error("Error fetching user role:", error);
+      res.status(500).json({ error: "Failed to fetch user role" });
     }
   });
 

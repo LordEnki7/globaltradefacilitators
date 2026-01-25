@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { AlertTriangle, CheckCircle2, Circle, Lock, ChevronDown, ChevronRight } from "lucide-react";
-import { useUser } from "@/lib/user-context";
+import { useAuth } from "@/hooks/use-auth";
 import { 
   EXPORTER_CHECKLIST_PHASES, 
   IMPORTER_CHECKLIST_PHASES, 
@@ -21,7 +21,7 @@ interface ComplianceChecklistProps {
 }
 
 export function ComplianceChecklist({ transactionId }: ComplianceChecklistProps) {
-  const { user } = useUser();
+  const { user } = useAuth();
   const [expandedPhases, setExpandedPhases] = useState<Record<string, boolean>>({});
 
   const { data: checklist, isLoading } = useQuery<TransactionChecklist>({
@@ -213,7 +213,7 @@ export function ComplianceChecklist({ transactionId }: ComplianceChecklistProps)
   const exporterData = checklist?.exporterChecklist || {};
   const importerData = checklist?.importerChecklist || {};
 
-  const defaultTab = user.role === "importer" ? "importer" : "exporter";
+  const defaultTab = user?.role === "importer" ? "importer" : "exporter";
 
   return (
     <Card>

@@ -16,7 +16,9 @@ A comprehensive tracking system for USDA GSM-102 Export Credit Guarantee transac
 - **Country Verification**: List of USDA-approved importing countries with authorized banks
 - **Status Dashboard**: Visual pipeline overview with transaction statistics
 - **Notifications**: Alerts for missing documents, approaching deadlines, and status changes
-- **User Roles**: Support for Exporter, Importer, and Admin roles
+- **User Authentication**: Replit Auth integration with Google, GitHub, email, and other OIDC providers
+- **User Roles**: Support for Exporter, Importer, Admin, and Pending roles with admin-controlled role assignment
+- **Admin Dashboard**: User management page for admins to assign roles and companies
 
 ## Technical Stack
 - **Frontend**: React with TypeScript, TanStack Query, Wouter routing

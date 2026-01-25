@@ -1,6 +1,8 @@
 import { z } from "zod";
 
-export const userRoleEnum = z.enum(["exporter", "importer", "admin"]);
+export * from "./models/auth";
+
+export const userRoleEnum = z.enum(["exporter", "importer", "admin", "pending"]);
 export type UserRole = z.infer<typeof userRoleEnum>;
 
 export const transactionStageEnum = z.enum(["application", "approval", "shipment", "payment", "completed"]);
@@ -24,27 +26,6 @@ export type DocumentStatus = z.infer<typeof documentStatusEnum>;
 
 export const complianceStatusEnum = z.enum(["pending", "in_progress", "completed", "overdue"]);
 export type ComplianceStatus = z.infer<typeof complianceStatusEnum>;
-
-export interface User {
-  id: string;
-  username: string;
-  password: string;
-  role: UserRole;
-  company: string;
-  country: string;
-  email: string;
-}
-
-export const insertUserSchema = z.object({
-  username: z.string().min(3),
-  password: z.string().min(6),
-  role: userRoleEnum,
-  company: z.string().min(2),
-  country: z.string().min(2),
-  email: z.string().email()
-});
-
-export type InsertUser = z.infer<typeof insertUserSchema>;
 
 export interface Transaction {
   id: string;

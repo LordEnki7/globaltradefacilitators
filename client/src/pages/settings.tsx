@@ -16,18 +16,11 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { useTheme } from "@/components/theme-provider";
-import { useUser } from "@/lib/user-context";
-import type { UserRole } from "@shared/schema";
+import { useAuth } from "@/hooks/use-auth";
 
 export default function SettingsPage() {
   const { theme, setTheme } = useTheme();
-  const { user, setRole } = useUser();
-
-  const roles: { value: UserRole; label: string; description: string }[] = [
-    { value: "exporter", label: "Exporter", description: "U.S. agricultural exporter" },
-    { value: "importer", label: "Importer", description: "Foreign importer" },
-    { value: "admin", label: "Administrator", description: "Full system access" }
-  ];
+  const { user } = useAuth();
 
   return (
     <div className="space-y-6 max-w-3xl">
@@ -52,22 +45,26 @@ export default function SettingsPage() {
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <Label className="text-xs text-muted-foreground">Company Name</Label>
-              <p className="font-medium">{user.company}</p>
+              <p className="font-medium">{user?.company || "Not assigned"}</p>
             </div>
             <div>
               <Label className="text-xs text-muted-foreground">Current Role</Label>
               <div className="flex items-center gap-2">
-                <p className="font-medium capitalize">{user.role}</p>
-                <Badge variant="secondary" className="text-xs">{user.role === "admin" ? "Full Access" : "Limited"}</Badge>
+                <p className="font-medium capitalize">{user?.role || "pending"}</p>
+                <Badge variant="secondary" className="text-xs">
+                  {user?.role === "admin" ? "Full Access" : user?.role === "pending" ? "Awaiting Assignment" : "Limited"}
+                </Badge>
               </div>
             </div>
             <div>
-              <Label className="text-xs text-muted-foreground">Country</Label>
-              <p className="font-medium">{user.country}</p>
+              <Label className="text-xs text-muted-foreground">Email</Label>
+              <p className="font-medium">{user?.email || "Not set"}</p>
             </div>
             <div>
               <Label className="text-xs text-muted-foreground">USDA Registration</Label>
-              <p className="font-medium text-emerald-600 dark:text-emerald-400">Verified</p>
+              <p className="font-medium text-emerald-600 dark:text-emerald-400">
+                {user?.role && user.role !== "pending" ? "Verified" : "Pending Verification"}
+              </p>
             </div>
           </div>
         </CardContent>
@@ -80,23 +77,18 @@ export default function SettingsPage() {
             User Role
           </CardTitle>
           <CardDescription>
-            Switch between user roles to view role-specific features
+            Your role determines which features you can access
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid gap-3 sm:grid-cols-3">
-            {roles.map((role) => (
-              <Button
-                key={role.value}
-                variant={user.role === role.value ? "default" : "outline"}
-                className="h-auto flex-col items-start p-4 text-left"
-                onClick={() => setRole(role.value)}
-                data-testid={`button-role-${role.value}`}
-              >
-                <span className="font-medium">{role.label}</span>
-                <span className="text-xs opacity-70 font-normal">{role.description}</span>
-              </Button>
-            ))}
+          <div className="p-4 rounded-lg bg-muted/50 border">
+            <p className="text-sm text-muted-foreground">
+              {user?.role === "pending" ? (
+                "Your account is pending approval. An administrator will assign your role shortly."
+              ) : (
+                `You are currently assigned the ${user?.role || "pending"} role. Contact an administrator to change your role.`
+              )}
+            </p>
           </div>
         </CardContent>
       </Card>

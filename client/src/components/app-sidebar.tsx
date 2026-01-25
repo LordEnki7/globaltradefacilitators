@@ -8,9 +8,10 @@ import {
   Bell,
   Settings,
   Package,
-  Building2,
   User,
-  FolderOpen
+  FolderOpen,
+  Shield,
+  LogOut
 } from "lucide-react";
 import {
   Sidebar,
@@ -25,7 +26,9 @@ import {
   SidebarFooter,
 } from "@/components/ui/sidebar";
 import { Badge } from "@/components/ui/badge";
-import { useUser } from "@/lib/user-context";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useAuth } from "@/hooks/use-auth";
 import type { Notification } from "@shared/schema";
 
 const mainMenuItems = [
@@ -42,16 +45,22 @@ const referenceItems = [
 
 export function AppSidebar() {
   const [location] = useLocation();
-  const { user } = useUser();
+  const { user } = useAuth();
 
   const { data: notifications = [] } = useQuery<Notification[]>({
     queryKey: ["/api/notifications"],
   });
 
+  const { data: userRole } = useQuery<{ role: string; company: string | null; firstName: string | null; lastName: string | null }>({
+    queryKey: ["/api/user/role"],
+  });
+
   const unreadCount = notifications.filter(n => !n.isRead).length;
 
-  const roleLabel = user.role === "admin" ? "Administrator" : 
-                    user.role === "exporter" ? "Exporter" : "Importer";
+  const isAdmin = userRole?.role === "admin";
+  const roleLabel = userRole?.role === "admin" ? "Administrator" : 
+                    userRole?.role === "exporter" ? "Exporter" : 
+                    userRole?.role === "importer" ? "Importer" : "Pending";
 
   return (
     <Sidebar>
@@ -153,23 +162,54 @@ export function AppSidebar() {
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
+              {isAdmin && (
+                <SidebarMenuItem>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={location === "/admin"}
+                    data-testid="nav-admin"
+                  >
+                    <Link href="/admin">
+                      <Shield className="h-4 w-4" />
+                      <span>Admin</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              )}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="border-t border-sidebar-border p-4">
+      <SidebarFooter className="border-t border-sidebar-border p-4 space-y-3">
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary font-medium text-sm">
-            <User className="h-4 w-4" />
-          </div>
+          <Avatar className="h-9 w-9">
+            <AvatarImage src={user?.profileImageUrl || undefined} />
+            <AvatarFallback>
+              {user?.firstName?.[0] || user?.email?.[0]?.toUpperCase() || "U"}
+            </AvatarFallback>
+          </Avatar>
           <div className="flex flex-col flex-1 min-w-0">
             <span className="text-sm font-medium text-sidebar-foreground truncate">
-              {user.company}
+              {user?.firstName && user?.lastName 
+                ? `${user.firstName} ${user.lastName}` 
+                : userRole?.company || user?.email || "User"}
             </span>
             <span className="text-xs text-muted-foreground">{roleLabel}</span>
           </div>
         </div>
+        <Button 
+          variant="outline" 
+          size="sm" 
+          className="w-full" 
+          asChild
+          data-testid="button-logout"
+        >
+          <a href="/api/logout">
+            <LogOut className="h-4 w-4 mr-2" />
+            Sign Out
+          </a>
+        </Button>
       </SidebarFooter>
     </Sidebar>
   );

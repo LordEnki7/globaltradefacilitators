@@ -1,7 +1,5 @@
 import { randomUUID } from "crypto";
 import type {
-  User,
-  InsertUser,
   Transaction,
   InsertTransaction,
   Document,
@@ -20,10 +18,6 @@ import type {
 } from "@shared/schema";
 
 export interface IStorage {
-  getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
-  
   getTransactions(): Promise<Transaction[]>;
   getTransaction(id: string): Promise<Transaction | undefined>;
   createTransaction(transaction: InsertTransaction): Promise<Transaction>;
@@ -55,7 +49,6 @@ export interface IStorage {
 }
 
 export class MemStorage implements IStorage {
-  private users: Map<string, User>;
   private transactions: Map<string, Transaction>;
   private documents: Map<string, Document>;
   private complianceItems: Map<string, ComplianceItem>;
@@ -64,7 +57,6 @@ export class MemStorage implements IStorage {
   private workflows: Map<string, TransactionWorkflow>;
 
   constructor() {
-    this.users = new Map();
     this.transactions = new Map();
     this.documents = new Map();
     this.complianceItems = new Map();
@@ -77,17 +69,7 @@ export class MemStorage implements IStorage {
 
   private seedData() {
     const now = new Date().toISOString();
-    const userId = "user-1";
-    
-    this.users.set(userId, {
-      id: userId,
-      username: "admin",
-      password: "admin123",
-      role: "admin",
-      company: "American MFG & MKT Association USA",
-      country: "United States",
-      email: "admin@zapp.com"
-    });
+    const seedUserId = "system";
 
     const transactions: Transaction[] = [
       {
@@ -206,9 +188,9 @@ export class MemStorage implements IStorage {
         type: "letter_of_credit",
         status: "verified",
         fileName: "LC_Nigeria_ZAPP2025001.pdf",
-        uploadedBy: userId,
+        uploadedBy: seedUserId,
         uploadedAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
-        verifiedBy: userId,
+        verifiedBy: seedUserId,
         verifiedAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString(),
         notes: ""
       },
@@ -218,7 +200,7 @@ export class MemStorage implements IStorage {
         type: "commercial_invoice",
         status: "uploaded",
         fileName: "Invoice_ZAPP2025001.pdf",
-        uploadedBy: userId,
+        uploadedBy: seedUserId,
         uploadedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
         verifiedBy: null,
         verifiedAt: null,
@@ -230,9 +212,9 @@ export class MemStorage implements IStorage {
         type: "letter_of_credit",
         status: "verified",
         fileName: "LC_Ghana_ZAPP2025002.pdf",
-        uploadedBy: userId,
+        uploadedBy: seedUserId,
         uploadedAt: new Date(Date.now() - 12 * 24 * 60 * 60 * 1000).toISOString(),
-        verifiedBy: userId,
+        verifiedBy: seedUserId,
         verifiedAt: new Date(Date.now() - 11 * 24 * 60 * 60 * 1000).toISOString(),
         notes: ""
       },
@@ -242,9 +224,9 @@ export class MemStorage implements IStorage {
         type: "bill_of_lading",
         status: "verified",
         fileName: "BOL_Ghana_ZAPP2025002.pdf",
-        uploadedBy: userId,
+        uploadedBy: seedUserId,
         uploadedAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString(),
-        verifiedBy: userId,
+        verifiedBy: seedUserId,
         verifiedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
         notes: ""
       },
@@ -254,7 +236,7 @@ export class MemStorage implements IStorage {
         type: "health_certificate",
         status: "uploaded",
         fileName: "HealthCert_ZAPP2025002.pdf",
-        uploadedBy: userId,
+        uploadedBy: seedUserId,
         uploadedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
         verifiedBy: null,
         verifiedAt: null,
@@ -266,7 +248,7 @@ export class MemStorage implements IStorage {
         type: "usda_form",
         status: "pending",
         fileName: "USDA_Form_ZAPP2025004.pdf",
-        uploadedBy: userId,
+        uploadedBy: seedUserId,
         uploadedAt: now,
         verifiedBy: null,
         verifiedAt: null,
@@ -285,7 +267,7 @@ export class MemStorage implements IStorage {
         status: "in_progress",
         dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
         completedAt: null,
-        assignedTo: userId
+        assignedTo: seedUserId
       },
       {
         id: "comp-2",
@@ -305,7 +287,7 @@ export class MemStorage implements IStorage {
         status: "completed",
         dueDate: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
         completedAt: new Date(Date.now() - 12 * 24 * 60 * 60 * 1000).toISOString(),
-        assignedTo: userId
+        assignedTo: seedUserId
       },
       {
         id: "comp-4",
@@ -315,7 +297,7 @@ export class MemStorage implements IStorage {
         status: "in_progress",
         dueDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString(),
         completedAt: null,
-        assignedTo: userId
+        assignedTo: seedUserId
       },
       {
         id: "comp-5",
@@ -335,7 +317,7 @@ export class MemStorage implements IStorage {
         status: "overdue",
         dueDate: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
         completedAt: null,
-        assignedTo: userId
+        assignedTo: seedUserId
       }
     ];
 
@@ -344,7 +326,7 @@ export class MemStorage implements IStorage {
     const notifications: Notification[] = [
       {
         id: "notif-1",
-        userId: userId,
+        userId: seedUserId,
         type: "document_missing",
         title: "Missing Packing List",
         message: "Transaction ZAPP-2025-001 requires a packing list for the approval stage.",
@@ -354,7 +336,7 @@ export class MemStorage implements IStorage {
       },
       {
         id: "notif-2",
-        userId: userId,
+        userId: seedUserId,
         type: "deadline_approaching",
         title: "Compliance Deadline",
         message: "NAFDAC Product Approval for ZAPP-2025-001 is due in 7 days.",
@@ -364,7 +346,7 @@ export class MemStorage implements IStorage {
       },
       {
         id: "notif-3",
-        userId: userId,
+        userId: seedUserId,
         type: "action_required",
         title: "Overdue Compliance Item",
         message: "French Label Compliance for ZAPP-2025-004 is overdue by 3 days.",
@@ -374,7 +356,7 @@ export class MemStorage implements IStorage {
       },
       {
         id: "notif-4",
-        userId: userId,
+        userId: seedUserId,
         type: "stage_change",
         title: "Transaction Advanced",
         message: "ZAPP-2025-002 has advanced to the shipment stage.",
@@ -384,7 +366,7 @@ export class MemStorage implements IStorage {
       },
       {
         id: "notif-5",
-        userId: userId,
+        userId: seedUserId,
         type: "document_verified",
         title: "Document Verified",
         message: "Letter of Credit for ZAPP-2025-001 has been verified.",
@@ -395,23 +377,6 @@ export class MemStorage implements IStorage {
     ];
 
     notifications.forEach(n => this.notifications.set(n.id, n));
-  }
-
-  async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
-  }
-
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username
-    );
-  }
-
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
   }
 
   async getTransactions(): Promise<Transaction[]> {
