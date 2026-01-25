@@ -12,7 +12,9 @@ import type {
   InsertNotification,
   TransactionStage,
   DocumentStatus,
-  ComplianceStatus
+  ComplianceStatus,
+  TransactionChecklist,
+  InsertTransactionChecklist
 } from "@shared/schema";
 
 export interface IStorage {
@@ -39,6 +41,10 @@ export interface IStorage {
   createNotification(notification: InsertNotification): Promise<Notification>;
   markNotificationRead(id: string): Promise<Notification | undefined>;
   markAllNotificationsRead(userId: string): Promise<void>;
+  
+  getTransactionChecklist(transactionId: string): Promise<TransactionChecklist | undefined>;
+  createOrUpdateChecklist(data: InsertTransactionChecklist): Promise<TransactionChecklist>;
+  updateChecklistItem(transactionId: string, itemId: string, checked: boolean, type: "exporter" | "importer"): Promise<TransactionChecklist | undefined>;
 }
 
 export class MemStorage implements IStorage {
@@ -47,6 +53,7 @@ export class MemStorage implements IStorage {
   private documents: Map<string, Document>;
   private complianceItems: Map<string, ComplianceItem>;
   private notifications: Map<string, Notification>;
+  private checklists: Map<string, TransactionChecklist>;
 
   constructor() {
     this.users = new Map();
@@ -54,6 +61,7 @@ export class MemStorage implements IStorage {
     this.documents = new Map();
     this.complianceItems = new Map();
     this.notifications = new Map();
+    this.checklists = new Map();
     
     this.seedData();
   }
@@ -555,6 +563,49 @@ export class MemStorage implements IStorage {
         this.notifications.set(id, { ...notification, isRead: true });
       }
     }
+  }
+
+  async getTransactionChecklist(transactionId: string): Promise<TransactionChecklist | undefined> {
+    return this.checklists.get(transactionId);
+  }
+
+  async createOrUpdateChecklist(data: InsertTransactionChecklist): Promise<TransactionChecklist> {
+    const existing = this.checklists.get(data.transactionId);
+    const checklist: TransactionChecklist = {
+      transactionId: data.transactionId,
+      exporterChecklist: data.exporterChecklist || existing?.exporterChecklist || {},
+      importerChecklist: data.importerChecklist || existing?.importerChecklist || {},
+      updatedAt: new Date().toISOString()
+    };
+    this.checklists.set(data.transactionId, checklist);
+    return checklist;
+  }
+
+  async updateChecklistItem(
+    transactionId: string, 
+    itemId: string, 
+    checked: boolean, 
+    type: "exporter" | "importer"
+  ): Promise<TransactionChecklist | undefined> {
+    let checklist = this.checklists.get(transactionId);
+    if (!checklist) {
+      checklist = {
+        transactionId,
+        exporterChecklist: {},
+        importerChecklist: {},
+        updatedAt: new Date().toISOString()
+      };
+    }
+    
+    if (type === "exporter") {
+      checklist.exporterChecklist[itemId] = checked;
+    } else {
+      checklist.importerChecklist[itemId] = checked;
+    }
+    checklist.updatedAt = new Date().toISOString();
+    
+    this.checklists.set(transactionId, checklist);
+    return checklist;
   }
 }
 

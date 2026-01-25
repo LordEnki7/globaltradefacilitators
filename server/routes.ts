@@ -195,5 +195,38 @@ export async function registerRoutes(
     }
   });
 
+  app.get("/api/checklists/:transactionId", async (req, res) => {
+    try {
+      const checklist = await storage.getTransactionChecklist(req.params.transactionId);
+      if (!checklist) {
+        return res.json({
+          transactionId: req.params.transactionId,
+          exporterChecklist: {},
+          importerChecklist: {},
+          updatedAt: new Date().toISOString()
+        });
+      }
+      res.json(checklist);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch checklist" });
+    }
+  });
+
+  app.patch("/api/checklists/:transactionId/item", async (req, res) => {
+    try {
+      const { itemId, checked, type } = req.body;
+      if (!itemId || checked === undefined || !type) {
+        return res.status(400).json({ error: "Missing required fields: itemId, checked, type" });
+      }
+      if (type !== "exporter" && type !== "importer") {
+        return res.status(400).json({ error: "Type must be 'exporter' or 'importer'" });
+      }
+      const checklist = await storage.updateChecklistItem(req.params.transactionId, itemId, checked, type);
+      res.json(checklist);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to update checklist item" });
+    }
+  });
+
   return httpServer;
 }
