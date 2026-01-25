@@ -5,7 +5,10 @@ A comprehensive tracking system for USDA GSM-102 Export Credit Guarantee transac
 
 ## Key Features
 - **Transaction Tracking**: Create and track export transactions through 5 stages (Application → Approval → Shipment → Payment → Completed)
-- **Document Management**: Upload and verify trade documents (Letter of Credit, Commodity Certificates, Shipping Documents, USDA Forms)
+- **Transaction Templates**: 6 country-specific quick-start templates (Ghana, Nigeria, Senegal) for rice, frozen chicken, edible oils, and tomato paste with pre-filled LC language and compliance requirements
+- **90-Day Guided Workflow**: 6-phase wizard (Foundation → Compliance → Financing → Execution → Shipping → Scale) with task tracking and phase advancement
+- **Document Management**: Upload and verify trade documents with AES-256 encryption indication and auto-complete functionality that checks related checklist items
+- **Deal Room**: Organized folder structure (7 main folders) for professional deal organization matching trade industry standards
 - **Master Compliance Checklist**: Comprehensive phase-based checklists for both exporters (8 phases) and importers (6 phases) with stop gates and blocking items
 - **Country Verification**: List of USDA-approved importing countries with authorized banks
 - **Status Dashboard**: Visual pipeline overview with transaction statistics
@@ -52,10 +55,15 @@ A comprehensive tracking system for USDA GSM-102 Export Credit Guarantee transac
 - `PATCH /api/transactions/:id/stage` - Update transaction stage
 - `GET/POST /api/documents` - List/upload documents
 - `PATCH /api/documents/:id/verify` - Verify document
+- `POST /api/documents/auto-complete` - Auto-complete checklist items based on document upload
 - `GET/POST /api/compliance` - List/add compliance items
 - `PATCH /api/compliance/:id/status` - Update compliance status
 - `GET /api/checklists/:transactionId` - Get transaction compliance checklist
 - `PATCH /api/checklists/:transactionId/item` - Update checklist item status
+- `GET /api/templates` - Get available transaction templates
+- `GET/POST /api/workflows/:transactionId` - Get/create 90-day workflow for transaction
+- `PATCH /api/workflows/:transactionId/task` - Update workflow task status
+- `PATCH /api/workflows/:transactionId/phase` - Advance workflow to next phase
 - `GET /api/notifications` - List notifications
 - `PATCH /api/notifications/:id/read` - Mark as read
 - `PATCH /api/notifications/read-all` - Mark all as read
