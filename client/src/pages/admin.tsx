@@ -22,39 +22,12 @@ export default function AdminPage() {
     queryKey: ["/api/user/role"],
   });
 
+  const isAdmin = userRole?.role === "admin";
+
   const { data: users = [], isLoading, error } = useQuery<User[]>({
     queryKey: ["/api/admin/users"],
-    enabled: userRole?.role === "admin",
+    enabled: isAdmin,
   });
-
-  useEffect(() => {
-    if (!isLoadingRole && userRole?.role !== "admin") {
-      toast({
-        title: "Access Denied",
-        description: "You need admin privileges to access this page.",
-        variant: "destructive",
-      });
-      setLocation("/");
-    }
-  }, [userRole, isLoadingRole, setLocation, toast]);
-
-  if (isLoadingRole || (userRole?.role !== "admin")) {
-    return (
-      <div className="flex flex-col items-center justify-center h-full gap-4">
-        {isLoadingRole ? (
-          <Loader2 className="h-8 w-8 animate-spin text-primary" data-testid="loader-admin" />
-        ) : (
-          <>
-            <AlertTriangle className="h-12 w-12 text-destructive" />
-            <p className="text-lg font-medium">Admin access required</p>
-            <Button onClick={() => setLocation("/")} data-testid="button-go-home">
-              Go to Dashboard
-            </Button>
-          </>
-        )}
-      </div>
-    );
-  }
 
   const updateRoleMutation = useMutation({
     mutationFn: async ({ userId, role }: { userId: string; role: string }) => {
@@ -97,6 +70,17 @@ export default function AdminPage() {
     },
   });
 
+  useEffect(() => {
+    if (!isLoadingRole && !isAdmin) {
+      toast({
+        title: "Access Denied",
+        description: "You need admin privileges to access this page.",
+        variant: "destructive",
+      });
+      setLocation("/");
+    }
+  }, [isAdmin, isLoadingRole, setLocation, toast]);
+
   const getRoleBadgeVariant = (role: string | null) => {
     switch (role) {
       case "admin":
@@ -118,6 +102,26 @@ export default function AdminPage() {
   const handleCompanySave = (userId: string) => {
     updateCompanyMutation.mutate({ userId, company: companyValue });
   };
+
+  if (isLoadingRole) {
+    return (
+      <div className="flex flex-col items-center justify-center h-full gap-4">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" data-testid="loader-admin" />
+      </div>
+    );
+  }
+
+  if (!isAdmin) {
+    return (
+      <div className="flex flex-col items-center justify-center h-full gap-4">
+        <AlertTriangle className="h-12 w-12 text-destructive" />
+        <p className="text-lg font-medium">Admin access required</p>
+        <Button onClick={() => setLocation("/")} data-testid="button-go-home">
+          Go to Dashboard
+        </Button>
+      </div>
+    );
+  }
 
   if (isLoading) {
     return (
