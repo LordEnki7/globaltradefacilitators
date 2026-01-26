@@ -82,38 +82,51 @@ export async function setupAuth(app: Express) {
   // Keep track of registered strategies
   const registeredStrategies = new Set<string>();
 
+  // Use environment domain if available, otherwise use request hostname
+  const getCallbackDomain = () => {
+    return process.env.REPLIT_DEV_DOMAIN || process.env.REPLIT_DOMAINS?.split(",")[0] || "";
+  };
+
   // Helper function to ensure strategy exists for a domain
   const ensureStrategy = (domain: string) => {
-    const strategyName = `replitauth:${domain}`;
+    // Use the Replit-provided domain for callback URL to ensure it matches what's registered
+    const callbackDomain = getCallbackDomain() || domain;
+    const strategyName = `replitauth:${callbackDomain}`;
     if (!registeredStrategies.has(strategyName)) {
+      const callbackURL = `https://${callbackDomain}/api/callback`;
+      console.log("[Auth] Creating strategy for domain:", callbackDomain, "callbackURL:", callbackURL);
+      console.log("[Auth] OIDC config issuer:", config.serverMetadata().issuer);
       const strategy = new Strategy(
         {
           name: strategyName,
           config,
           scope: "openid email profile offline_access",
-          callbackURL: `https://${domain}/api/callback`,
+          callbackURL,
         },
         verify
       );
       passport.use(strategy);
       registeredStrategies.add(strategyName);
     }
+    return strategyName;
   };
 
   passport.serializeUser((user: Express.User, cb) => cb(null, user));
   passport.deserializeUser((user: Express.User, cb) => cb(null, user));
 
   app.get("/api/login", (req, res, next) => {
-    ensureStrategy(req.hostname);
-    passport.authenticate(`replitauth:${req.hostname}`, {
+    console.log("[Auth] Login request - hostname:", req.hostname, "host:", req.headers.host);
+    const strategyName = ensureStrategy(req.hostname);
+    passport.authenticate(strategyName, {
       prompt: "login consent",
       scope: ["openid", "email", "profile", "offline_access"],
     })(req, res, next);
   });
 
   app.get("/api/callback", (req, res, next) => {
-    ensureStrategy(req.hostname);
-    passport.authenticate(`replitauth:${req.hostname}`, {
+    console.log("[Auth] Callback request - hostname:", req.hostname, "query:", req.query);
+    const strategyName = ensureStrategy(req.hostname);
+    passport.authenticate(strategyName, {
       successReturnToOrRedirect: "/",
       failureRedirect: "/api/login",
     })(req, res, next);
