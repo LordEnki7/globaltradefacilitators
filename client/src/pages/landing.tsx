@@ -57,7 +57,7 @@ export default function LandingPage() {
               </h1>
               
               <p className="text-lg text-gray-200 leading-relaxed max-w-xl">
-                Zapp Marketing & Manufacturing delivers structured GSM-102 transactions 
+                Global Trade Facilitators delivers structured GSM-102 transactions 
                 with bank-ready documentation, regulatory compliance, and end-to-end 
                 deal management for agricultural exports.
               </p>
@@ -109,6 +109,123 @@ export default function LandingPage() {
               <div>
                 <p className="text-3xl font-bold text-primary">5</p>
                 <p className="text-sm text-muted-foreground">Stage Pipeline</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="what-is-gsm102" className="py-20 px-6 bg-muted/30">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold mb-4" data-testid="heading-gsm-explanation">
+                What is GSM-102?
+              </h2>
+              <p className="text-muted-foreground max-w-3xl mx-auto">
+                GSM-102 is the USDA's export credit guarantee program that supports U.S. agricultural 
+                exports through LC-based financing.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 mb-12">
+              <Card>
+                <CardContent className="p-6 space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-3 bg-primary/10 rounded-lg">
+                      <Shield className="h-6 w-6 text-primary" />
+                    </div>
+                    <h3 className="text-lg font-semibold">The Name Explained</h3>
+                  </div>
+                  <div className="space-y-3 text-sm">
+                    <div className="flex items-start gap-3">
+                      <span className="font-mono font-bold text-primary min-w-[60px]">GSM</span>
+                      <span className="text-muted-foreground">
+                        <span className="font-medium text-foreground">General Sales Manager</span> — the legacy internal name 
+                        USDA Commodity Credit Corporation used decades ago for export credit programs
+                      </span>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="font-mono font-bold text-primary min-w-[60px]">102</span>
+                      <span className="text-muted-foreground">
+                        Identifies the <span className="font-medium text-foreground">short-to-medium term</span> credit 
+                        guarantee program (GSM-103 was long-term but is no longer active)
+                      </span>
+                    </div>
+                  </div>
+                  <div className="pt-3 border-t border-border">
+                    <p className="text-xs text-muted-foreground italic">
+                      The term "GSM" is outdated language, but the program is very much alive. USDA never rebranded it, 
+                      so everyone still uses GSM-102.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6 space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-3 bg-primary/10 rounded-lg">
+                      <Building2 className="h-6 w-6 text-primary" />
+                    </div>
+                    <h3 className="text-lg font-semibold">What It Actually Does</h3>
+                  </div>
+                  <p className="text-muted-foreground">
+                    A U.S. government-backed guarantee that helps foreign buyers purchase U.S. agricultural 
+                    products using Letters of Credit, while protecting U.S. exporters and banks from non-payment.
+                  </p>
+                  <div className="grid grid-cols-2 gap-3 text-sm">
+                    <div className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-primary shrink-0" />
+                      <span>Guarantees up to 98% of principal</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-primary shrink-0" />
+                      <span>Covers approved foreign banks</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-primary shrink-0" />
+                      <span>Supports USD Letters of Credit</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-primary shrink-0" />
+                      <span>Importers buy now, pay later</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="bg-primary/5 border border-primary/20 rounded-xl p-6 md:p-8">
+              <div className="grid md:grid-cols-3 gap-6 items-center">
+                <div className="md:col-span-2 space-y-3">
+                  <h3 className="text-lg font-semibold flex items-center gap-2">
+                    <Anchor className="h-5 w-5 text-primary" />
+                    In Plain English
+                  </h3>
+                  <p className="text-muted-foreground">
+                    The USDA guarantees that if a foreign bank defaults on an agricultural import payment, 
+                    the U.S. government will cover the loss. This means:
+                  </p>
+                  <ul className="space-y-2 text-sm">
+                    <li className="flex items-start gap-2">
+                      <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                      <span><span className="font-medium">Exporters get paid immediately</span> — no waiting on foreign payments</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                      <span><span className="font-medium">Importers get extended terms</span> — buy now and pay later with LC financing</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                      <span><span className="font-medium">Banks are protected</span> — U.S. government backs up to 98% of principal</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="hidden md:flex items-center justify-center">
+                  <div className="text-center p-6 bg-background rounded-lg border">
+                    <p className="text-4xl font-bold text-primary">98%</p>
+                    <p className="text-sm text-muted-foreground mt-1">Principal Guarantee</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
