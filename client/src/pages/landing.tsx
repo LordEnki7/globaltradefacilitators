@@ -17,12 +17,16 @@ export default function LandingPage() {
       <nav className="fixed top-0 left-0 right-0 z-50 border-b bg-background/80 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="h-12 w-12 overflow-hidden rounded-lg bg-white flex items-center justify-center p-1">
-              <img 
-                src={logoImage} 
-                alt="Global Trade Facilitators" 
-                className="h-24 w-auto object-cover object-top"
-                data-testid="img-header-logo"
+            <div 
+              className="h-14 w-14 overflow-hidden rounded-lg bg-white flex items-center justify-center"
+              data-testid="img-header-logo"
+            >
+              <div 
+                className="w-full h-[400%] bg-contain bg-no-repeat bg-top"
+                style={{ 
+                  backgroundImage: `url(${logoImage})`,
+                  transform: 'translateY(37.5%)'
+                }}
               />
             </div>
             <div className="flex flex-col">
@@ -631,12 +635,16 @@ export default function LandingPage() {
         <footer className="border-t py-8 px-6 bg-muted/20">
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 overflow-hidden rounded-lg bg-white flex items-center justify-center p-1">
-                <img 
-                  src={logoImage} 
-                  alt="Global Trade Facilitators" 
-                  className="h-20 w-auto object-cover object-top"
-                  data-testid="img-footer-logo"
+              <div 
+                className="h-12 w-12 overflow-hidden rounded-lg bg-white flex items-center justify-center"
+                data-testid="img-footer-logo"
+              >
+                <div 
+                  className="w-full h-[400%] bg-contain bg-no-repeat bg-top"
+                  style={{ 
+                    backgroundImage: `url(${logoImage})`,
+                    transform: 'translateY(12.5%)'
+                  }}
                 />
               </div>
               <span className="font-medium">Global Trade Facilitators</span>

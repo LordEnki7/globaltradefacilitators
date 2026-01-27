@@ -68,12 +68,16 @@ export function AppSidebar() {
       <SidebarHeader className="border-b border-sidebar-border px-4 py-4">
         <Link href="/">
           <div className="flex items-center gap-3 hover-elevate rounded-md p-1 -m-1 cursor-pointer">
-            <div className="h-10 w-10 overflow-hidden rounded-md bg-white flex items-center justify-center p-0.5">
-              <img 
-                src={logoImage} 
-                alt="Global Trade Facilitators" 
-                className="h-20 w-auto object-cover object-top"
-                data-testid="img-sidebar-logo"
+            <div 
+              className="h-10 w-10 overflow-hidden rounded-md bg-white flex items-center justify-center"
+              data-testid="img-sidebar-logo"
+            >
+              <div 
+                className="w-full h-[400%] bg-contain bg-no-repeat bg-top"
+                style={{ 
+                  backgroundImage: `url(${logoImage})`,
+                  transform: 'translateY(37.5%)'
+                }}
               />
             </div>
             <div className="flex flex-col">
