@@ -9,15 +9,26 @@ import riceWarehouseImage from "@assets/White-Rice-Packing_1769477014542.png";
 import controlRoomImage from "@assets/jst-leitstand-fuer-logistik-hero-mobil_1769477147339.webp";
 import geographicMapImage from "@assets/geographical_map_1769477917369.png";
 import complianceDocsImage from "@assets/second_geographical_image_2_1769477917367.png";
+import logoImage from "@assets/logos_for_this_app_1769477935936.png";
 
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background">
       <nav className="fixed top-0 left-0 right-0 z-50 border-b bg-background/80 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <Shield className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold">Zapp GSM-102</span>
+        <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="h-12 w-12 overflow-hidden rounded-lg bg-white flex items-center justify-center p-1">
+              <img 
+                src={logoImage} 
+                alt="Global Trade Facilitators" 
+                className="h-24 w-auto object-cover object-top"
+                data-testid="img-header-logo"
+              />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-lg font-bold leading-tight">Global Trade Facilitators</span>
+              <span className="text-xs text-muted-foreground">GSM-102 Export Credit</span>
+            </div>
           </div>
           <Button asChild data-testid="button-login-nav">
             <a href="/api/login">Sign In</a>
@@ -619,9 +630,16 @@ export default function LandingPage() {
 
         <footer className="border-t py-8 px-6 bg-muted/20">
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <Shield className="h-5 w-5 text-primary" />
-              <span className="font-medium">Zapp Marketing & Manufacturing</span>
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 overflow-hidden rounded-lg bg-white flex items-center justify-center p-1">
+                <img 
+                  src={logoImage} 
+                  alt="Global Trade Facilitators" 
+                  className="h-20 w-auto object-cover object-top"
+                  data-testid="img-footer-logo"
+                />
+              </div>
+              <span className="font-medium">Global Trade Facilitators</span>
             </div>
             <p>&copy; {new Date().getFullYear()} GSM-102 Export Credit Guarantee Tracker</p>
           </div>
