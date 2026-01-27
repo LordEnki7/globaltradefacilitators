@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Shield, FileCheck, Globe, ArrowRight, CheckCircle, Anchor, Building2 } from "lucide-react";
 import heroImage from "@assets/global_trade_containers_cover_1769476614264.jpg";
 import processFlowImage from "@assets/blg_inline_how_does_trade_finance_work_02_1769476764172.png";
+import complianceImage from "@assets/foreign-trade-legal-advice_1769476846132.webp";
 
 export default function LandingPage() {
   return (
@@ -256,6 +257,66 @@ export default function LandingPage() {
                       </div>
                     </div>
                   ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-20 px-6 bg-muted/30">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="rounded-xl overflow-hidden shadow-lg">
+                <img 
+                  src={complianceImage} 
+                  alt="Trade compliance documentation and legal review"
+                  className="w-full h-auto object-cover"
+                  data-testid="img-compliance"
+                />
+              </div>
+              <div className="space-y-6">
+                <h2 className="text-3xl font-bold">Documentation-Driven Compliance</h2>
+                <p className="text-muted-foreground leading-relaxed">
+                  GSM-102 success depends on rigorous documentation. Every transaction 
+                  follows established procedures with verified paperwork at each stage.
+                </p>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 text-primary mt-0.5" />
+                    <div>
+                      <p className="font-medium">Master Compliance Checklists</p>
+                      <p className="text-sm text-muted-foreground">
+                        8-phase exporter checklist and 6-phase importer checklist with stop gates
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 text-primary mt-0.5" />
+                    <div>
+                      <p className="font-medium">Document Verification</p>
+                      <p className="text-sm text-muted-foreground">
+                        Track LC, Bill of Lading, Certificate of Origin, and all required forms
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 text-primary mt-0.5" />
+                    <div>
+                      <p className="font-medium">Organized Deal Room</p>
+                      <p className="text-sm text-muted-foreground">
+                        7-folder structure matching industry standards for bank presentations
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 text-primary mt-0.5" />
+                    <div>
+                      <p className="font-medium">Export Package Delivery</p>
+                      <p className="text-sm text-muted-foreground">
+                        Download or email complete document packages to officials
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
