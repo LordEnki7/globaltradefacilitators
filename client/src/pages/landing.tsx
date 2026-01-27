@@ -7,6 +7,8 @@ import complianceImage from "@assets/foreign-trade-legal-advice_1769476846132.we
 import bankingImage from "@assets/alumni-interview-trade-finance-1024x683_1769476904823.jpg";
 import riceWarehouseImage from "@assets/White-Rice-Packing_1769477014542.png";
 import controlRoomImage from "@assets/jst-leitstand-fuer-logistik-hero-mobil_1769477147339.webp";
+import geographicMapImage from "@assets/geographical_map_1769477917369.png";
+import complianceDocsImage from "@assets/second_geographical_image_2_1769477917367.png";
 
 export default function LandingPage() {
   return (
@@ -450,6 +452,15 @@ export default function LandingPage() {
               </p>
             </div>
             
+            <div className="rounded-xl overflow-hidden shadow-lg mb-12">
+              <img 
+                src={geographicMapImage} 
+                alt="Global trade routes connecting Dominican Republic, Caribbean, and West Africa"
+                className="w-full h-auto object-cover"
+                data-testid="img-geographic-map"
+              />
+            </div>
+            
             <div className="grid md:grid-cols-2 gap-8">
               <Card className="overflow-hidden">
                 <div className="h-3 bg-gradient-to-r from-emerald-500 to-emerald-600" />
@@ -522,6 +533,15 @@ export default function LandingPage() {
                   </div>
                 </CardContent>
               </Card>
+            </div>
+
+            <div className="mt-12 rounded-xl overflow-hidden shadow-lg">
+              <img 
+                src={complianceDocsImage} 
+                alt="Trade compliance documents including Certificate of Origin, Bill of Lading, and Health Certificate with approval stamps"
+                className="w-full h-auto object-cover"
+                data-testid="img-compliance-docs"
+              />
             </div>
           </div>
         </section>
