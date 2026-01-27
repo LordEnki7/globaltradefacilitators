@@ -1,7 +1,11 @@
 # GSM-102 USDA Export Credit Guarantee Tracker
 
 ## Overview
-A comprehensive tracking system for USDA GSM-102 Export Credit Guarantee transactions for Zapp Marketing and Manufacturing. This application helps manage international agricultural trade transactions from application through payment completion.
+A comprehensive tracking system for USDA GSM-102 Export Credit Guarantee transactions for Global Trade Facilitators.
+
+**Live URL**: globaltradefacilitators.us.com
+
+This application helps manage international agricultural trade transactions from application through payment completion.
 
 ## Key Features
 - **Transaction Tracking**: Create and track export transactions through 5 stages (Application → Approval → Shipment → Payment → Completed)
