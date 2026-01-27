@@ -1,6 +1,9 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Shield, FileCheck, Globe, ArrowRight, CheckCircle, Anchor, Building2, Package, MapPin, Activity, DollarSign, Users, Truck, Landmark } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Shield, FileCheck, Globe, ArrowRight, CheckCircle, Anchor, Building2, Package, MapPin, Activity, DollarSign, Users, Truck, Landmark, Calculator } from "lucide-react";
 import heroImage from "@assets/global_trade_containers_cover_1769476614264.jpg";
 import processFlowImage from "@assets/blg_inline_how_does_trade_finance_work_02_1769476764172.png";
 import complianceImage from "@assets/foreign-trade-legal-advice_1769476846132.webp";
@@ -13,6 +16,33 @@ import logoShipMain from "../assets/logo-ship-main.png";
 import logoGlobeAirplane from "../assets/logo-globe-airplane.png";
 
 export default function LandingPage() {
+  const [dealAmount, setDealAmount] = useState(500000);
+
+  const formatCurrency = (amount: number) => {
+    if (amount >= 1000000) {
+      return `$${(amount / 1000000).toFixed(1)}M`;
+    }
+    if (amount >= 1000) {
+      return `$${(amount / 1000).toFixed(0)}K`;
+    }
+    return `$${amount.toFixed(0)}`;
+  };
+
+  const calculations = {
+    exporterLow: dealAmount * 0.08,
+    exporterHigh: dealAmount * 0.15,
+    importerLow: dealAmount * 0.12,
+    importerHigh: dealAmount * 0.25,
+    facilitatorLow: dealAmount * 0.015,
+    facilitatorHigh: dealAmount * 0.03,
+    usBankLow: dealAmount * 0.0075,
+    usBankHigh: dealAmount * 0.015,
+    foreignBankLow: dealAmount * 0.01,
+    foreignBankHigh: dealAmount * 0.03,
+    logisticsLow: dealAmount * 0.04,
+    logisticsHigh: dealAmount * 0.08,
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <nav className="fixed top-0 left-0 right-0 z-50 border-b bg-background/80 backdrop-blur-sm">
@@ -233,14 +263,54 @@ export default function LandingPage() {
 
         <section id="deal-economics" className="py-20 px-6">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center mb-8">
               <h2 className="text-3xl font-bold mb-4" data-testid="heading-deal-economics">
-                Who Makes What: $500K Deal Example
+                Deal Value Calculator
               </h2>
               <p className="text-muted-foreground max-w-3xl mx-auto">
-                A realistic breakdown of how value flows through a GSM-102 transaction. 
+                Enter your deal amount to see how value flows through a GSM-102 transaction. 
                 Everyone gets paid, no one is squeezed, and banks are protected.
               </p>
+            </div>
+
+            <div className="bg-primary/5 border border-primary/30 rounded-xl p-6 mb-10 max-w-xl mx-auto">
+              <div className="flex items-center gap-3 mb-4">
+                <Calculator className="h-6 w-6 text-primary" />
+                <h3 className="text-lg font-semibold">Enter Deal Value</h3>
+              </div>
+              <div className="space-y-3">
+                <Label htmlFor="deal-amount" className="text-sm text-muted-foreground">
+                  Contract Value (USD)
+                </Label>
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground font-medium">$</span>
+                  <Input
+                    id="deal-amount"
+                    type="number"
+                    min={10000}
+                    max={10000000}
+                    step={10000}
+                    value={dealAmount}
+                    onChange={(e) => setDealAmount(Math.max(10000, Number(e.target.value)))}
+                    className="pl-8 text-xl font-bold h-14"
+                    data-testid="input-deal-amount"
+                  />
+                </div>
+                <div className="flex gap-2 flex-wrap">
+                  {[100000, 250000, 500000, 1000000, 2000000].map((amount) => (
+                    <Button 
+                      key={amount}
+                      variant="outline" 
+                      size="sm"
+                      onClick={() => setDealAmount(amount)}
+                      className={dealAmount === amount ? "border-primary bg-primary/10" : ""}
+                      data-testid={`button-preset-${amount}`}
+                    >
+                      {formatCurrency(amount)}
+                    </Button>
+                  ))}
+                </div>
+              </div>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
@@ -262,7 +332,9 @@ export default function LandingPage() {
                     </div>
                     <div className="flex justify-between items-center text-lg">
                       <span className="text-muted-foreground">Earnings</span>
-                      <span className="font-bold text-green-500">$40K – $75K</span>
+                      <span className="font-bold text-green-500" data-testid="calc-exporter">
+                        {formatCurrency(calculations.exporterLow)} – {formatCurrency(calculations.exporterHigh)}
+                      </span>
                     </div>
                   </div>
                   <p className="text-xs text-muted-foreground mt-3 pt-3 border-t">
@@ -289,7 +361,9 @@ export default function LandingPage() {
                     </div>
                     <div className="flex justify-between items-center text-lg">
                       <span className="text-muted-foreground">Earnings</span>
-                      <span className="font-bold text-blue-500">$60K – $125K</span>
+                      <span className="font-bold text-blue-500" data-testid="calc-importer">
+                        {formatCurrency(calculations.importerLow)} – {formatCurrency(calculations.importerHigh)}
+                      </span>
                     </div>
                   </div>
                   <p className="text-xs text-muted-foreground mt-3 pt-3 border-t">
@@ -316,11 +390,13 @@ export default function LandingPage() {
                     </div>
                     <div className="flex justify-between items-center text-lg">
                       <span className="text-muted-foreground">Earnings</span>
-                      <span className="font-bold text-primary">$7.5K – $15K</span>
+                      <span className="font-bold text-primary" data-testid="calc-facilitator">
+                        {formatCurrency(calculations.facilitatorLow)} – {formatCurrency(calculations.facilitatorHigh)}
+                      </span>
                     </div>
                   </div>
                   <p className="text-xs text-muted-foreground mt-3 pt-3 border-t">
-                    No inventory risk. Best structure: $7.5K–$10K upfront + 1% embedded in transaction.
+                    No inventory risk. Best structure: upfront fee + embedded in transaction.
                   </p>
                 </CardContent>
               </Card>
@@ -343,7 +419,9 @@ export default function LandingPage() {
                     </div>
                     <div className="flex justify-between items-center text-lg">
                       <span className="text-muted-foreground">Earnings</span>
-                      <span className="font-bold text-amber-500">$3.75K – $7.5K</span>
+                      <span className="font-bold text-amber-500" data-testid="calc-usbank">
+                        {formatCurrency(calculations.usBankLow)} – {formatCurrency(calculations.usBankHigh)}
+                      </span>
                     </div>
                   </div>
                   <p className="text-xs text-muted-foreground mt-3 pt-3 border-t">
@@ -370,7 +448,9 @@ export default function LandingPage() {
                     </div>
                     <div className="flex justify-between items-center text-lg">
                       <span className="text-muted-foreground">Earnings</span>
-                      <span className="font-bold text-purple-500">$5K – $15K</span>
+                      <span className="font-bold text-purple-500" data-testid="calc-foreignbank">
+                        {formatCurrency(calculations.foreignBankLow)} – {formatCurrency(calculations.foreignBankHigh)}
+                      </span>
                     </div>
                   </div>
                   <p className="text-xs text-muted-foreground mt-3 pt-3 border-t">
@@ -397,7 +477,9 @@ export default function LandingPage() {
                     </div>
                     <div className="flex justify-between items-center text-lg">
                       <span className="text-muted-foreground">Cost</span>
-                      <span className="font-bold text-rose-500">$20K – $40K</span>
+                      <span className="font-bold text-rose-500" data-testid="calc-logistics">
+                        {formatCurrency(calculations.logisticsLow)} – {formatCurrency(calculations.logisticsHigh)}
+                      </span>
                     </div>
                   </div>
                   <p className="text-xs text-muted-foreground mt-3 pt-3 border-t">
@@ -412,8 +494,11 @@ export default function LandingPage() {
                 <div className="space-y-4">
                   <h3 className="text-xl font-semibold flex items-center gap-2">
                     <DollarSign className="h-5 w-5 text-primary" />
-                    Why This Works
+                    Your Annual Potential
                   </h3>
+                  <p className="text-sm text-muted-foreground">
+                    Based on {formatCurrency(dealAmount)} deals at 2% average facilitator fee:
+                  </p>
                   <ul className="space-y-2 text-sm">
                     <li className="flex items-center gap-2">
                       <CheckCircle className="h-4 w-4 text-primary shrink-0" />
@@ -436,11 +521,15 @@ export default function LandingPage() {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-background rounded-lg p-4 text-center border">
                     <p className="text-2xl font-bold text-primary">1 deal/mo</p>
-                    <p className="text-sm text-muted-foreground">~$120K/year</p>
+                    <p className="text-sm text-muted-foreground" data-testid="calc-annual-1">
+                      ~{formatCurrency(dealAmount * 0.02 * 12)}/year
+                    </p>
                   </div>
                   <div className="bg-background rounded-lg p-4 text-center border">
                     <p className="text-2xl font-bold text-primary">2 deals/mo</p>
-                    <p className="text-sm text-muted-foreground">~$240K/year</p>
+                    <p className="text-sm text-muted-foreground" data-testid="calc-annual-2">
+                      ~{formatCurrency(dealAmount * 0.02 * 24)}/year
+                    </p>
                   </div>
                   <div className="col-span-2 bg-primary/10 rounded-lg p-4 text-center border border-primary/30">
                     <p className="text-lg font-bold">$1M deals = Double everything</p>
