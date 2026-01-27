@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Shield, FileCheck, Globe, ArrowRight, CheckCircle, Anchor, Building2, Package } from "lucide-react";
+import { Shield, FileCheck, Globe, ArrowRight, CheckCircle, Anchor, Building2, Package, MapPin } from "lucide-react";
 import heroImage from "@assets/global_trade_containers_cover_1769476614264.jpg";
 import processFlowImage from "@assets/blg_inline_how_does_trade_finance_work_02_1769476764172.png";
 import complianceImage from "@assets/foreign-trade-legal-advice_1769476846132.webp";
@@ -435,7 +435,97 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section className="py-20 px-6">
+        <section id="markets" className="py-20 px-6">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <div className="flex items-center justify-center gap-2 text-primary mb-4">
+                <MapPin className="h-5 w-5" />
+                <span className="text-sm font-medium tracking-wide uppercase">Markets We Serve</span>
+              </div>
+              <h2 className="text-3xl font-bold mb-4">Strategic Regional Focus</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                We prioritize markets with established banking relationships, clear regulatory 
+                frameworks, and strong demand for U.S. agricultural products.
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              <Card className="overflow-hidden">
+                <div className="h-3 bg-gradient-to-r from-emerald-500 to-emerald-600" />
+                <CardContent className="p-6 space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-3 bg-emerald-500/10 rounded-lg">
+                      <Globe className="h-6 w-6 text-emerald-500" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold">West Africa</h3>
+                      <p className="text-sm text-muted-foreground">Primary Focus Region</p>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground">
+                    Strong demand for rice, frozen poultry, and edible oils. 
+                    Established banking channels and clear import procedures.
+                  </p>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-emerald-500" />
+                      <span className="font-medium">Ghana</span>
+                      <span className="text-xs text-muted-foreground">- Fastest, cleanest market</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-emerald-500" />
+                      <span className="font-medium">Nigeria</span>
+                      <span className="text-xs text-muted-foreground">- Largest volume potential</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-emerald-500" />
+                      <span className="font-medium">Senegal</span>
+                      <span className="text-xs text-muted-foreground">- Growing import demand</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="overflow-hidden">
+                <div className="h-3 bg-gradient-to-r from-cyan-500 to-cyan-600" />
+                <CardContent className="p-6 space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-3 bg-cyan-500/10 rounded-lg">
+                      <Globe className="h-6 w-6 text-cyan-500" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold">Caribbean</h3>
+                      <p className="text-sm text-muted-foreground">Established Trade Corridor</p>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground">
+                    Consistent demand for U.S. agricultural products with 
+                    reliable banking infrastructure and proximity advantages.
+                  </p>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-cyan-500" />
+                      <span className="font-medium">Dominican Republic</span>
+                      <span className="text-xs text-muted-foreground">- Key trading partner</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-muted-foreground" />
+                      <span className="text-muted-foreground">Jamaica</span>
+                      <span className="text-xs text-muted-foreground">- Coming soon</span>
+                    </div>
+                  </div>
+                  <div className="pt-4 border-t">
+                    <p className="text-sm text-muted-foreground italic">
+                      Future expansion: Europe, Asia, additional Africa markets
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-20 px-6 bg-muted/30">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <h2 className="text-3xl font-bold">Ready to Execute Your Next Deal?</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
