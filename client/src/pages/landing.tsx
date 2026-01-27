@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Shield, FileCheck, Globe, ArrowRight, CheckCircle, Anchor, Building2, Package, MapPin, Activity } from "lucide-react";
+import { Shield, FileCheck, Globe, ArrowRight, CheckCircle, Anchor, Building2, Package, MapPin, Activity, DollarSign, Users, Truck, Landmark } from "lucide-react";
 import heroImage from "@assets/global_trade_containers_cover_1769476614264.jpg";
 import processFlowImage from "@assets/blg_inline_how_does_trade_finance_work_02_1769476764172.png";
 import complianceImage from "@assets/foreign-trade-legal-advice_1769476846132.webp";
@@ -231,7 +231,228 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section id="features" className="py-20 px-6">
+        <section id="deal-economics" className="py-20 px-6">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold mb-4" data-testid="heading-deal-economics">
+                Who Makes What: $500K Deal Example
+              </h2>
+              <p className="text-muted-foreground max-w-3xl mx-auto">
+                A realistic breakdown of how value flows through a GSM-102 transaction. 
+                Everyone gets paid, no one is squeezed, and banks are protected.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+              <Card>
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 bg-green-500/10 rounded-lg">
+                      <Package className="h-5 w-5 text-green-500" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">U.S. Exporter</h3>
+                      <p className="text-xs text-muted-foreground">Seller of Goods</p>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-muted-foreground">Typical Margin</span>
+                      <span className="font-medium">8% – 15%</span>
+                    </div>
+                    <div className="flex justify-between items-center text-lg">
+                      <span className="text-muted-foreground">Earnings</span>
+                      <span className="font-bold text-green-500">$40K – $75K</span>
+                    </div>
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-3 pt-3 border-t">
+                    Gets paid immediately once documents are clean. Low risk with government-backed payment.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 bg-blue-500/10 rounded-lg">
+                      <Globe className="h-5 w-5 text-blue-500" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">Importer</h3>
+                      <p className="text-xs text-muted-foreground">Buyer / Distributor</p>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-muted-foreground">Typical Margin</span>
+                      <span className="font-medium">12% – 25%</span>
+                    </div>
+                    <div className="flex justify-between items-center text-lg">
+                      <span className="text-muted-foreground">Earnings</span>
+                      <span className="font-bold text-blue-500">$60K – $125K</span>
+                    </div>
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-3 pt-3 border-t">
+                    Carries customs, VAT, FX exposure, and market risk. Higher margins in Africa/Caribbean.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-primary/50 bg-primary/5">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 bg-primary/20 rounded-lg">
+                      <Users className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">You — Facilitator</h3>
+                      <p className="text-xs text-muted-foreground">Structure & Compliance</p>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-muted-foreground">Typical Fee</span>
+                      <span className="font-medium">1.5% – 3%</span>
+                    </div>
+                    <div className="flex justify-between items-center text-lg">
+                      <span className="text-muted-foreground">Earnings</span>
+                      <span className="font-bold text-primary">$7.5K – $15K</span>
+                    </div>
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-3 pt-3 border-t">
+                    No inventory risk. Best structure: $7.5K–$10K upfront + 1% embedded in transaction.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 bg-amber-500/10 rounded-lg">
+                      <Building2 className="h-5 w-5 text-amber-500" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">U.S. Bank</h3>
+                      <p className="text-xs text-muted-foreground">Confirming / Financing</p>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-muted-foreground">Annualized Rate</span>
+                      <span className="font-medium">0.75% – 1.5%</span>
+                    </div>
+                    <div className="flex justify-between items-center text-lg">
+                      <span className="text-muted-foreground">Earnings</span>
+                      <span className="font-bold text-amber-500">$3.75K – $7.5K</span>
+                    </div>
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-3 pt-3 border-t">
+                    Minimal risk with 98% USDA guarantee. Short duration, clean paper.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 bg-purple-500/10 rounded-lg">
+                      <Landmark className="h-5 w-5 text-purple-500" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">Foreign Bank</h3>
+                      <p className="text-xs text-muted-foreground">Issuing Bank</p>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-muted-foreground">Fees + Interest</span>
+                      <span className="font-medium">1% – 3%</span>
+                    </div>
+                    <div className="flex justify-between items-center text-lg">
+                      <span className="text-muted-foreground">Earnings</span>
+                      <span className="font-bold text-purple-500">$5K – $15K</span>
+                    </div>
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-3 pt-3 border-t">
+                    LC issuance fee, commitment fee, and interest spread. Carries importer credit risk.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 bg-rose-500/10 rounded-lg">
+                      <Truck className="h-5 w-5 text-rose-500" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold">Logistics</h3>
+                      <p className="text-xs text-muted-foreground">Freight & Insurance</p>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-muted-foreground">Typical Cost</span>
+                      <span className="font-medium">4% – 8%</span>
+                    </div>
+                    <div className="flex justify-between items-center text-lg">
+                      <span className="text-muted-foreground">Cost</span>
+                      <span className="font-bold text-rose-500">$20K – $40K</span>
+                    </div>
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-3 pt-3 border-t">
+                    Paid by importer or embedded in CIF pricing. Operational cost, not profit center.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="bg-muted/50 rounded-xl p-6 md:p-8 border">
+              <div className="grid md:grid-cols-2 gap-8 items-center">
+                <div className="space-y-4">
+                  <h3 className="text-xl font-semibold flex items-center gap-2">
+                    <DollarSign className="h-5 w-5 text-primary" />
+                    Why This Works
+                  </h3>
+                  <ul className="space-y-2 text-sm">
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-primary shrink-0" />
+                      <span>Everyone gets paid — no one is squeezed</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-primary shrink-0" />
+                      <span>Banks are protected by 98% USDA guarantee</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-primary shrink-0" />
+                      <span>You earn without inventory or FX risk</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle className="h-4 w-4 text-primary shrink-0" />
+                      <span>Government backs the credit — deals scale cleanly</span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-background rounded-lg p-4 text-center border">
+                    <p className="text-2xl font-bold text-primary">1 deal/mo</p>
+                    <p className="text-sm text-muted-foreground">~$120K/year</p>
+                  </div>
+                  <div className="bg-background rounded-lg p-4 text-center border">
+                    <p className="text-2xl font-bold text-primary">2 deals/mo</p>
+                    <p className="text-sm text-muted-foreground">~$240K/year</p>
+                  </div>
+                  <div className="col-span-2 bg-primary/10 rounded-lg p-4 text-center border border-primary/30">
+                    <p className="text-lg font-bold">$1M deals = Double everything</p>
+                    <p className="text-sm text-muted-foreground">And you still don't touch product</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="features" className="py-20 px-6 bg-muted/30">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold mb-4" data-testid="heading-features">
