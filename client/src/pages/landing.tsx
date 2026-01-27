@@ -1043,7 +1043,7 @@ export default function LandingPage() {
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <h2 className="text-3xl font-bold">Ready to Execute Your Next Deal?</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Access the Zapp GSM-102 portal to manage your agricultural export transactions 
+              Access the Global Trade Facilitators portal to manage your agricultural export transactions 
               with the documentation standards banks and regulators expect.
             </p>
             <Button size="lg" asChild data-testid="button-cta-bottom">
@@ -1063,7 +1063,10 @@ export default function LandingPage() {
                 className="h-10 w-auto"
                 data-testid="img-footer-logo"
               />
-              <span className="font-medium">Global Trade Facilitators</span>
+              <div>
+                <span className="font-medium">Global Trade Facilitators</span>
+                <p className="text-xs opacity-70">A division of Zapp Marketing and Manufacturing</p>
+              </div>
             </div>
             <p>&copy; {new Date().getFullYear()} GSM-102 Export Credit Guarantee Tracker</p>
           </div>

@@ -1,7 +1,7 @@
 # GSM-102 USDA Export Credit Guarantee Tracker
 
 ## Overview
-A comprehensive tracking system for USDA GSM-102 Export Credit Guarantee transactions for Global Trade Facilitators.
+A comprehensive tracking system for USDA GSM-102 Export Credit Guarantee transactions for Global Trade Facilitators, a division of Zapp Marketing and Manufacturing.
 
 **Live URL**: globaltradefacilitators.us.com
 
