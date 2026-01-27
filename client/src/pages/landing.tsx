@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Shield, FileCheck, Globe, ArrowRight, CheckCircle, Anchor, Building2 } from "lucide-react";
 import heroImage from "@assets/global_trade_containers_cover_1769476614264.jpg";
+import processFlowImage from "@assets/blg_inline_how_does_trade_finance_work_02_1769476764172.png";
 
 export default function LandingPage() {
   return (
@@ -52,7 +53,7 @@ export default function LandingPage() {
                   </a>
                 </Button>
                 <Button size="lg" variant="outline" className="bg-white/10 border-white/30 text-white backdrop-blur-sm" asChild>
-                  <a href="#features">View Capabilities</a>
+                  <a href="#how-it-works">How It Works</a>
                 </Button>
               </div>
               
@@ -150,7 +151,46 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section className="py-20 px-6 bg-muted/30">
+        <section id="how-it-works" className="py-20 px-6 bg-muted/30">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold mb-4">How Trade Finance Works</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                GSM-102 transactions follow a proven flow connecting exporters, banks, 
+                and importers with government-backed credit guarantees.
+              </p>
+            </div>
+            
+            <div className="bg-white rounded-xl p-6 md:p-10 shadow-sm">
+              <img 
+                src={processFlowImage} 
+                alt="Trade Finance Flow: Exporter to Bank to Shipment to Importer to Repayment"
+                className="w-full max-w-3xl mx-auto"
+                data-testid="img-process-flow"
+              />
+            </div>
+            
+            <div className="grid md:grid-cols-5 gap-4 mt-10">
+              {[
+                { step: "1", title: "Contract", desc: "Exporter & Importer sign sales agreement" },
+                { step: "2", title: "LC Issued", desc: "Importer's bank issues Letter of Credit" },
+                { step: "3", title: "Shipping", desc: "Goods shipped via carrier with B/L" },
+                { step: "4", title: "Documents", desc: "Banks exchange docs & verify compliance" },
+                { step: "5", title: "Payment", desc: "Exporter paid, importer receives goods" },
+              ].map((item) => (
+                <div key={item.step} className="text-center space-y-2">
+                  <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold mx-auto">
+                    {item.step}
+                  </div>
+                  <p className="font-medium text-sm">{item.title}</p>
+                  <p className="text-xs text-muted-foreground">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-20 px-6">
           <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
