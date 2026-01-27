@@ -30,7 +30,7 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAuth } from "@/hooks/use-auth";
 import type { Notification } from "@shared/schema";
-import logoImage from "@assets/logos_for_this_app_1769477935936.png";
+import logoShipMain from "../assets/logo-ship-main.png";
 
 const mainMenuItems = [
   { title: "Dashboard", url: "/", icon: LayoutDashboard },
@@ -68,18 +68,12 @@ export function AppSidebar() {
       <SidebarHeader className="border-b border-sidebar-border px-4 py-4">
         <Link href="/">
           <div className="flex items-center gap-3 hover-elevate rounded-md p-1 -m-1 cursor-pointer">
-            <div 
-              className="h-10 w-10 overflow-hidden rounded-md bg-white flex items-center justify-center"
+            <img 
+              src={logoShipMain} 
+              alt="Global Trade Facilitators" 
+              className="h-10 w-auto"
               data-testid="img-sidebar-logo"
-            >
-              <div 
-                className="w-full h-[400%] bg-contain bg-no-repeat bg-top"
-                style={{ 
-                  backgroundImage: `url(${logoImage})`,
-                  transform: 'translateY(37.5%)'
-                }}
-              />
-            </div>
+            />
             <div className="flex flex-col">
               <span className="font-semibold text-sidebar-foreground text-sm tracking-tight">Global Trade</span>
               <span className="text-xs text-muted-foreground">GSM-102 Tracker</span>
