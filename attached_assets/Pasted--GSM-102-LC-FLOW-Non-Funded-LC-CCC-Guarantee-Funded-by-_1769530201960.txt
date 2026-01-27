@@ -1,0 +1,152 @@
+🔁 GSM-102 LC FLOW
+(Non-Funded LC → CCC Guarantee → Funded by U.S. Bank)
+NEW ACTORS TO ADD
+
+You must add two entities to the diagram:
+
+CCC (USDA Commodity Credit Corporation)
+
+U.S. Financing / Confirming Bank
+
+🧩 FINAL PARTICIPANTS (Left to Right)
+
+Seller (Exporter)
+
+U.S. Financing Bank (Confirming Bank)
+
+CCC (USDA)
+
+Opening / Issuing Bank (Foreign Bank)
+
+Buyer (Importer)
+
+Carrier
+
+🔢 REVISED STEP-BY-STEP FLOW (GSM-102)
+
+Use these exact steps to redraw the chart.
+
+1. Sales Contract
+
+Buyer ↔ Seller
+
+Contract states: “Payment via LC supported by USDA GSM-102.”
+
+2. Buyer Applies for LC
+
+Buyer → Opening / Issuing Bank
+
+Buyer requests a non-funded USD LC
+
+LC references GSM-102 eligibility
+
+3. Issuing Bank Issues LC
+
+Issuing Bank → Advising / U.S. Bank
+
+LC is issued (still unfunded)
+
+LC is advised to exporter via U.S. bank
+
+4. Seller Applies for GSM-102 Guarantee
+
+Seller → CCC
+
+Seller submits GSM-102 application
+
+References:
+
+LC
+
+Issuing bank
+
+Buyer
+
+Goods
+
+👉 THIS IS THE KEY INSERTION POINT
+Your original chart skips this entirely.
+
+5. CCC Issues Guarantee
+
+CCC → Seller
+
+CCC issues guarantee (up to 98%)
+
+Guarantee is assignable
+
+6. Guarantee Assigned
+
+Seller → U.S. Financing Bank
+
+Seller assigns CCC guarantee to U.S. bank
+
+U.S. bank now has government-backed risk cover
+
+7. U.S. Bank Confirms / Funds
+
+U.S. Bank → Seller
+
+U.S. bank confirms LC
+
+Seller is now protected + financeable
+
+8. Shipment
+
+Seller → Carrier
+
+Goods shipped
+
+Carrier issues Bill of Lading (B/L)
+
+9. Documents Presented
+
+Seller → U.S. Bank
+
+Seller presents:
+
+B/L
+
+Invoice
+
+Certificates
+
+10. Exporter Paid at Sight
+
+U.S. Bank → Seller
+
+Seller gets paid immediately
+
+LC is now funded via U.S. bank, not the foreign bank
+
+11. Documents Forwarded
+
+U.S. Bank → Issuing Bank
+
+Documents sent
+
+Issuing bank accepts obligation
+
+12. Buyer Receives Goods
+
+Issuing Bank → Buyer
+
+Buyer pays local bank (or accepts deferred obligation)
+
+Buyer receives B/L and goods
+
+13. Deferred Repayment
+
+Issuing Bank → U.S. Bank
+
+Issuing bank repays U.S. bank over time (180–360 days)
+
+14. CCC Backstop (Only if Default)
+
+CCC → U.S. Bank
+
+If issuing bank defaults:
+
+CCC pays up to 98%
+
+Otherwise, CCC never moves money

@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Shield, FileCheck, Globe, ArrowRight, CheckCircle, Anchor, Building2, Package, MapPin, Activity, DollarSign, Users, Truck, Landmark, Calculator } from "lucide-react";
 import heroImage from "@assets/global_trade_containers_cover_1769476614264.jpg";
-import processFlowImage from "@assets/blg_inline_how_does_trade_finance_work_02_1769476764172.png";
+import processFlowImage from "@assets/Flow_Chart_1769530193720.png";
 import complianceImage from "@assets/foreign-trade-legal-advice_1769476846132.webp";
 import bankingImage from "@assets/alumni-interview-trade-finance-1024x683_1769476904823.jpg";
 import riceWarehouseImage from "@assets/White-Rice-Packing_1769477014542.png";
