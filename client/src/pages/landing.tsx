@@ -1,11 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Shield, FileCheck, Globe, ArrowRight, CheckCircle, Anchor, Building2, Package, MapPin } from "lucide-react";
+import { Shield, FileCheck, Globe, ArrowRight, CheckCircle, Anchor, Building2, Package, MapPin, Activity } from "lucide-react";
 import heroImage from "@assets/global_trade_containers_cover_1769476614264.jpg";
 import processFlowImage from "@assets/blg_inline_how_does_trade_finance_work_02_1769476764172.png";
 import complianceImage from "@assets/foreign-trade-legal-advice_1769476846132.webp";
 import bankingImage from "@assets/alumni-interview-trade-finance-1024x683_1769476904823.jpg";
 import riceWarehouseImage from "@assets/White-Rice-Packing_1769477014542.png";
+import controlRoomImage from "@assets/jst-leitstand-fuer-logistik-hero-mobil_1769477147339.webp";
 
 export default function LandingPage() {
   return (
@@ -526,6 +527,62 @@ export default function LandingPage() {
         </section>
 
         <section className="py-20 px-6 bg-muted/30">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="space-y-6 order-2 md:order-1">
+                <div className="flex items-center gap-2 text-primary">
+                  <Activity className="h-5 w-5" />
+                  <span className="text-sm font-medium tracking-wide uppercase">Deal Operations</span>
+                </div>
+                <h2 className="text-3xl font-bold">Active Transaction Monitoring</h2>
+                <p className="text-muted-foreground leading-relaxed">
+                  Every GSM-102 transaction is tracked through our centralized dashboard. 
+                  Real-time visibility into document status, compliance checkpoints, 
+                  and payment milestones.
+                </p>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 text-primary mt-0.5" />
+                    <div>
+                      <p className="font-medium">Stage-by-Stage Tracking</p>
+                      <p className="text-sm text-muted-foreground">
+                        Monitor progress from Application through Completion
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 text-primary mt-0.5" />
+                    <div>
+                      <p className="font-medium">Automated Notifications</p>
+                      <p className="text-sm text-muted-foreground">
+                        Alerts for missing documents and approaching deadlines
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 text-primary mt-0.5" />
+                    <div>
+                      <p className="font-medium">90-Day Workflow Dashboard</p>
+                      <p className="text-sm text-muted-foreground">
+                        6-phase guided execution from foundation to scale
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="rounded-xl overflow-hidden shadow-lg order-1 md:order-2">
+                <img 
+                  src={controlRoomImage} 
+                  alt="Operations control room with transaction monitoring dashboards"
+                  className="w-full h-auto object-cover"
+                  data-testid="img-control-room"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-20 px-6">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <h2 className="text-3xl font-bold">Ready to Execute Your Next Deal?</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
