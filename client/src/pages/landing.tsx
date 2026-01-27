@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Shield, FileCheck, Globe, ArrowRight, CheckCircle, Anchor, Building2 } from "lucide-react";
+import { Shield, FileCheck, Globe, ArrowRight, CheckCircle, Anchor, Building2, Package } from "lucide-react";
 import heroImage from "@assets/global_trade_containers_cover_1769476614264.jpg";
 import processFlowImage from "@assets/blg_inline_how_does_trade_finance_work_02_1769476764172.png";
 import complianceImage from "@assets/foreign-trade-legal-advice_1769476846132.webp";
 import bankingImage from "@assets/alumni-interview-trade-finance-1024x683_1769476904823.jpg";
+import riceWarehouseImage from "@assets/White-Rice-Packing_1769477014542.png";
 
 export default function LandingPage() {
   return (
@@ -386,6 +387,55 @@ export default function LandingPage() {
         </section>
 
         <section className="py-20 px-6 bg-muted/30">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="rounded-xl overflow-hidden shadow-lg">
+                <img 
+                  src={riceWarehouseImage} 
+                  alt="Industrial scale rice warehouse with bulk quantities"
+                  className="w-full h-auto object-cover"
+                  data-testid="img-product-rice"
+                />
+              </div>
+              <div className="space-y-6">
+                <div className="flex items-center gap-2 text-primary">
+                  <Package className="h-5 w-5" />
+                  <span className="text-sm font-medium tracking-wide uppercase">Product Categories</span>
+                </div>
+                <h2 className="text-3xl font-bold">Agricultural Commodities at Scale</h2>
+                <p className="text-muted-foreground leading-relaxed">
+                  GSM-102 supports a wide range of U.S. agricultural products for export. 
+                  Our templates are optimized for high-demand commodities in West African 
+                  and Caribbean markets.
+                </p>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="p-4 bg-card border rounded-lg">
+                    <p className="font-semibold">Rice</p>
+                    <p className="text-sm text-muted-foreground">Long grain, parboiled, basmati</p>
+                  </div>
+                  <div className="p-4 bg-card border rounded-lg">
+                    <p className="font-semibold">Frozen Poultry</p>
+                    <p className="text-sm text-muted-foreground">Chicken leg quarters, wings</p>
+                  </div>
+                  <div className="p-4 bg-card border rounded-lg">
+                    <p className="font-semibold">Edible Oils</p>
+                    <p className="text-sm text-muted-foreground">Soybean, vegetable, palm</p>
+                  </div>
+                  <div className="p-4 bg-card border rounded-lg">
+                    <p className="font-semibold">Tomato Paste</p>
+                    <p className="text-sm text-muted-foreground">Canned, drums, bulk</p>
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground italic">
+                  Country-specific templates include pre-configured product requirements, 
+                  health certificates, and customs documentation.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-20 px-6">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <h2 className="text-3xl font-bold">Ready to Execute Your Next Deal?</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
