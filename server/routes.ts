@@ -760,5 +760,40 @@ FOR OFFICIAL USE ONLY - CONFIDENTIAL TRADE DOCUMENTATION
     }
   });
 
+  // User self-service role selection (only exporter/importer allowed)
+  app.post("/api/user/select-role", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user?.claims?.sub;
+      const { role } = req.body;
+      
+      // Only allow exporter or importer - admin must be assigned by an admin
+      if (role !== "exporter" && role !== "importer") {
+        return res.status(400).json({ error: "Invalid role. Choose exporter or importer." });
+      }
+      
+      const [user] = await db.select().from(users).where(eq(users.id, userId));
+      
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+      
+      // Only allow role selection if currently pending
+      if (user.role !== "pending") {
+        return res.status(400).json({ error: "Role already assigned. Contact admin to change." });
+      }
+      
+      const [updatedUser] = await db
+        .update(users)
+        .set({ role, updatedAt: new Date() })
+        .where(eq(users.id, userId))
+        .returning();
+        
+      res.json(updatedUser);
+    } catch (error) {
+      console.error("Error selecting role:", error);
+      res.status(500).json({ error: "Failed to select role" });
+    }
+  });
+
   return httpServer;
 }
