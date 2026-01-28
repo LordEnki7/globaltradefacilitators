@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Copy, Mail, Share2, Check, Users } from "lucide-react";
+import { useMutation } from "@tanstack/react-query";
+import { Copy, Mail, Share2, Check, Users, Send, Loader2 } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -13,6 +14,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
+import { useAuth } from "@/hooks/use-auth";
 import type { Transaction } from "@shared/schema";
 
 interface ShareTransactionDialogProps {
@@ -22,7 +25,9 @@ interface ShareTransactionDialogProps {
 
 export function ShareTransactionDialog({ transaction, trigger }: ShareTransactionDialogProps) {
   const [copied, setCopied] = useState(false);
+  const [inviteEmail, setInviteEmail] = useState("");
   const { toast } = useToast();
+  const { user } = useAuth();
   const linkCode = transaction.linkCode;
 
   const handleCopyCode = async () => {
@@ -58,6 +63,38 @@ export function ShareTransactionDialog({ transaction, trigger }: ShareTransactio
         variant: "destructive",
       });
     }
+  };
+
+  const sendInviteMutation = useMutation({
+    mutationFn: async () => {
+      const senderName = user?.firstName && user?.lastName 
+        ? `${user.firstName} ${user.lastName}` 
+        : user?.email || "An exporter";
+      return apiRequest("POST", `/api/transactions/${transaction.id}/invite`, {
+        email: inviteEmail,
+        senderName
+      });
+    },
+    onSuccess: () => {
+      toast({
+        title: "Invitation Sent",
+        description: `An invitation email has been sent to ${inviteEmail}`,
+      });
+      setInviteEmail("");
+    },
+    onError: (error) => {
+      toast({
+        title: "Failed to Send",
+        description: (error as Error).message || "Could not send invitation email.",
+        variant: "destructive",
+      });
+    }
+  });
+
+  const handleSendInvite = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!inviteEmail.trim()) return;
+    sendInviteMutation.mutate();
   };
 
   return (
@@ -113,7 +150,7 @@ export function ShareTransactionDialog({ transaction, trigger }: ShareTransactio
           <Separator />
 
           <div className="space-y-2">
-            <Label>Or share a direct link</Label>
+            <Label>Copy direct link</Label>
             <Button
               variant="secondary"
               className="w-full"
@@ -124,6 +161,36 @@ export function ShareTransactionDialog({ transaction, trigger }: ShareTransactio
               Copy Join Link
             </Button>
           </div>
+
+          <Separator />
+
+          <form onSubmit={handleSendInvite} className="space-y-2">
+            <Label htmlFor="invite-email">Send email invitation</Label>
+            <div className="flex gap-2">
+              <Input
+                id="invite-email"
+                type="email"
+                placeholder="partner@company.com"
+                value={inviteEmail}
+                onChange={(e) => setInviteEmail(e.target.value)}
+                data-testid="input-invite-email"
+              />
+              <Button
+                type="submit"
+                disabled={!inviteEmail.trim() || sendInviteMutation.isPending}
+                data-testid="button-send-invite"
+              >
+                {sendInviteMutation.isPending ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Send className="h-4 w-4" />
+                )}
+              </Button>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              We'll send them an email with instructions to join.
+            </p>
+          </form>
 
           <div className="bg-muted/50 rounded-lg p-4 space-y-2">
             <h4 className="font-medium text-sm">Transaction Details</h4>

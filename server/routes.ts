@@ -115,6 +115,83 @@ export async function registerRoutes(
     }
   });
 
+  app.post("/api/transactions/:id/invite", async (req, res) => {
+    try {
+      const { email, senderName } = req.body;
+      if (!email) {
+        return res.status(400).json({ error: "Email is required" });
+      }
+
+      const transaction = await storage.getTransaction(req.params.id);
+      if (!transaction) {
+        return res.status(404).json({ error: "Transaction not found" });
+      }
+
+      if (!transaction.linkCode) {
+        return res.status(400).json({ error: "Transaction does not have a link code" });
+      }
+
+      if (transaction.importerUserId) {
+        return res.status(400).json({ error: "Transaction already has an importer linked" });
+      }
+
+      const joinUrl = `${req.protocol}://${req.get('host')}/join-transaction?code=${transaction.linkCode}`;
+      
+      const emailBody = `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #0d9488;">You're Invited to Join a Trade Transaction</h2>
+          <p>Hello,</p>
+          <p>${senderName || 'An exporter'} has invited you to join a GSM-102 export transaction as the importer.</p>
+          
+          <div style="background-color: #f3f4f6; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <h3 style="margin-top: 0; color: #374151;">Transaction Details</h3>
+            <table style="width: 100%; border-collapse: collapse;">
+              <tr><td style="padding: 4px 0;"><strong>Deal ID:</strong></td><td>${transaction.dealId}</td></tr>
+              <tr><td style="padding: 4px 0;"><strong>Product:</strong></td><td>${transaction.product}</td></tr>
+              <tr><td style="padding: 4px 0;"><strong>Quantity:</strong></td><td>${transaction.quantity}</td></tr>
+              <tr><td style="padding: 4px 0;"><strong>Value:</strong></td><td>$${transaction.valueUsd.toLocaleString()}</td></tr>
+              <tr><td style="padding: 4px 0;"><strong>Destination:</strong></td><td>${transaction.destinationCountry}</td></tr>
+            </table>
+          </div>
+
+          <p>To join this transaction, use the link code below:</p>
+          <div style="background-color: #0d9488; color: white; padding: 15px; border-radius: 8px; text-align: center; font-size: 24px; letter-spacing: 3px; font-family: monospace;">
+            ${transaction.linkCode}
+          </div>
+
+          <p style="margin-top: 20px;">Or click the button below to join directly:</p>
+          <a href="${joinUrl}" style="display: inline-block; background-color: #0d9488; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+            Join Transaction
+          </a>
+
+          <hr style="margin: 30px 0; border: none; border-top: 1px solid #e5e7eb;">
+          <p style="font-size: 12px; color: #6b7280;">
+            This email was sent by Global Trade Facilitators, a division of Zapp Marketing and Manufacturing.
+            If you did not expect this invitation, please disregard this email.
+          </p>
+        </div>
+      `;
+
+      const { client, fromEmail } = await getUncachableResendClient();
+      
+      const emailResult = await client.emails.send({
+        from: fromEmail,
+        to: email,
+        subject: `Invitation to Join Transaction ${transaction.dealId} - Global Trade Facilitators`,
+        html: emailBody
+      });
+
+      res.json({ 
+        success: true, 
+        message: "Invitation email sent successfully",
+        messageId: emailResult.data?.id 
+      });
+    } catch (error) {
+      console.error("Failed to send invitation email:", error);
+      res.status(500).json({ error: "Failed to send invitation email" });
+    }
+  });
+
   app.get("/api/documents", async (req, res) => {
     try {
       const transactionId = req.query.transactionId as string | undefined;
