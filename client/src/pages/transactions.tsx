@@ -8,7 +8,10 @@ import {
   Plus,
   ArrowUpDown,
   MoreHorizontal,
-  Eye
+  Eye,
+  Users,
+  UserCheck,
+  UserX
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -37,6 +40,8 @@ import {
 import { StageBadge } from "@/components/stage-badge";
 import { LoadingState } from "@/components/loading-state";
 import { EmptyState } from "@/components/empty-state";
+import { Badge } from "@/components/ui/badge";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import type { Transaction, TransactionStage } from "@shared/schema";
 import { format } from "date-fns";
 
@@ -151,6 +156,7 @@ export default function TransactionsPage() {
                     <TableHead>Product</TableHead>
                     <TableHead>Destination</TableHead>
                     <TableHead className="text-right">Value</TableHead>
+                    <TableHead>Partners</TableHead>
                     <TableHead>Stage</TableHead>
                     <TableHead>Created</TableHead>
                     <TableHead className="w-[60px]"></TableHead>
@@ -174,6 +180,39 @@ export default function TransactionsPage() {
                       <TableCell>{transaction.destinationCountry}</TableCell>
                       <TableCell className="text-right font-medium">
                         ${transaction.valueUsd.toLocaleString()}
+                      </TableCell>
+                      <TableCell>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <div className="flex items-center gap-1.5">
+                              {transaction.exporterUserId && transaction.importerUserId ? (
+                                <Badge variant="default" className="gap-1 bg-green-600 hover:bg-green-600">
+                                  <UserCheck className="h-3 w-3" />
+                                  Linked
+                                </Badge>
+                              ) : transaction.exporterUserId || transaction.importerUserId ? (
+                                <Badge variant="secondary" className="gap-1">
+                                  <Users className="h-3 w-3" />
+                                  Partial
+                                </Badge>
+                              ) : (
+                                <Badge variant="outline" className="gap-1 text-muted-foreground">
+                                  <UserX className="h-3 w-3" />
+                                  Unlinked
+                                </Badge>
+                              )}
+                            </div>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            {transaction.exporterUserId && transaction.importerUserId 
+                              ? "Both exporter and importer are linked" 
+                              : transaction.exporterUserId 
+                                ? "Waiting for importer to join" 
+                                : transaction.importerUserId 
+                                  ? "Waiting for exporter to link" 
+                                  : "No users linked yet"}
+                          </TooltipContent>
+                        </Tooltip>
                       </TableCell>
                       <TableCell>
                         <StageBadge stage={transaction.stage} size="sm" />
