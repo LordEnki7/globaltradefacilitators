@@ -1,4 +1,4 @@
-import { randomUUID } from "crypto";
+import { randomUUID, randomBytes } from "crypto";
 import type {
   Transaction,
   InsertTransaction,
@@ -20,7 +20,10 @@ import type {
 export interface IStorage {
   getTransactions(): Promise<Transaction[]>;
   getTransaction(id: string): Promise<Transaction | undefined>;
-  createTransaction(transaction: InsertTransaction): Promise<Transaction>;
+  getTransactionByLinkCode(linkCode: string): Promise<Transaction | undefined>;
+  createTransaction(transaction: InsertTransaction, creatorUserId?: string): Promise<Transaction>;
+  linkImporterToTransaction(transactionId: string, importerUserId: string): Promise<Transaction | undefined>;
+  getTransactionsForUser(userId: string, role: "exporter" | "importer"): Promise<Transaction[]>;
   updateTransactionStage(id: string, stage: TransactionStage): Promise<Transaction | undefined>;
   
   getDocuments(transactionId?: string): Promise<Document[]>;
@@ -75,8 +78,11 @@ export class MemStorage implements IStorage {
       {
         id: "txn-1",
         dealId: "ZAPP-2025-001",
+        linkCode: "GTF-A1B2C3",
         exporterId: "exporter-1",
         importerId: "importer-1",
+        exporterUserId: null,
+        importerUserId: null,
         stage: "approval",
         product: "Rice (Long Grain)",
         quantity: "500 MT",
@@ -96,8 +102,11 @@ export class MemStorage implements IStorage {
       {
         id: "txn-2",
         dealId: "ZAPP-2025-002",
+        linkCode: "GTF-D4E5F6",
         exporterId: "exporter-1",
         importerId: "importer-2",
+        exporterUserId: null,
+        importerUserId: null,
         stage: "shipment",
         product: "Frozen Chicken",
         quantity: "200 MT",
@@ -117,8 +126,11 @@ export class MemStorage implements IStorage {
       {
         id: "txn-3",
         dealId: "ZAPP-2025-003",
+        linkCode: "GTF-G7H8I9",
         exporterId: "exporter-1",
         importerId: "importer-3",
+        exporterUserId: null,
+        importerUserId: null,
         stage: "application",
         product: "Edible Oils",
         quantity: "300 MT",
@@ -138,8 +150,11 @@ export class MemStorage implements IStorage {
       {
         id: "txn-4",
         dealId: "ZAPP-2025-004",
+        linkCode: "GTF-J0K1L2",
         exporterId: "exporter-1",
         importerId: "importer-4",
+        exporterUserId: null,
+        importerUserId: null,
         stage: "payment",
         product: "Tomato Paste",
         quantity: "150 MT",
@@ -159,8 +174,11 @@ export class MemStorage implements IStorage {
       {
         id: "txn-5",
         dealId: "ZAPP-2024-018",
+        linkCode: "GTF-M3N4O5",
         exporterId: "exporter-1",
         importerId: "importer-5",
+        exporterUserId: null,
+        importerUserId: null,
         stage: "completed",
         product: "Rice (Parboiled)",
         quantity: "800 MT",
@@ -387,12 +405,25 @@ export class MemStorage implements IStorage {
     return this.transactions.get(id);
   }
 
-  async createTransaction(insertTransaction: InsertTransaction): Promise<Transaction> {
+  private generateLinkCode(): string {
+    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    let code = "GTF-";
+    for (let i = 0; i < 6; i++) {
+      code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return code;
+  }
+
+  async createTransaction(insertTransaction: InsertTransaction, creatorUserId?: string): Promise<Transaction> {
     const id = randomUUID();
     const now = new Date().toISOString();
+    const linkCode = this.generateLinkCode();
     const transaction: Transaction = {
       ...insertTransaction,
       id,
+      linkCode,
+      exporterUserId: creatorUserId || null,
+      importerUserId: null,
       stage: "application",
       createdAt: now,
       updatedAt: now,
@@ -405,6 +436,33 @@ export class MemStorage implements IStorage {
     };
     this.transactions.set(id, transaction);
     return transaction;
+  }
+
+  async getTransactionByLinkCode(linkCode: string): Promise<Transaction | undefined> {
+    const transactions = Array.from(this.transactions.values());
+    return transactions.find(t => t.linkCode === linkCode);
+  }
+
+  async linkImporterToTransaction(transactionId: string, importerUserId: string): Promise<Transaction | undefined> {
+    const transaction = this.transactions.get(transactionId);
+    if (!transaction) return undefined;
+    
+    const updated = {
+      ...transaction,
+      importerUserId,
+      updatedAt: new Date().toISOString()
+    };
+    this.transactions.set(transactionId, updated);
+    return updated;
+  }
+
+  async getTransactionsForUser(userId: string, role: "exporter" | "importer"): Promise<Transaction[]> {
+    const transactions = Array.from(this.transactions.values());
+    if (role === "exporter") {
+      return transactions.filter(t => t.exporterUserId === userId);
+    } else {
+      return transactions.filter(t => t.importerUserId === userId);
+    }
   }
 
   async updateTransactionStage(id: string, stage: TransactionStage): Promise<Transaction | undefined> {

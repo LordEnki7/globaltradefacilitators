@@ -30,8 +30,11 @@ export type ComplianceStatus = z.infer<typeof complianceStatusEnum>;
 export interface Transaction {
   id: string;
   dealId: string;
+  linkCode: string;
   exporterId: string;
   importerId: string;
+  exporterUserId: string | null;
+  importerUserId: string | null;
   stage: TransactionStage;
   product: string;
   quantity: string;
