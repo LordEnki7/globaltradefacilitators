@@ -23,6 +23,11 @@ This application helps manage international agricultural trade transactions from
 - **User Authentication**: Replit Auth integration with Google, GitHub, email, and other OIDC providers
 - **User Roles**: Support for Exporter, Importer, Admin, and Pending roles with admin-controlled role assignment
 - **Admin Dashboard**: User management page for admins to assign roles and companies
+- **Transaction Linking**: Connect exporters and importers on the same deal through:
+  - Auto-generated link codes (GTF-XXXXXX format)
+  - Shareable join links
+  - Email invitations via Resend integration
+  - Partner status indicators in transaction list
 
 ## Technical Stack
 - **Frontend**: React with TypeScript, TanStack Query, Wouter routing
@@ -79,6 +84,10 @@ This application helps manage international agricultural trade transactions from
 - `GET /api/notifications` - List notifications
 - `PATCH /api/notifications/:id/read` - Mark as read
 - `PATCH /api/notifications/read-all` - Mark all as read
+- `GET /api/transactions/link/:linkCode` - Look up transaction by link code
+- `POST /api/transactions/:id/link-importer` - Link importer to transaction
+- `GET /api/my-transactions` - Get transactions for current user
+- `POST /api/transactions/:id/invite` - Send email invitation to join transaction
 
 ## USDA-Approved Countries
 The system includes 15 pre-configured countries approved for GSM-102 transactions:
