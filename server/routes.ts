@@ -61,6 +61,60 @@ export async function registerRoutes(
     }
   });
 
+  app.get("/api/transactions/link/:linkCode", async (req, res) => {
+    try {
+      const transaction = await storage.getTransactionByLinkCode(req.params.linkCode);
+      if (!transaction) {
+        return res.status(404).json({ error: "Transaction not found with this code" });
+      }
+      res.json({
+        id: transaction.id,
+        dealId: transaction.dealId,
+        product: transaction.product,
+        quantity: transaction.quantity,
+        valueUsd: transaction.valueUsd,
+        destinationCountry: transaction.destinationCountry,
+        exporterId: transaction.exporterId,
+        hasImporter: !!transaction.importerUserId
+      });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to look up transaction" });
+    }
+  });
+
+  app.post("/api/transactions/:id/link-importer", async (req, res) => {
+    try {
+      const { importerUserId } = req.body;
+      if (!importerUserId) {
+        return res.status(400).json({ error: "Importer user ID is required" });
+      }
+      const transaction = await storage.getTransaction(req.params.id);
+      if (!transaction) {
+        return res.status(404).json({ error: "Transaction not found" });
+      }
+      if (transaction.importerUserId) {
+        return res.status(400).json({ error: "Transaction already has an importer linked" });
+      }
+      const updated = await storage.linkImporterToTransaction(req.params.id, importerUserId);
+      res.json(updated);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to link importer to transaction" });
+    }
+  });
+
+  app.get("/api/my-transactions", async (req, res) => {
+    try {
+      const { userId, role } = req.query as { userId?: string; role?: "exporter" | "importer" };
+      if (!userId || !role) {
+        return res.status(400).json({ error: "userId and role are required" });
+      }
+      const transactions = await storage.getTransactionsForUser(userId, role);
+      res.json(transactions);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch user transactions" });
+    }
+  });
+
   app.get("/api/documents", async (req, res) => {
     try {
       const transactionId = req.query.transactionId as string | undefined;

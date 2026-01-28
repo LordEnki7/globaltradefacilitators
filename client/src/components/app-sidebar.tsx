@@ -11,7 +11,8 @@ import {
   User,
   FolderOpen,
   Shield,
-  LogOut
+  LogOut,
+  Link2
 } from "lucide-react";
 import {
   Sidebar,
@@ -176,6 +177,20 @@ export function AppSidebar() {
                     <Link href="/admin">
                       <Shield className="h-4 w-4" />
                       <span>Admin</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              )}
+              {userRole?.role === "importer" && (
+                <SidebarMenuItem>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={location === "/join-transaction"}
+                    data-testid="nav-join-transaction"
+                  >
+                    <Link href="/join-transaction">
+                      <Link2 className="h-4 w-4" />
+                      <span>Join Transaction</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

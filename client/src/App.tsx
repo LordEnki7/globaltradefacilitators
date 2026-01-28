@@ -23,6 +23,7 @@ import DealRoomPage from "@/pages/deal-room";
 import AdminPage from "@/pages/admin";
 import LandingPage from "@/pages/landing";
 import RoleSelectionPage from "@/pages/role-selection";
+import JoinTransactionPage from "@/pages/join-transaction";
 
 function Router() {
   return (
@@ -38,6 +39,7 @@ function Router() {
       <Route path="/notifications" component={NotificationsPage} />
       <Route path="/settings" component={SettingsPage} />
       <Route path="/admin" component={AdminPage} />
+      <Route path="/join-transaction" component={JoinTransactionPage} />
       <Route component={NotFound} />
     </Switch>
   );

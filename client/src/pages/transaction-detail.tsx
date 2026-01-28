@@ -29,6 +29,7 @@ import { UploadDocumentDialog } from "@/components/upload-document-dialog";
 import { ComplianceChecklist } from "@/components/compliance-checklist";
 import { WorkflowWizard } from "@/components/workflow-wizard";
 import { EmailDialog } from "@/components/email-dialog";
+import { ShareTransactionDialog } from "@/components/share-transaction-dialog";
 import { LoadingState } from "@/components/loading-state";
 import { EmptyState } from "@/components/empty-state";
 import { useToast } from "@/hooks/use-toast";
@@ -150,6 +151,7 @@ export default function TransactionDetailPage() {
             <Download className="h-4 w-4 mr-2" />
             Download All Documents
           </Button>
+          <ShareTransactionDialog transaction={transaction} />
           <EmailDialog 
             transactionId={transactionId!} 
             dealId={transaction.dealId} 
