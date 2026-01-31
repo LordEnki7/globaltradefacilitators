@@ -3,17 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Shield, FileCheck, Globe, ArrowRight, CheckCircle, Anchor, Building2, Package, MapPin, Activity, DollarSign, Users, Truck, Landmark, Calculator } from "lucide-react";
+import { Shield, FileCheck, Globe, ArrowRight, CheckCircle, Building2, Package, MapPin, DollarSign, Users, Landmark, Calculator, Wheat, Drumstick, Droplets, CircleDot } from "lucide-react";
 import heroImage from "@assets/global_trade_containers_cover_1769476614264.jpg";
-import processFlowImage from "@assets/Flow_Chart_1769530193720.png";
-import complianceImage from "@assets/foreign-trade-legal-advice_1769476846132.webp";
+import newFlowChartImage from "@assets/New_Flow_Chart_1769862149111.png";
 import bankingImage from "@assets/alumni-interview-trade-finance-1024x683_1769476904823.jpg";
 import riceWarehouseImage from "@assets/White-Rice-Packing_1769477014542.png";
-import controlRoomImage from "@assets/jst-leitstand-fuer-logistik-hero-mobil_1769477147339.webp";
 import geographicMapImage from "@assets/geographical_map_1769477917369.png";
-import complianceDocsImage from "@assets/second_geographical_image_2_1769477917367.png";
 import logoShipMain from "../assets/logo-ship-main.png";
-import logoGlobeAirplane from "../assets/logo-globe-airplane.png";
 
 export default function LandingPage() {
   const [dealAmount, setDealAmount] = useState(500000);
@@ -44,8 +40,8 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <nav className="fixed top-0 left-0 right-0 z-50 border-b bg-background/80 backdrop-blur-sm">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
+      <nav className="fixed top-0 left-0 right-0 z-50 border-b bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <img 
@@ -55,8 +51,8 @@ export default function LandingPage() {
               data-testid="img-header-logo"
             />
             <div className="flex flex-col">
-              <span className="text-lg font-bold leading-tight">Global Trade Facilitators</span>
-              <span className="text-xs text-muted-foreground">GSM-102 Export Credit</span>
+              <span className="text-lg font-semibold leading-tight text-slate-800 dark:text-slate-100">Global Trade Facilitators</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400">GSM-102 Export Credit</span>
             </div>
           </div>
           <Button asChild data-testid="button-login-nav">
@@ -71,29 +67,29 @@ export default function LandingPage() {
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: `url(${heroImage})` }}
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-900/85 via-slate-800/70 to-slate-700/50" />
           </div>
           
           <div className="relative z-10 max-w-6xl mx-auto px-6 py-20">
             <div className="max-w-2xl space-y-6">
-              <div className="flex items-center gap-2 text-primary">
-                <Anchor className="h-5 w-5" />
+              <div className="flex items-center gap-2 text-teal-400">
+                <Shield className="h-5 w-5" />
                 <span className="text-sm font-medium tracking-wide uppercase">USDA Export Credit Guarantee Program</span>
               </div>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight" data-testid="heading-hero">
-                Global Trade.
-                <span className="block text-primary">Institutional Precision.</span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white leading-tight" data-testid="heading-hero">
+                Agricultural Exports
+                <span className="block text-teal-400">from the U.S. on Credit</span>
               </h1>
               
-              <p className="text-lg text-gray-200 leading-relaxed max-w-xl">
-                Global Trade Facilitators delivers structured GSM-102 transactions 
-                with bank-ready documentation, regulatory compliance, and end-to-end 
-                deal management for agricultural exports.
+              <p className="text-lg text-slate-200 leading-relaxed max-w-xl">
+                We facilitate U.S. agricultural exports using the USDA GSM-102 Export Credit Guarantee Program, 
+                allowing qualified international buyers to purchase American-origin products on deferred payment 
+                terms while U.S. sellers are paid immediately.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Button size="lg" asChild data-testid="button-get-started">
+                <Button size="lg" asChild className="bg-teal-600 hover:bg-teal-700" data-testid="button-get-started">
                   <a href="/api/login" className="gap-2">
                     Access Deal Portal <ArrowRight className="h-5 w-5" />
                   </a>
@@ -103,86 +99,86 @@ export default function LandingPage() {
                 </Button>
               </div>
               
-              <div className="flex flex-wrap items-center gap-6 pt-6 text-sm text-gray-300">
+              <div className="flex flex-wrap items-center gap-6 pt-6 text-sm text-slate-300">
                 <span className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-primary" />
-                  USDA Approved Markets
+                  <CheckCircle className="h-4 w-4 text-teal-400" />
+                  Non-Funded Letters of Credit
                 </span>
                 <span className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-primary" />
-                  LC Documentation Ready
+                  <CheckCircle className="h-4 w-4 text-teal-400" />
+                  Government-Backed Guarantees
                 </span>
                 <span className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-primary" />
-                  Bank Compliant
+                  <CheckCircle className="h-4 w-4 text-teal-400" />
+                  U.S. Confirming Banks
                 </span>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="py-12 px-6 border-b bg-muted/20">
+        <section className="py-12 px-6 border-b bg-white dark:bg-slate-800">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               <div>
-                <p className="text-3xl font-bold text-primary">15+</p>
-                <p className="text-sm text-muted-foreground">Approved Countries</p>
+                <p className="text-3xl font-semibold text-teal-600 dark:text-teal-400">15+</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400">Approved Countries</p>
               </div>
               <div>
-                <p className="text-3xl font-bold text-primary">13</p>
-                <p className="text-sm text-muted-foreground">Deal Templates</p>
+                <p className="text-3xl font-semibold text-teal-600 dark:text-teal-400">98%</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400">Principal Guaranteed</p>
               </div>
               <div>
-                <p className="text-3xl font-bold text-primary">90</p>
-                <p className="text-sm text-muted-foreground">Day Workflow</p>
+                <p className="text-3xl font-semibold text-teal-600 dark:text-teal-400">90</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400">Day Workflow</p>
               </div>
               <div>
-                <p className="text-3xl font-bold text-primary">5</p>
-                <p className="text-sm text-muted-foreground">Stage Pipeline</p>
+                <p className="text-3xl font-semibold text-teal-600 dark:text-teal-400">5</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400">Stage Pipeline</p>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="what-is-gsm102" className="py-20 px-6 bg-muted/30">
+        <section id="what-is-gsm102" className="py-20 px-6 bg-slate-100 dark:bg-slate-800/50">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4" data-testid="heading-gsm-explanation">
+              <h2 className="text-3xl font-semibold mb-4 text-slate-800 dark:text-slate-100" data-testid="heading-gsm-explanation">
                 What is GSM-102?
               </h2>
-              <p className="text-muted-foreground max-w-3xl mx-auto">
+              <p className="text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
                 GSM-102 is the USDA's export credit guarantee program that supports U.S. agricultural 
                 exports through LC-based financing.
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8 mb-12">
-              <Card>
+              <Card className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
                 <CardContent className="p-6 space-y-4">
                   <div className="flex items-center gap-3">
-                    <div className="p-3 bg-primary/10 rounded-lg">
-                      <Shield className="h-6 w-6 text-primary" />
+                    <div className="p-3 bg-navy-100 dark:bg-navy-900/30 rounded-lg" style={{ backgroundColor: 'rgba(30, 58, 95, 0.1)' }}>
+                      <Shield className="h-6 w-6" style={{ color: '#1e3a5f' }} />
                     </div>
-                    <h3 className="text-lg font-semibold">The Name Explained</h3>
+                    <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-100">The Name Explained</h3>
                   </div>
                   <div className="space-y-3 text-sm">
                     <div className="flex items-start gap-3">
-                      <span className="font-mono font-bold text-primary min-w-[60px]">GSM</span>
-                      <span className="text-muted-foreground">
-                        <span className="font-medium text-foreground">General Sales Manager</span> — the legacy internal name 
+                      <span className="font-mono font-semibold text-teal-600 dark:text-teal-400 min-w-[60px]">GSM</span>
+                      <span className="text-slate-600 dark:text-slate-400">
+                        <span className="font-medium text-slate-800 dark:text-slate-200">General Sales Manager</span> — the legacy internal name 
                         USDA Commodity Credit Corporation used decades ago for export credit programs
                       </span>
                     </div>
                     <div className="flex items-start gap-3">
-                      <span className="font-mono font-bold text-primary min-w-[60px]">102</span>
-                      <span className="text-muted-foreground">
-                        Identifies the <span className="font-medium text-foreground">short-to-medium term</span> credit 
+                      <span className="font-mono font-semibold text-teal-600 dark:text-teal-400 min-w-[60px]">102</span>
+                      <span className="text-slate-600 dark:text-slate-400">
+                        Identifies the <span className="font-medium text-slate-800 dark:text-slate-200">short-to-medium term</span> credit 
                         guarantee program (GSM-103 was long-term but is no longer active)
                       </span>
                     </div>
                   </div>
-                  <div className="pt-3 border-t border-border">
-                    <p className="text-xs text-muted-foreground italic">
+                  <div className="pt-3 border-t border-slate-200 dark:border-slate-700">
+                    <p className="text-xs text-slate-500 dark:text-slate-500 italic">
                       The term "GSM" is outdated language, but the program is very much alive. USDA never rebranded it, 
                       so everyone still uses GSM-102.
                     </p>
@@ -190,70 +186,70 @@ export default function LandingPage() {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
                 <CardContent className="p-6 space-y-4">
                   <div className="flex items-center gap-3">
-                    <div className="p-3 bg-primary/10 rounded-lg">
-                      <Building2 className="h-6 w-6 text-primary" />
+                    <div className="p-3 rounded-lg" style={{ backgroundColor: 'rgba(196, 164, 100, 0.15)' }}>
+                      <Building2 className="h-6 w-6" style={{ color: '#c4a464' }} />
                     </div>
-                    <h3 className="text-lg font-semibold">What It Actually Does</h3>
+                    <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-100">What It Actually Does</h3>
                   </div>
-                  <p className="text-muted-foreground">
+                  <p className="text-slate-600 dark:text-slate-400">
                     A U.S. government-backed guarantee that helps foreign buyers purchase U.S. agricultural 
                     products using Letters of Credit, while protecting U.S. exporters and banks from non-payment.
                   </p>
                   <div className="grid grid-cols-2 gap-3 text-sm">
                     <div className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-primary shrink-0" />
-                      <span>Guarantees up to 98% of principal</span>
+                      <CheckCircle className="h-4 w-4 text-teal-600 dark:text-teal-400 shrink-0" />
+                      <span className="text-slate-700 dark:text-slate-300">Guarantees up to 98% of principal</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-primary shrink-0" />
-                      <span>Covers approved foreign banks</span>
+                      <CheckCircle className="h-4 w-4 text-teal-600 dark:text-teal-400 shrink-0" />
+                      <span className="text-slate-700 dark:text-slate-300">Covers approved foreign banks</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-primary shrink-0" />
-                      <span>Supports USD Letters of Credit</span>
+                      <CheckCircle className="h-4 w-4 text-teal-600 dark:text-teal-400 shrink-0" />
+                      <span className="text-slate-700 dark:text-slate-300">Supports USD Letters of Credit</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-primary shrink-0" />
-                      <span>Importers buy now, pay later</span>
+                      <CheckCircle className="h-4 w-4 text-teal-600 dark:text-teal-400 shrink-0" />
+                      <span className="text-slate-700 dark:text-slate-300">Importers buy now, pay later</span>
                     </div>
                   </div>
                 </CardContent>
               </Card>
             </div>
 
-            <div className="bg-primary/5 border border-primary/20 rounded-xl p-6 md:p-8">
+            <div className="bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-800 rounded-xl p-6 md:p-8">
               <div className="grid md:grid-cols-3 gap-6 items-center">
                 <div className="md:col-span-2 space-y-3">
-                  <h3 className="text-lg font-semibold flex items-center gap-2">
-                    <Anchor className="h-5 w-5 text-primary" />
+                  <h3 className="text-lg font-semibold flex items-center gap-2 text-slate-800 dark:text-slate-100">
+                    <Shield className="h-5 w-5 text-teal-600 dark:text-teal-400" />
                     In Plain English
                   </h3>
-                  <p className="text-muted-foreground">
+                  <p className="text-slate-600 dark:text-slate-400">
                     The USDA guarantees that if a foreign bank defaults on an agricultural import payment, 
                     the U.S. government will cover the loss. This means:
                   </p>
                   <ul className="space-y-2 text-sm">
                     <li className="flex items-start gap-2">
-                      <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                      <span><span className="font-medium">Exporters get paid immediately</span> — no waiting on foreign payments</span>
+                      <ArrowRight className="h-4 w-4 text-teal-600 dark:text-teal-400 mt-0.5 shrink-0" />
+                      <span className="text-slate-700 dark:text-slate-300"><span className="font-medium">Exporters get paid immediately</span> — no waiting on foreign payments</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                      <span><span className="font-medium">Importers get extended terms</span> — buy now and pay later with LC financing</span>
+                      <ArrowRight className="h-4 w-4 text-teal-600 dark:text-teal-400 mt-0.5 shrink-0" />
+                      <span className="text-slate-700 dark:text-slate-300"><span className="font-medium">Importers get extended terms</span> — buy now and pay later with LC financing</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                      <span><span className="font-medium">Banks are protected</span> — U.S. government backs up to 98% of principal</span>
+                      <ArrowRight className="h-4 w-4 text-teal-600 dark:text-teal-400 mt-0.5 shrink-0" />
+                      <span className="text-slate-700 dark:text-slate-300"><span className="font-medium">Banks are protected</span> — U.S. government backs up to 98% of principal</span>
                     </li>
                   </ul>
                 </div>
                 <div className="hidden md:flex items-center justify-center">
-                  <div className="text-center p-6 bg-background rounded-lg border">
-                    <p className="text-4xl font-bold text-primary">98%</p>
-                    <p className="text-sm text-muted-foreground mt-1">Principal Guarantee</p>
+                  <div className="text-center p-6 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+                    <p className="text-4xl font-semibold text-teal-600 dark:text-teal-400">98%</p>
+                    <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">Principal Guarantee</p>
                   </div>
                 </div>
               </div>
@@ -261,29 +257,29 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section id="deal-economics" className="py-20 px-6">
+        <section id="deal-economics" className="py-20 px-6 bg-white dark:bg-slate-900">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold mb-4" data-testid="heading-deal-economics">
+              <h2 className="text-3xl font-semibold mb-4 text-slate-800 dark:text-slate-100" data-testid="heading-deal-economics">
                 Deal Value Calculator
               </h2>
-              <p className="text-muted-foreground max-w-3xl mx-auto">
+              <p className="text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
                 Enter your deal amount to see how value flows through a GSM-102 transaction. 
                 Everyone gets paid, no one is squeezed, and banks are protected.
               </p>
             </div>
 
-            <div className="bg-primary/5 border border-primary/30 rounded-xl p-6 mb-10 max-w-xl mx-auto">
+            <div className="bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-800 rounded-xl p-6 mb-10 max-w-xl mx-auto">
               <div className="flex items-center gap-3 mb-4">
-                <Calculator className="h-6 w-6 text-primary" />
-                <h3 className="text-lg font-semibold">Enter Deal Value</h3>
+                <Calculator className="h-6 w-6 text-teal-600 dark:text-teal-400" />
+                <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-100">Enter Deal Value</h3>
               </div>
               <div className="space-y-3">
-                <Label htmlFor="deal-amount" className="text-sm text-muted-foreground">
+                <Label htmlFor="deal-amount" className="text-sm text-slate-600 dark:text-slate-400">
                   Contract Value (USD)
                 </Label>
                 <div className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground font-medium">$</span>
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 font-medium">$</span>
                   <Input
                     id="deal-amount"
                     type="number"
@@ -292,7 +288,7 @@ export default function LandingPage() {
                     step={10000}
                     value={dealAmount}
                     onChange={(e) => setDealAmount(Math.max(10000, Number(e.target.value)))}
-                    className="pl-8 text-xl font-bold h-14"
+                    className="pl-8 text-xl font-semibold h-14 bg-white dark:bg-slate-800"
                     data-testid="input-deal-amount"
                   />
                 </div>
@@ -303,7 +299,7 @@ export default function LandingPage() {
                       variant="outline" 
                       size="sm"
                       onClick={() => setDealAmount(amount)}
-                      className={dealAmount === amount ? "border-primary bg-primary/10" : ""}
+                      className={dealAmount === amount ? "border-teal-500 bg-teal-50 dark:bg-teal-900/30" : ""}
                       data-testid={`button-preset-${amount}`}
                     >
                       {formatCurrency(amount)}
@@ -314,226 +310,226 @@ export default function LandingPage() {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-              <Card>
+              <Card className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 bg-green-500/10 rounded-lg">
-                      <Package className="h-5 w-5 text-green-500" />
+                    <div className="p-2 rounded-lg" style={{ backgroundColor: 'rgba(30, 58, 95, 0.1)' }}>
+                      <Package className="h-5 w-5" style={{ color: '#1e3a5f' }} />
                     </div>
                     <div>
-                      <h3 className="font-semibold">U.S. Exporter</h3>
-                      <p className="text-xs text-muted-foreground">Seller of Goods</p>
+                      <h3 className="font-semibold text-slate-800 dark:text-slate-100">U.S. Seller</h3>
+                      <p className="text-xs text-slate-500">(Exporter)</p>
                     </div>
                   </div>
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-muted-foreground">Typical Margin</span>
-                      <span className="font-medium">8% – 15%</span>
+                      <span className="text-sm text-slate-600 dark:text-slate-400">Typical Margin</span>
+                      <span className="font-medium text-slate-800 dark:text-slate-200">8% – 15%</span>
                     </div>
                     <div className="flex justify-between items-center text-lg">
-                      <span className="text-muted-foreground">Earnings</span>
-                      <span className="font-bold text-green-500" data-testid="calc-exporter">
+                      <span className="text-slate-600 dark:text-slate-400">Earnings</span>
+                      <span className="font-semibold" style={{ color: '#1e3a5f' }} data-testid="calc-exporter">
                         {formatCurrency(calculations.exporterLow)} – {formatCurrency(calculations.exporterHigh)}
                       </span>
                     </div>
                   </div>
-                  <p className="text-xs text-muted-foreground mt-3 pt-3 border-t">
+                  <p className="text-xs text-slate-500 mt-3 pt-3 border-t border-slate-200 dark:border-slate-700">
                     Gets paid immediately once documents are clean. Low risk with government-backed payment.
                   </p>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 bg-blue-500/10 rounded-lg">
-                      <Globe className="h-5 w-5 text-blue-500" />
+                    <div className="p-2 rounded-lg" style={{ backgroundColor: 'rgba(13, 148, 136, 0.1)' }}>
+                      <Globe className="h-5 w-5 text-teal-600" />
                     </div>
                     <div>
-                      <h3 className="font-semibold">Importer</h3>
-                      <p className="text-xs text-muted-foreground">Buyer / Distributor</p>
+                      <h3 className="font-semibold text-slate-800 dark:text-slate-100">Buyer</h3>
+                      <p className="text-xs text-slate-500">(Importer)</p>
                     </div>
                   </div>
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-muted-foreground">Typical Margin</span>
-                      <span className="font-medium">12% – 25%</span>
+                      <span className="text-sm text-slate-600 dark:text-slate-400">Typical Margin</span>
+                      <span className="font-medium text-slate-800 dark:text-slate-200">12% – 25%</span>
                     </div>
                     <div className="flex justify-between items-center text-lg">
-                      <span className="text-muted-foreground">Earnings</span>
-                      <span className="font-bold text-blue-500" data-testid="calc-importer">
+                      <span className="text-slate-600 dark:text-slate-400">Earnings</span>
+                      <span className="font-semibold text-teal-600" data-testid="calc-importer">
                         {formatCurrency(calculations.importerLow)} – {formatCurrency(calculations.importerHigh)}
                       </span>
                     </div>
                   </div>
-                  <p className="text-xs text-muted-foreground mt-3 pt-3 border-t">
+                  <p className="text-xs text-slate-500 mt-3 pt-3 border-t border-slate-200 dark:border-slate-700">
                     Carries customs, VAT, FX exposure, and market risk. Higher margins in Africa/Caribbean.
                   </p>
                 </CardContent>
               </Card>
 
-              <Card className="border-primary/50 bg-primary/5">
+              <Card className="bg-teal-50 dark:bg-teal-900/20 border-teal-200 dark:border-teal-700">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 bg-primary/20 rounded-lg">
-                      <Users className="h-5 w-5 text-primary" />
+                    <div className="p-2 bg-teal-100 dark:bg-teal-800/50 rounded-lg">
+                      <Users className="h-5 w-5 text-teal-600 dark:text-teal-400" />
                     </div>
                     <div>
-                      <h3 className="font-semibold">You — Facilitator</h3>
-                      <p className="text-xs text-muted-foreground">Structure & Compliance</p>
+                      <h3 className="font-semibold text-slate-800 dark:text-slate-100">You — Facilitator</h3>
+                      <p className="text-xs text-slate-500">Structure & Compliance</p>
                     </div>
                   </div>
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-muted-foreground">Typical Fee</span>
-                      <span className="font-medium">1.5% – 3%</span>
+                      <span className="text-sm text-slate-600 dark:text-slate-400">Typical Fee</span>
+                      <span className="font-medium text-slate-800 dark:text-slate-200">1.5% – 3%</span>
                     </div>
                     <div className="flex justify-between items-center text-lg">
-                      <span className="text-muted-foreground">Earnings</span>
-                      <span className="font-bold text-primary" data-testid="calc-facilitator">
+                      <span className="text-slate-600 dark:text-slate-400">Earnings</span>
+                      <span className="font-semibold text-teal-600 dark:text-teal-400" data-testid="calc-facilitator">
                         {formatCurrency(calculations.facilitatorLow)} – {formatCurrency(calculations.facilitatorHigh)}
                       </span>
                     </div>
                   </div>
-                  <p className="text-xs text-muted-foreground mt-3 pt-3 border-t">
+                  <p className="text-xs text-slate-500 mt-3 pt-3 border-t border-teal-200 dark:border-teal-700">
                     No inventory risk. Best structure: upfront fee + embedded in transaction.
                   </p>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 bg-amber-500/10 rounded-lg">
-                      <Building2 className="h-5 w-5 text-amber-500" />
+                    <div className="p-2 rounded-lg" style={{ backgroundColor: 'rgba(75, 85, 99, 0.1)' }}>
+                      <Building2 className="h-5 w-5 text-slate-600 dark:text-slate-400" />
                     </div>
                     <div>
-                      <h3 className="font-semibold">U.S. Bank</h3>
-                      <p className="text-xs text-muted-foreground">Confirming / Financing</p>
+                      <h3 className="font-semibold text-slate-800 dark:text-slate-100">U.S. Confirming Bank</h3>
+                      <p className="text-xs text-slate-500">Financing</p>
                     </div>
                   </div>
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-muted-foreground">Annualized Rate</span>
-                      <span className="font-medium">0.75% – 1.5%</span>
+                      <span className="text-sm text-slate-600 dark:text-slate-400">Annualized Rate</span>
+                      <span className="font-medium text-slate-800 dark:text-slate-200">0.75% – 1.5%</span>
                     </div>
                     <div className="flex justify-between items-center text-lg">
-                      <span className="text-muted-foreground">Earnings</span>
-                      <span className="font-bold text-amber-500" data-testid="calc-usbank">
+                      <span className="text-slate-600 dark:text-slate-400">Earnings</span>
+                      <span className="font-semibold text-slate-600 dark:text-slate-400" data-testid="calc-usbank">
                         {formatCurrency(calculations.usBankLow)} – {formatCurrency(calculations.usBankHigh)}
                       </span>
                     </div>
                   </div>
-                  <p className="text-xs text-muted-foreground mt-3 pt-3 border-t">
+                  <p className="text-xs text-slate-500 mt-3 pt-3 border-t border-slate-200 dark:border-slate-700">
                     Minimal risk with 98% USDA guarantee. Short duration, clean paper.
                   </p>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 bg-purple-500/10 rounded-lg">
-                      <Landmark className="h-5 w-5 text-purple-500" />
+                    <div className="p-2 rounded-lg" style={{ backgroundColor: 'rgba(75, 85, 99, 0.15)' }}>
+                      <Landmark className="h-5 w-5 text-slate-700 dark:text-slate-300" />
                     </div>
                     <div>
-                      <h3 className="font-semibold">Foreign Bank</h3>
-                      <p className="text-xs text-muted-foreground">Issuing Bank</p>
+                      <h3 className="font-semibold text-slate-800 dark:text-slate-100">Issuing Bank</h3>
+                      <p className="text-xs text-slate-500">(Buyer's Bank)</p>
                     </div>
                   </div>
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-muted-foreground">Fees + Interest</span>
-                      <span className="font-medium">1% – 3%</span>
+                      <span className="text-sm text-slate-600 dark:text-slate-400">Fees + Interest</span>
+                      <span className="font-medium text-slate-800 dark:text-slate-200">1% – 3%</span>
                     </div>
                     <div className="flex justify-between items-center text-lg">
-                      <span className="text-muted-foreground">Earnings</span>
-                      <span className="font-bold text-purple-500" data-testid="calc-foreignbank">
+                      <span className="text-slate-600 dark:text-slate-400">Earnings</span>
+                      <span className="font-semibold text-slate-700 dark:text-slate-300" data-testid="calc-foreignbank">
                         {formatCurrency(calculations.foreignBankLow)} – {formatCurrency(calculations.foreignBankHigh)}
                       </span>
                     </div>
                   </div>
-                  <p className="text-xs text-muted-foreground mt-3 pt-3 border-t">
+                  <p className="text-xs text-slate-500 mt-3 pt-3 border-t border-slate-200 dark:border-slate-700">
                     LC issuance fee, commitment fee, and interest spread. Carries importer credit risk.
                   </p>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 bg-rose-500/10 rounded-lg">
-                      <Truck className="h-5 w-5 text-rose-500" />
+                    <div className="p-2 rounded-lg" style={{ backgroundColor: 'rgba(196, 164, 100, 0.15)' }}>
+                      <CircleDot className="h-5 w-5" style={{ color: '#c4a464' }} />
                     </div>
                     <div>
-                      <h3 className="font-semibold">Logistics</h3>
-                      <p className="text-xs text-muted-foreground">Freight & Insurance</p>
+                      <h3 className="font-semibold text-slate-800 dark:text-slate-100">USDA CCC</h3>
+                      <p className="text-xs text-slate-500">Guarantee Provider</p>
                     </div>
                   </div>
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-muted-foreground">Typical Cost</span>
-                      <span className="font-medium">4% – 8%</span>
+                      <span className="text-sm text-slate-600 dark:text-slate-400">Guarantee Fee</span>
+                      <span className="font-medium text-slate-800 dark:text-slate-200">Varies</span>
                     </div>
                     <div className="flex justify-between items-center text-lg">
-                      <span className="text-muted-foreground">Cost</span>
-                      <span className="font-bold text-rose-500" data-testid="calc-logistics">
-                        {formatCurrency(calculations.logisticsLow)} – {formatCurrency(calculations.logisticsHigh)}
+                      <span className="text-slate-600 dark:text-slate-400">Coverage</span>
+                      <span className="font-semibold" style={{ color: '#c4a464' }}>
+                        Up to 98%
                       </span>
                     </div>
                   </div>
-                  <p className="text-xs text-muted-foreground mt-3 pt-3 border-t">
-                    Paid by importer or embedded in CIF pricing. Operational cost, not profit center.
+                  <p className="text-xs text-slate-500 mt-3 pt-3 border-t border-slate-200 dark:border-slate-700">
+                    Only pays in event of default. Reduces risk for all parties in the transaction.
                   </p>
                 </CardContent>
               </Card>
             </div>
 
-            <div className="bg-muted/50 rounded-xl p-6 md:p-8 border">
+            <div className="bg-slate-100 dark:bg-slate-800 rounded-xl p-6 md:p-8 border border-slate-200 dark:border-slate-700">
               <div className="grid md:grid-cols-2 gap-8 items-center">
                 <div className="space-y-4">
-                  <h3 className="text-xl font-semibold flex items-center gap-2">
-                    <DollarSign className="h-5 w-5 text-primary" />
+                  <h3 className="text-xl font-semibold flex items-center gap-2 text-slate-800 dark:text-slate-100">
+                    <DollarSign className="h-5 w-5 text-teal-600 dark:text-teal-400" />
                     Your Annual Potential
                   </h3>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-slate-600 dark:text-slate-400">
                     Based on {formatCurrency(dealAmount)} deals at 2% average facilitator fee:
                   </p>
                   <ul className="space-y-2 text-sm">
                     <li className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-primary shrink-0" />
-                      <span>Everyone gets paid — no one is squeezed</span>
+                      <CheckCircle className="h-4 w-4 text-teal-600 dark:text-teal-400 shrink-0" />
+                      <span className="text-slate-700 dark:text-slate-300">Everyone gets paid — no one is squeezed</span>
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-primary shrink-0" />
-                      <span>Banks are protected by 98% USDA guarantee</span>
+                      <CheckCircle className="h-4 w-4 text-teal-600 dark:text-teal-400 shrink-0" />
+                      <span className="text-slate-700 dark:text-slate-300">Banks are protected by 98% USDA guarantee</span>
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-primary shrink-0" />
-                      <span>You earn without inventory or FX risk</span>
+                      <CheckCircle className="h-4 w-4 text-teal-600 dark:text-teal-400 shrink-0" />
+                      <span className="text-slate-700 dark:text-slate-300">You earn without inventory or FX risk</span>
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-primary shrink-0" />
-                      <span>Government backs the credit — deals scale cleanly</span>
+                      <CheckCircle className="h-4 w-4 text-teal-600 dark:text-teal-400 shrink-0" />
+                      <span className="text-slate-700 dark:text-slate-300">Government backs the credit — deals scale cleanly</span>
                     </li>
                   </ul>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-background rounded-lg p-4 text-center border">
-                    <p className="text-2xl font-bold text-primary">1 deal/mo</p>
-                    <p className="text-sm text-muted-foreground" data-testid="calc-annual-1">
+                  <div className="bg-white dark:bg-slate-900 rounded-lg p-4 text-center border border-slate-200 dark:border-slate-700">
+                    <p className="text-2xl font-semibold text-teal-600 dark:text-teal-400">1 deal/mo</p>
+                    <p className="text-sm text-slate-600 dark:text-slate-400" data-testid="calc-annual-1">
                       ~{formatCurrency(dealAmount * 0.02 * 12)}/year
                     </p>
                   </div>
-                  <div className="bg-background rounded-lg p-4 text-center border">
-                    <p className="text-2xl font-bold text-primary">2 deals/mo</p>
-                    <p className="text-sm text-muted-foreground" data-testid="calc-annual-2">
+                  <div className="bg-white dark:bg-slate-900 rounded-lg p-4 text-center border border-slate-200 dark:border-slate-700">
+                    <p className="text-2xl font-semibold text-teal-600 dark:text-teal-400">2 deals/mo</p>
+                    <p className="text-sm text-slate-600 dark:text-slate-400" data-testid="calc-annual-2">
                       ~{formatCurrency(dealAmount * 0.02 * 24)}/year
                     </p>
                   </div>
-                  <div className="col-span-2 bg-primary/10 rounded-lg p-4 text-center border border-primary/30">
-                    <p className="text-lg font-bold">$1M deals = Double everything</p>
-                    <p className="text-sm text-muted-foreground">And you still don't touch product</p>
+                  <div className="col-span-2 bg-teal-50 dark:bg-teal-900/30 rounded-lg p-4 text-center border border-teal-200 dark:border-teal-800">
+                    <p className="text-lg font-semibold text-slate-800 dark:text-slate-100">$1M deals = Double everything</p>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">And you still don't touch product</p>
                   </div>
                 </div>
               </div>
@@ -541,50 +537,50 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section id="features" className="py-20 px-6 bg-muted/30">
+        <section id="features" className="py-20 px-6 bg-slate-100 dark:bg-slate-800/50">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold mb-4" data-testid="heading-features">
+              <h2 className="text-3xl font-semibold mb-4 text-slate-800 dark:text-slate-100" data-testid="heading-features">
                 Enterprise-Grade Trade Management
               </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
                 Purpose-built for agricultural exporters navigating USDA GSM-102 transactions 
                 across West Africa, the Caribbean, and emerging markets.
               </p>
             </div>
             
             <div className="grid md:grid-cols-3 gap-6">
-              <Card className="hover-elevate">
+              <Card className="hover-elevate bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
                 <CardContent className="p-6 space-y-4">
-                  <div className="p-3 bg-primary/10 rounded-lg w-fit">
-                    <FileCheck className="h-6 w-6 text-primary" />
+                  <div className="p-3 bg-teal-50 dark:bg-teal-900/30 rounded-lg w-fit">
+                    <FileCheck className="h-6 w-6 text-teal-600 dark:text-teal-400" />
                   </div>
-                  <h3 className="text-lg font-semibold">Document Control</h3>
-                  <p className="text-muted-foreground">
+                  <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-100">Document Control</h3>
+                  <p className="text-slate-600 dark:text-slate-400">
                     Centralized document management with verification tracking, 
                     mobile scanning, and organized deal room structure for bank presentations.
                   </p>
                 </CardContent>
               </Card>
-              <Card className="hover-elevate">
+              <Card className="hover-elevate bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
                 <CardContent className="p-6 space-y-4">
-                  <div className="p-3 bg-primary/10 rounded-lg w-fit">
-                    <Shield className="h-6 w-6 text-primary" />
+                  <div className="p-3 bg-teal-50 dark:bg-teal-900/30 rounded-lg w-fit">
+                    <Shield className="h-6 w-6 text-teal-600 dark:text-teal-400" />
                   </div>
-                  <h3 className="text-lg font-semibold">Compliance Checklists</h3>
-                  <p className="text-muted-foreground">
+                  <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-100">Compliance Checklists</h3>
+                  <p className="text-slate-600 dark:text-slate-400">
                     Comprehensive phase-based checklists for exporters (8 phases) 
                     and importers (6 phases) with stop gates and blocking item alerts.
                   </p>
                 </CardContent>
               </Card>
-              <Card className="hover-elevate">
+              <Card className="hover-elevate bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
                 <CardContent className="p-6 space-y-4">
-                  <div className="p-3 bg-primary/10 rounded-lg w-fit">
-                    <Globe className="h-6 w-6 text-primary" />
+                  <div className="p-3 bg-teal-50 dark:bg-teal-900/30 rounded-lg w-fit">
+                    <Globe className="h-6 w-6 text-teal-600 dark:text-teal-400" />
                   </div>
-                  <h3 className="text-lg font-semibold">Market Templates</h3>
-                  <p className="text-muted-foreground">
+                  <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-100">Market Templates</h3>
+                  <p className="text-slate-600 dark:text-slate-400">
                     Country-specific templates for Ghana, Nigeria, Senegal, 
                     and Dominican Republic with pre-approved banks and LC language.
                   </p>
@@ -594,220 +590,141 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section id="how-it-works" className="py-20 px-6 bg-muted/30">
+        <section id="how-it-works" className="py-20 px-6 bg-white dark:bg-slate-900">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">How Trade Finance Works</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                GSM-102 transactions follow a proven flow connecting exporters, banks, 
-                and importers with government-backed credit guarantees.
+              <h2 className="text-3xl font-semibold mb-4 text-slate-800 dark:text-slate-100">How Trade Finance Works</h2>
+              <p className="text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
+                We facilitate U.S. agricultural exports using the USDA GSM-102 Export Credit Guarantee Program, 
+                allowing qualified international buyers to purchase American-origin agricultural products on 
+                deferred payment terms while U.S. sellers are paid immediately.
               </p>
             </div>
             
-            <div className="bg-white rounded-xl p-6 md:p-10 shadow-sm">
+            <div className="bg-slate-50 dark:bg-slate-800 rounded-xl p-4 md:p-8 border border-slate-200 dark:border-slate-700">
               <img 
-                src={processFlowImage} 
-                alt="Trade Finance Flow: Exporter to Bank to Shipment to Importer to Repayment"
-                className="w-full max-w-3xl mx-auto"
+                src={newFlowChartImage} 
+                alt="GSM-102 Trade Finance Flow: U.S. Seller, Buyer, USDA CCC, Issuing Bank, U.S. Confirming Bank"
+                className="w-full max-w-4xl mx-auto"
                 data-testid="img-process-flow"
               />
             </div>
             
-            <div className="grid md:grid-cols-5 gap-4 mt-10">
-              {[
-                { step: "1", title: "Contract", desc: "Exporter & Importer sign sales agreement" },
-                { step: "2", title: "LC Issued", desc: "Importer's bank issues Letter of Credit" },
-                { step: "3", title: "Shipping", desc: "Goods shipped via carrier with B/L" },
-                { step: "4", title: "Documents", desc: "Banks exchange docs & verify compliance" },
-                { step: "5", title: "Payment", desc: "Exporter paid, importer receives goods" },
-              ].map((item) => (
-                <div key={item.step} className="text-center space-y-2">
-                  <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold mx-auto">
-                    {item.step}
-                  </div>
-                  <p className="font-medium text-sm">{item.title}</p>
-                  <p className="text-xs text-muted-foreground">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="py-20 px-6">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="space-y-6">
-                <h2 className="text-3xl font-bold">Built for Institutional Partners</h2>
-                <p className="text-muted-foreground leading-relaxed">
-                  Whether you're a U.S. exporter, foreign importer, or banking institution, 
-                  our platform provides the documentation standards and workflow transparency 
-                  required for GSM-102 guaranteed transactions.
-                </p>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <div className="p-2 bg-primary/10 rounded-lg mt-1">
-                      <Building2 className="h-4 w-4 text-primary" />
-                    </div>
-                    <div>
-                      <p className="font-medium">Bank-Ready Documentation</p>
-                      <p className="text-sm text-muted-foreground">
-                        Export packages formatted for LC presentations and regulatory review
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="p-2 bg-primary/10 rounded-lg mt-1">
-                      <Shield className="h-4 w-4 text-primary" />
-                    </div>
-                    <div>
-                      <p className="font-medium">Role-Based Access</p>
-                      <p className="text-sm text-muted-foreground">
-                        Separate portals for exporters, importers, and administrators
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="p-2 bg-primary/10 rounded-lg mt-1">
-                      <Anchor className="h-4 w-4 text-primary" />
-                    </div>
-                    <div>
-                      <p className="font-medium">90-Day Guided Workflow</p>
-                      <p className="text-sm text-muted-foreground">
-                        Structured 6-phase process from deal foundation to scaling
-                      </p>
-                    </div>
-                  </div>
-                </div>
+            <div className="mt-12 grid md:grid-cols-2 gap-8">
+              <div className="bg-slate-50 dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700">
+                <h3 className="text-lg font-semibold mb-4 text-slate-800 dark:text-slate-100">The Process Flow</h3>
+                <ol className="space-y-3 text-sm">
+                  <li className="flex items-start gap-3">
+                    <span className="w-6 h-6 rounded-full bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 flex items-center justify-center text-xs font-semibold shrink-0">1</span>
+                    <span className="text-slate-700 dark:text-slate-300">U.S. Seller issues a Proforma Invoice / Proforma Contract to the Buyer</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-6 h-6 rounded-full bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 flex items-center justify-center text-xs font-semibold shrink-0">2</span>
+                    <span className="text-slate-700 dark:text-slate-300">Buyer signs and accepts the Proforma Contract and returns it to the Seller</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-6 h-6 rounded-full bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 flex items-center justify-center text-xs font-semibold shrink-0">3</span>
+                    <span className="text-slate-700 dark:text-slate-300">Seller submits signed Proforma Contract and GSM-102 application to USDA CCC</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-6 h-6 rounded-full bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 flex items-center justify-center text-xs font-semibold shrink-0">4</span>
+                    <span className="text-slate-700 dark:text-slate-300">CCC issues a GSM-102 Guarantee Letter to the Seller</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-6 h-6 rounded-full bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 flex items-center justify-center text-xs font-semibold shrink-0">5</span>
+                    <span className="text-slate-700 dark:text-slate-300">Seller requests a non-funded, open Letter of Credit from the Buyer</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-6 h-6 rounded-full bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 flex items-center justify-center text-xs font-semibold shrink-0">6</span>
+                    <span className="text-slate-700 dark:text-slate-300">Buyer applies for the LC with its Issuing Bank</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-6 h-6 rounded-full bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 flex items-center justify-center text-xs font-semibold shrink-0">7</span>
+                    <span className="text-slate-700 dark:text-slate-300">Issuing Bank issues the LC directly to the Seller</span>
+                  </li>
+                </ol>
               </div>
-              <div className="bg-card border rounded-lg p-8 space-y-6">
-                <h3 className="text-xl font-semibold">Transaction Pipeline</h3>
-                <div className="space-y-4">
-                  {[
-                    { stage: "Application", desc: "LC issuance & deal setup" },
-                    { stage: "Approval", desc: "GSM-102 guarantee & documentation" },
-                    { stage: "Shipment", desc: "Goods shipped & shipping docs" },
-                    { stage: "Payment", desc: "Processing & USDA form submission" },
-                    { stage: "Completed", desc: "Transaction successfully closed" },
-                  ].map((item, i) => (
-                    <div key={item.stage} className="flex items-center gap-4">
-                      <div className="w-8 h-8 rounded-full bg-primary/20 text-primary flex items-center justify-center text-sm font-medium">
-                        {i + 1}
-                      </div>
-                      <div>
-                        <p className="font-medium">{item.stage}</p>
-                        <p className="text-xs text-muted-foreground">{item.desc}</p>
-                      </div>
-                    </div>
-                  ))}
+              <div className="bg-slate-50 dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700">
+                <h3 className="text-lg font-semibold mb-4 text-slate-800 dark:text-slate-100">Completion & Payment</h3>
+                <ol className="space-y-3 text-sm" start={8}>
+                  <li className="flex items-start gap-3">
+                    <span className="w-6 h-6 rounded-full bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 flex items-center justify-center text-xs font-semibold shrink-0">8</span>
+                    <span className="text-slate-700 dark:text-slate-300">Seller ships U.S.-origin agricultural products to the Buyer</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-6 h-6 rounded-full bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 flex items-center justify-center text-xs font-semibold shrink-0">9</span>
+                    <span className="text-slate-700 dark:text-slate-300">Seller negotiates the LC with a U.S. Confirming Bank</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-6 h-6 rounded-full bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 flex items-center justify-center text-xs font-semibold shrink-0">10</span>
+                    <span className="text-slate-700 dark:text-slate-300">Confirming Bank pays the Seller at sight</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-6 h-6 rounded-full bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 flex items-center justify-center text-xs font-semibold shrink-0">11</span>
+                    <span className="text-slate-700 dark:text-slate-300">Seller reports shipment completion and submits customs-certified proof to CCC</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-6 h-6 rounded-full bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 flex items-center justify-center text-xs font-semibold shrink-0">12</span>
+                    <span className="text-slate-700 dark:text-slate-300">Buyer repays the Issuing Bank under the deferred terms agreed</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-6 h-6 rounded-full bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 flex items-center justify-center text-xs font-semibold shrink-0">13</span>
+                    <span className="text-slate-700 dark:text-slate-300">Issuing Bank repays the U.S. Confirming Bank under GSM-102 terms</span>
+                  </li>
+                </ol>
+                <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
+                  <p className="text-xs text-slate-500 italic">
+                    Only in the event of default, the CCC pays under the guarantee.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="py-20 px-6 bg-muted/30">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="rounded-xl overflow-hidden shadow-lg">
-                <img 
-                  src={complianceImage} 
-                  alt="Trade compliance documentation and legal review"
-                  className="w-full h-auto object-cover"
-                  data-testid="img-compliance"
-                />
-              </div>
-              <div className="space-y-6">
-                <h2 className="text-3xl font-bold">Documentation-Driven Compliance</h2>
-                <p className="text-muted-foreground leading-relaxed">
-                  GSM-102 success depends on rigorous documentation. Every transaction 
-                  follows established procedures with verified paperwork at each stage.
-                </p>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary mt-0.5" />
-                    <div>
-                      <p className="font-medium">Master Compliance Checklists</p>
-                      <p className="text-sm text-muted-foreground">
-                        8-phase exporter checklist and 6-phase importer checklist with stop gates
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary mt-0.5" />
-                    <div>
-                      <p className="font-medium">Document Verification</p>
-                      <p className="text-sm text-muted-foreground">
-                        Track LC, Bill of Lading, Certificate of Origin, and all required forms
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary mt-0.5" />
-                    <div>
-                      <p className="font-medium">Organized Deal Room</p>
-                      <p className="text-sm text-muted-foreground">
-                        7-folder structure matching industry standards for bank presentations
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary mt-0.5" />
-                    <div>
-                      <p className="font-medium">Export Package Delivery</p>
-                      <p className="text-sm text-muted-foreground">
-                        Download or email complete document packages to officials
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="py-20 px-6">
+        <section className="py-20 px-6 bg-slate-100 dark:bg-slate-800/50">
           <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="space-y-6 order-2 md:order-1">
-                <div className="flex items-center gap-2 text-primary">
+                <div className="flex items-center gap-2 text-teal-600 dark:text-teal-400">
                   <Building2 className="h-5 w-5" />
                   <span className="text-sm font-medium tracking-wide uppercase">Banking & Finance</span>
                 </div>
-                <h2 className="text-3xl font-bold">Government-Backed Credit Structure</h2>
-                <p className="text-muted-foreground leading-relaxed">
-                  GSM-102 provides a USDA guarantee that covers up to 98% of principal and interest, 
-                  giving banks confidence to issue Letters of Credit for agricultural exports.
+                <h2 className="text-3xl font-semibold text-slate-800 dark:text-slate-100">Government-Backed Credit Structure</h2>
+                <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Up to 98% of the invoice value, including freight, is guaranteed by the USDA Commodity 
+                  Credit Corporation (CCC), significantly reducing payment risk for U.S. exporters and confirming banks.
                 </p>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-primary/20 text-primary flex items-center justify-center text-sm font-bold">
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold shrink-0" style={{ backgroundColor: 'rgba(30, 58, 95, 0.15)', color: '#1e3a5f' }}>
                       LC
                     </div>
                     <div>
-                      <p className="font-medium">Letter of Credit Financing</p>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="font-medium text-slate-800 dark:text-slate-100">Non-Funded Letter of Credit</p>
+                      <p className="text-sm text-slate-600 dark:text-slate-400">
                         Bank-issued LCs with GSM-102 guarantee clauses for payment assurance
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-primary/20 text-primary flex items-center justify-center text-sm font-bold">
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold shrink-0" style={{ backgroundColor: 'rgba(196, 164, 100, 0.2)', color: '#c4a464' }}>
                       CCC
                     </div>
                     <div>
-                      <p className="font-medium">USDA CCC Guarantee</p>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="font-medium text-slate-800 dark:text-slate-100">USDA CCC Guarantee</p>
+                      <p className="text-sm text-slate-600 dark:text-slate-400">
                         Commodity Credit Corporation backing reduces bank risk exposure
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-primary/20 text-primary flex items-center justify-center text-sm font-bold">
-                      90d
+                    <div className="w-8 h-8 rounded-full bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 flex items-center justify-center text-sm font-semibold shrink-0">
+                      18m
                     </div>
                     <div>
-                      <p className="font-medium">Extended Payment Terms</p>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="font-medium text-slate-800 dark:text-slate-100">Extended Payment Terms</p>
+                      <p className="text-sm text-slate-600 dark:text-slate-400">
                         Up to 18 months financing for qualified importers
                       </p>
                     </div>
@@ -826,7 +743,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section className="py-20 px-6 bg-muted/30">
+        <section className="py-20 px-6 bg-white dark:bg-slate-900">
           <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="rounded-xl overflow-hidden shadow-lg">
@@ -838,35 +755,46 @@ export default function LandingPage() {
                 />
               </div>
               <div className="space-y-6">
-                <div className="flex items-center gap-2 text-primary">
+                <div className="flex items-center gap-2 text-teal-600 dark:text-teal-400">
                   <Package className="h-5 w-5" />
-                  <span className="text-sm font-medium tracking-wide uppercase">Product Categories</span>
+                  <span className="text-sm font-medium tracking-wide uppercase">American Origin Only</span>
                 </div>
-                <h2 className="text-3xl font-bold">Agricultural Commodities at Scale</h2>
-                <p className="text-muted-foreground leading-relaxed">
-                  GSM-102 supports a wide range of U.S. agricultural products for export. 
-                  Our templates are optimized for high-demand commodities in West African 
-                  and Caribbean markets.
+                <h2 className="text-3xl font-semibold text-slate-800 dark:text-slate-100">Eligible U.S. Agricultural Products</h2>
+                <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                  All products originate exclusively from the United States. GSM-102 supports a wide range 
+                  of U.S. agricultural products for export to qualified international buyers.
                 </p>
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="p-4 bg-card border rounded-lg">
-                    <p className="font-semibold">Rice</p>
-                    <p className="text-sm text-muted-foreground">Long grain, parboiled, basmati</p>
+                  <div className="p-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Wheat className="h-4 w-4 text-amber-600" />
+                      <p className="font-semibold text-slate-800 dark:text-slate-100">Grains & Derivatives</p>
+                    </div>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">Wheat, Corn, Grain-based derivatives</p>
                   </div>
-                  <div className="p-4 bg-card border rounded-lg">
-                    <p className="font-semibold">Frozen Poultry</p>
-                    <p className="text-sm text-muted-foreground">Chicken leg quarters, wings</p>
+                  <div className="p-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Drumstick className="h-4 w-4 text-rose-600" />
+                      <p className="font-semibold text-slate-800 dark:text-slate-100">Meat & Poultry</p>
+                    </div>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">Beef, Pork, Chicken, Turkey</p>
                   </div>
-                  <div className="p-4 bg-card border rounded-lg">
-                    <p className="font-semibold">Edible Oils</p>
-                    <p className="text-sm text-muted-foreground">Soybean, vegetable, palm</p>
+                  <div className="p-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Droplets className="h-4 w-4 text-blue-600" />
+                      <p className="font-semibold text-slate-800 dark:text-slate-100">Dairy Products</p>
+                    </div>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">Milk powder, Whey, Butter, Cheese</p>
                   </div>
-                  <div className="p-4 bg-card border rounded-lg">
-                    <p className="font-semibold">Tomato Paste</p>
-                    <p className="text-sm text-muted-foreground">Canned, drums, bulk</p>
+                  <div className="p-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Package className="h-4 w-4 text-green-600" />
+                      <p className="font-semibold text-slate-800 dark:text-slate-100">Oilseeds & General</p>
+                    </div>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">Soybeans, Snacks, Beverages</p>
                   </div>
                 </div>
-                <p className="text-sm text-muted-foreground italic">
+                <p className="text-sm text-slate-500 dark:text-slate-500 italic">
                   Country-specific templates include pre-configured product requirements, 
                   health certificates, and customs documentation.
                 </p>
@@ -875,21 +803,21 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section id="markets" className="py-20 px-6">
+        <section id="markets" className="py-20 px-6 bg-slate-100 dark:bg-slate-800/50">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <div className="flex items-center justify-center gap-2 text-primary mb-4">
+              <div className="flex items-center justify-center gap-2 text-teal-600 dark:text-teal-400 mb-4">
                 <MapPin className="h-5 w-5" />
                 <span className="text-sm font-medium tracking-wide uppercase">Markets We Serve</span>
               </div>
-              <h2 className="text-3xl font-bold mb-4">Strategic Regional Focus</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
+              <h2 className="text-3xl font-semibold mb-4 text-slate-800 dark:text-slate-100">Strategic Regional Focus</h2>
+              <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
                 We prioritize markets with established banking relationships, clear regulatory 
                 frameworks, and strong demand for U.S. agricultural products.
               </p>
             </div>
             
-            <div className="rounded-xl overflow-hidden shadow-lg mb-12">
+            <div className="rounded-xl overflow-hidden shadow-lg mb-12 border border-slate-200 dark:border-slate-700">
               <img 
                 src={geographicMapImage} 
                 alt="Global trade routes connecting Dominican Republic, Caribbean, and West Africa"
@@ -899,176 +827,134 @@ export default function LandingPage() {
             </div>
             
             <div className="grid md:grid-cols-2 gap-8">
-              <Card className="overflow-hidden">
-                <div className="h-3 bg-gradient-to-r from-emerald-500 to-emerald-600" />
+              <Card className="overflow-hidden bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
+                <div className="h-3 bg-gradient-to-r from-teal-500 to-teal-600" />
                 <CardContent className="p-6 space-y-4">
                   <div className="flex items-center gap-3">
-                    <div className="p-3 bg-emerald-500/10 rounded-lg">
-                      <Globe className="h-6 w-6 text-emerald-500" />
+                    <div className="p-3 bg-teal-50 dark:bg-teal-900/30 rounded-lg">
+                      <Globe className="h-6 w-6 text-teal-600 dark:text-teal-400" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold">West Africa</h3>
-                      <p className="text-sm text-muted-foreground">Primary Focus Region</p>
+                      <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-100">West Africa</h3>
+                      <p className="text-sm text-slate-500">Primary Focus Region</p>
                     </div>
                   </div>
-                  <p className="text-muted-foreground">
+                  <p className="text-slate-600 dark:text-slate-400">
                     Strong demand for rice, frozen poultry, and edible oils. 
                     Established banking channels and clear import procedures.
                   </p>
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-emerald-500" />
-                      <span className="font-medium">Ghana</span>
-                      <span className="text-xs text-muted-foreground">- Fastest, cleanest market</span>
+                      <CheckCircle className="h-4 w-4 text-teal-600 dark:text-teal-400" />
+                      <span className="font-medium text-slate-800 dark:text-slate-100">Ghana</span>
+                      <span className="text-xs text-slate-500">- Fastest, cleanest market</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-emerald-500" />
-                      <span className="font-medium">Nigeria</span>
-                      <span className="text-xs text-muted-foreground">- Largest volume potential</span>
+                      <CheckCircle className="h-4 w-4 text-teal-600 dark:text-teal-400" />
+                      <span className="font-medium text-slate-800 dark:text-slate-100">Nigeria</span>
+                      <span className="text-xs text-slate-500">- Largest volume potential</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-emerald-500" />
-                      <span className="font-medium">Senegal</span>
-                      <span className="text-xs text-muted-foreground">- Growing import demand</span>
+                      <CheckCircle className="h-4 w-4 text-teal-600 dark:text-teal-400" />
+                      <span className="font-medium text-slate-800 dark:text-slate-100">Senegal</span>
+                      <span className="text-xs text-slate-500">- Growing import demand</span>
                     </div>
                   </div>
                 </CardContent>
               </Card>
-              
-              <Card className="overflow-hidden">
-                <div className="h-3 bg-gradient-to-r from-cyan-500 to-cyan-600" />
+
+              <Card className="overflow-hidden bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
+                <div className="h-3 bg-gradient-to-r from-blue-500 to-blue-600" />
                 <CardContent className="p-6 space-y-4">
                   <div className="flex items-center gap-3">
-                    <div className="p-3 bg-cyan-500/10 rounded-lg">
-                      <Globe className="h-6 w-6 text-cyan-500" />
+                    <div className="p-3 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
+                      <Globe className="h-6 w-6 text-blue-600 dark:text-blue-400" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold">Caribbean</h3>
-                      <p className="text-sm text-muted-foreground">Established Trade Corridor</p>
+                      <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-100">Caribbean</h3>
+                      <p className="text-sm text-slate-500">Secondary Focus Region</p>
                     </div>
                   </div>
-                  <p className="text-muted-foreground">
-                    Consistent demand for U.S. agricultural products with 
-                    reliable banking infrastructure and proximity advantages.
+                  <p className="text-slate-600 dark:text-slate-400">
+                    Proximity advantage with established trade routes. 
+                    Strong relationships with local banks and importers.
                   </p>
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-cyan-500" />
-                      <span className="font-medium">Dominican Republic</span>
-                      <span className="text-xs text-muted-foreground">- Key trading partner</span>
+                      <CheckCircle className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                      <span className="font-medium text-slate-800 dark:text-slate-100">Dominican Republic</span>
+                      <span className="text-xs text-slate-500">- Primary Caribbean partner</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-muted-foreground" />
-                      <span className="text-muted-foreground">Jamaica</span>
-                      <span className="text-xs text-muted-foreground">- Coming soon</span>
+                      <CheckCircle className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                      <span className="font-medium text-slate-800 dark:text-slate-100">Jamaica</span>
+                      <span className="text-xs text-slate-500">- Expanding coverage</span>
                     </div>
-                  </div>
-                  <div className="pt-4 border-t">
-                    <p className="text-sm text-muted-foreground italic">
-                      Future expansion: Europe, Asia, additional Africa markets
-                    </p>
                   </div>
                 </CardContent>
               </Card>
             </div>
-
-            <div className="mt-12 rounded-xl overflow-hidden shadow-lg">
-              <img 
-                src={complianceDocsImage} 
-                alt="Trade compliance documents including Certificate of Origin, Bill of Lading, and Health Certificate with approval stamps"
-                className="w-full h-auto object-cover"
-                data-testid="img-compliance-docs"
-              />
-            </div>
           </div>
         </section>
 
-        <section className="py-20 px-6 bg-muted/30">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="space-y-6 order-2 md:order-1">
-                <div className="flex items-center gap-2 text-primary">
-                  <Activity className="h-5 w-5" />
-                  <span className="text-sm font-medium tracking-wide uppercase">Deal Operations</span>
-                </div>
-                <h2 className="text-3xl font-bold">Active Transaction Monitoring</h2>
-                <p className="text-muted-foreground leading-relaxed">
-                  Every GSM-102 transaction is tracked through our centralized dashboard. 
-                  Real-time visibility into document status, compliance checkpoints, 
-                  and payment milestones.
-                </p>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary mt-0.5" />
-                    <div>
-                      <p className="font-medium">Stage-by-Stage Tracking</p>
-                      <p className="text-sm text-muted-foreground">
-                        Monitor progress from Application through Completion
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary mt-0.5" />
-                    <div>
-                      <p className="font-medium">Automated Notifications</p>
-                      <p className="text-sm text-muted-foreground">
-                        Alerts for missing documents and approaching deadlines
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary mt-0.5" />
-                    <div>
-                      <p className="font-medium">90-Day Workflow Dashboard</p>
-                      <p className="text-sm text-muted-foreground">
-                        6-phase guided execution from foundation to scale
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="rounded-xl overflow-hidden shadow-lg order-1 md:order-2">
-                <img 
-                  src={controlRoomImage} 
-                  alt="Operations control room with transaction monitoring dashboards"
-                  className="w-full h-auto object-cover"
-                  data-testid="img-control-room"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="py-20 px-6">
+        <section className="py-20 px-6 bg-slate-800 dark:bg-slate-950">
           <div className="max-w-4xl mx-auto text-center space-y-8">
-            <h2 className="text-3xl font-bold">Ready to Execute Your Next Deal?</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Access the Global Trade Facilitators portal to manage your agricultural export transactions 
-              with the documentation standards banks and regulators expect.
+            <h2 className="text-3xl font-semibold text-white">Ready to Facilitate Your First Deal?</h2>
+            <p className="text-slate-300 text-lg max-w-2xl mx-auto">
+              Join Global Trade Facilitators and start managing GSM-102 transactions 
+              with professional tools, organized workflows, and comprehensive compliance tracking.
             </p>
-            <Button size="lg" asChild data-testid="button-cta-bottom">
-              <a href="/api/login" className="gap-2">
-                Sign In to Deal Portal <ArrowRight className="h-5 w-5" />
-              </a>
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg" asChild className="bg-teal-600 hover:bg-teal-700" data-testid="button-cta-bottom">
+                <a href="/api/login" className="gap-2">
+                  Access Deal Portal <ArrowRight className="h-5 w-5" />
+                </a>
+              </Button>
+              <Button size="lg" variant="outline" className="border-slate-500 text-white hover:bg-slate-700" asChild>
+                <a href="#how-it-works">Learn More</a>
+              </Button>
+            </div>
           </div>
         </section>
 
-        <footer className="border-t py-8 px-6 bg-muted/20">
-          <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-            <div className="flex items-center gap-3">
-              <img 
-                src={logoGlobeAirplane} 
-                alt="Global Trade Facilitators" 
-                className="h-10 w-auto"
-                data-testid="img-footer-logo"
-              />
+        <footer className="py-12 px-6 bg-slate-900 dark:bg-slate-950 border-t border-slate-800">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-8">
               <div>
-                <span className="font-medium">Global Trade Facilitators</span>
-                <p className="text-xs opacity-70">A division of Zapp Marketing and Manufacturing</p>
+                <div className="flex items-center gap-3 mb-4">
+                  <img 
+                    src={logoShipMain} 
+                    alt="Global Trade Facilitators" 
+                    className="h-10 w-auto"
+                  />
+                  <div className="flex flex-col">
+                    <span className="font-semibold text-white">Global Trade Facilitators</span>
+                    <span className="text-xs text-slate-400">A division of Zapp Marketing and Manufacturing</span>
+                  </div>
+                </div>
+                <p className="text-sm text-slate-400">
+                  Professional GSM-102 transaction management for U.S. agricultural exports.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-white mb-4">Quick Links</h4>
+                <ul className="space-y-2 text-sm text-slate-400">
+                  <li><a href="#what-is-gsm102" className="hover:text-teal-400 transition-colors">What is GSM-102?</a></li>
+                  <li><a href="#how-it-works" className="hover:text-teal-400 transition-colors">How It Works</a></li>
+                  <li><a href="#deal-economics" className="hover:text-teal-400 transition-colors">Deal Calculator</a></li>
+                  <li><a href="#markets" className="hover:text-teal-400 transition-colors">Markets</a></li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-semibold text-white mb-4">Contact</h4>
+                <p className="text-sm text-slate-400">
+                  globaltradefacilitators.us.com
+                </p>
               </div>
             </div>
-            <p>&copy; {new Date().getFullYear()} GSM-102 Export Credit Guarantee Tracker</p>
+            <div className="mt-8 pt-8 border-t border-slate-800 text-center text-sm text-slate-500">
+              <p>&copy; {new Date().getFullYear()} Global Trade Facilitators. All rights reserved.</p>
+            </div>
           </div>
         </footer>
       </main>

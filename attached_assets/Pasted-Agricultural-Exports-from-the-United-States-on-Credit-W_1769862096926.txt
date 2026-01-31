@@ -1,0 +1,162 @@
+Agricultural Exports from the United States on Credit
+
+We facilitate U.S. agricultural exports using the USDA GSM-102 Export Credit Guarantee Program, allowing qualified international buyers to purchase American-origin agricultural products on deferred payment terms while U.S. sellers are paid immediately.
+
+This structure uses non-funded Letters of Credit, government-backed guarantees, and U.S. confirming banks to reduce risk, ensure compliance, and enable scalable trade.
+
+How Trade Finance Works (GSM-102 Process)
+
+The U.S. Seller issues a Proforma Invoice / Proforma Contract to the Buyer.
+
+The Buyer signs and accepts the Proforma Contract and returns it to the Seller.
+
+The Seller submits the signed Proforma Contract and GSM-102 application directly to the USDA Commodity Credit Corporation (CCC).
+
+The CCC issues a GSM-102 Guarantee Letter to the Seller.
+
+The Seller requests a non-funded, open Letter of Credit (LC) from the Buyer.
+
+The Buyer applies for the LC with its Issuing Bank.
+
+The Issuing Bank issues the LC directly to the Seller.
+
+The Seller ships U.S.-origin agricultural products to the Buyer.
+
+The Seller negotiates the LC with a U.S. Confirming Bank.
+
+The Confirming Bank pays the Seller at sight.
+
+The Seller reports shipment completion and submits customs-certified proof of receipt to the CCC.
+
+The Buyer repays the Issuing Bank under the deferred terms agreed in the contract.
+
+The Issuing Bank repays the U.S. Confirming Bank under GSM-102 terms.
+
+Only in the event of default, the CCC pays under the guarantee.
+
+Government-Backed Credit Structure
+
+Up to 98% of the invoice value, including freight, is guaranteed by the USDA Commodity Credit Corporation (CCC), significantly reducing payment risk for U.S. exporters and confirming banks.
+
+Eligible U.S. Agricultural Products (American Origin Only)
+Grains & Derivatives
+
+Wheat
+
+Corn
+
+Grain-based derivatives
+
+Oilseeds & Crops
+
+Soybeans
+
+Dairy
+
+Milk powder
+
+Whey
+
+Butter
+
+Cheese
+
+Meat & Poultry
+
+Beef
+
+Pork
+
+Chicken
+
+Turkey
+
+General Groceries
+
+Snacks
+
+Beverages
+
+All products originate exclusively from the United States.
+
+🎨 EXACT DIAGRAM NODE LABELS
+
+(Use these verbatim — no substitutions)
+
+Primary Nodes
+
+U.S. Seller (Exporter)
+
+Buyer (Importer)
+
+USDA Commodity Credit Corporation (CCC)
+
+Issuing Bank (Buyer’s Bank)
+
+U.S. Confirming Bank
+
+Removed / Do NOT Include
+
+❌ Carrier
+
+❌ Transaction Pipeline
+
+❌ Built for Institutions
+
+❌ Documentation-Driven Compliance
+
+❌ Any top or intermediary node above Seller
+
+📐 DESIGNER-READY WIREFRAME SPEC
+
+(This is what you hand directly to a designer)
+
+Layout Structure
+
+Center-Left: U.S. Seller (Exporter)
+
+Center-Right: Buyer (Importer)
+
+Right-Bottom: Issuing Bank
+
+Left-Bottom: U.S. Confirming Bank
+
+Top-Center (Side Authority): USDA Commodity Credit Corporation (CCC)
+
+Arrow Rules
+
+Straight arrows only (no loops, no curves unless needed for clarity)
+
+Single direction per step
+
+No arrows between banks and CCC except guarantee/default
+
+Arrow Mapping
+
+Seller → Buyer (Proforma Invoice)
+
+Buyer → Seller (Signed Proforma)
+
+Seller → CCC (Application + Proforma)
+
+CCC → Seller (Guarantee Letter)
+
+Seller → Buyer (Request Non-Funded LC)
+
+Buyer → Issuing Bank (LC Application)
+
+Issuing Bank → Seller (LC Issued)
+
+Seller → Buyer (Shipment)
+
+Seller → U.S. Confirming Bank (LC Negotiation)
+
+U.S. Confirming Bank → Seller (Payment at Sight)
+
+Seller → CCC (Completion + Customs Verification)
+
+Buyer → Issuing Bank (Deferred Payment)
+
+Issuing Bank → U.S. Confirming Bank (Repayment)
+
+CCC → U.S. Confirming Bank (Default Only)
