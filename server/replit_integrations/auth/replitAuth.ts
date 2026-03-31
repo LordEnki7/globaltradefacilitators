@@ -10,9 +10,16 @@ import { authStorage } from "./storage";
 
 const getOidcConfig = memoize(
   async () => {
+    const clientId = process.env.REPL_ID;
+    if (!clientId) {
+      throw new Error(
+        "REPL_ID environment variable is not set. " +
+        "Add REPL_ID=088b27dc-ac8a-42e4-8f80-f9361c2a958b to your environment."
+      );
+    }
     return await client.discovery(
       new URL(process.env.ISSUER_URL ?? "https://replit.com/oidc"),
-      process.env.REPL_ID!
+      clientId
     );
   },
   { maxAge: 3600 * 1000 }
@@ -67,7 +74,18 @@ export async function setupAuth(app: Express) {
   app.use(passport.initialize());
   app.use(passport.session());
 
-  const config = await getOidcConfig();
+  let config: Awaited<ReturnType<typeof getOidcConfig>>;
+  try {
+    config = await getOidcConfig();
+  } catch (err: any) {
+    console.error("[Auth] OIDC setup failed:", err.message);
+    console.error("[Auth] Authentication will not be available. Set REPL_ID in your environment.");
+    // Register stub routes so the app doesn't 404 on auth paths
+    app.get("/api/login", (_req, res) => res.status(503).json({ error: "Authentication not configured. Set REPL_ID environment variable." }));
+    app.get("/api/callback", (_req, res) => res.status(503).json({ error: "Authentication not configured." }));
+    app.get("/api/logout", (_req, res) => res.redirect("/"));
+    return;
+  }
 
   const verify: VerifyFunction = async (
     tokens: client.TokenEndpointResponse & client.TokenEndpointResponseHelpers,
